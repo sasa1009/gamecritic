@@ -29,5 +29,12 @@ module App
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+    config.generators do |g|
+      g.test_framework :rspec,
+        fixtures: false,
+        view_specs: false,
+        helper_specs: true,
+        routing_specs: true
+    end
   end
 end

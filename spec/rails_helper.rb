@@ -20,7 +20,7 @@ require 'rspec/rails'
 # directory. Alternatively, in the individual `*_spec.rb` files, manually
 # require only the support files necessary.
 #
-# Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
+Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 
 # Checks for pending migration and applies them before tests are run.
 # If you are not using ActiveRecord, you can remove this line.
@@ -54,4 +54,27 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
+
+  # Systemスペック用のヘルパー。任意です。
+   config.include SystemSupport, type: :system
+
+   # 名称を一意にするために設定。任意かな。
+   config.before(:all, type: :system) do
+     timestamp!
+   end
+
+   # Systemスペックは不安定なのでリトライ用の設定。
+   config.verbose_retry = true
+   config.display_try_failure_messages = true
+   config.default_retry_count = 3
+
+   # 下記を追加
+   config.before(:each, type: :system) do
+     driven_by Capybara.default_driver
+   end
+
+   config.before(:each, type: :system, js: true) do
+     driven_by Capybara.javascript_driver
+     host! "http://#{Capybara.server_host}:#{Capybara.server_port}"
+   end
 end

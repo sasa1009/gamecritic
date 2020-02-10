@@ -38,10 +38,21 @@ gem 'bootsnap', '>= 1.1.0', require: false
 
 gem 'bcrypt', '~> 3.1.7'
 
+gem 'bootstrap', '~> 4.4.1'
+
+gem 'jquery-rails'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  gem 'rspec-rails', '~> 3.6.0'
+  gem 'rspec-rails', '~> 3.8.0'
+  gem 'factory_bot_rails', '~> 4.11'
+  gem 'selenium-webdriver'
+  gem 'rspec-retry'
+end
+
+group :test do
+  gem "capybara"
 end
 
 group :development do

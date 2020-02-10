@@ -11,13 +11,13 @@ RSpec.describe User, type: :model do
   it "is invalid without a name" do
     user.name = nil
     user.valid?
-    expect(user.errors[:name]).to include("can't be blank")
+    expect(user.errors[:name]).to include("を入力してください")
   end
 
   it "is invalid without a email" do
     user.email = nil
     user.valid?
-    expect(user.errors[:email]).to include("can't be blank")
+    expect(user.errors[:email]).to include("を入力してください")
   end
 
   it "is invalid when a name too long" do

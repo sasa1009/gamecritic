@@ -71,9 +71,9 @@ header {
     font-size: 2rem;
     margin-top: 20px;
   }
-  form {
+  .form {
     width: 600px;
-    margin: 20px;
+    margin-top: 20px;
     label {
       font-size: 1.7rem;
     }
@@ -91,9 +91,14 @@ header {
 
 // error messages
 #error_explanation {
-  color: red;
-  ul {
-    margin-bottom: 30px;
-  }
+  // color: red;
+  // ul {
+  //   margin-bottom: 30px;
+  // }
+  font-size: 1.5rem;
+}
+
+// alert
+.alert {
   font-size: 1.5rem;
 }

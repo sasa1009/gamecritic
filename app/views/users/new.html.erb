@@ -2,7 +2,7 @@
   <h1>gamecriticへようこそ！</h1>
   <p>新規登録して利用を開始しましょう。</p>
   <div class="form">
-    <%= form_for(@user) do |f| %>
+    <%= form_for(@user, url: signup_path) do |f| %>
       <%= render 'shared/error_messages'%>
 
       <div class="form-group">

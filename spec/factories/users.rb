@@ -5,4 +5,10 @@ FactoryBot.define do
     password { "foobar" }
     password_confirmation { "foobar" }
   end
+
+  factory :michael, class: User do
+    name { "Michael Example" }
+    email { "michael@gmail.com" }
+    password { User.digest("password") }
+  end
 end

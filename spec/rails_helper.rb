@@ -77,4 +77,6 @@ RSpec.configure do |config|
      driven_by Capybara.javascript_driver
      host! "http://#{Capybara.server_host}:#{Capybara.server_port}"
    end
+   
+   config.include TestHelper
 end

@@ -5,7 +5,6 @@ RSpec.describe "Users", type: :request do
     context "access to the sign up page" do
       it "responds successfully" do
         get signup_path
-        expect(response).to be_successful
         expect(response).to have_http_status "200"
       end
     end
@@ -44,7 +43,6 @@ RSpec.describe "Users", type: :request do
     context "access to the profile page" do
       it "responds successfully" do
         get user_path(user)
-        expect(response).to be_successful
         expect(response).to have_http_status "200"
       end
     end

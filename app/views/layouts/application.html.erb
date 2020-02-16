@@ -7,13 +7,8 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <!--[if lt IE 9]>
-      <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/r29/html5.min.js">
-      </script>
-    <![endif]-->
     <script src="https://kit.fontawesome.com/fbc4707179.js" crossorigin="anonymous"></script>
   </head>
-
   <body>
     <%= render 'layouts/header' %>
     <div class="wrapper">
@@ -21,7 +16,6 @@
         <%= content_tag(:div, message, class: "alert alert-#{message_type}") %>
       <% end %>
       <%= yield %>
-      <%= debug(params) if Rails.env.development? %>
     </div>
   </body>
 </html>

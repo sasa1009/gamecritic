@@ -14,9 +14,8 @@ RSpec.describe 'UsersLogin', type: :system, js: true do
     expect(page).to_not have_selector(".alert-danger")
   end
 
-  let!(:user) { FactoryBot.create(:user) }
-
   it "login with valid information followed by logout" do
+    user = FactoryBot.create(:user)
     visit login_path
     find("#email").set(user.email)
     find("#password").set("password")

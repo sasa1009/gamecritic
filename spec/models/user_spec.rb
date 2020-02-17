@@ -1,8 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  let(:user) { User.create(name: "Example User", email: "exampleuser@gmail.com",
-                           password: "foobar", password_confirmation: "foobar") }
+  let(:user) { FactoryBot.create(:user) }
 
   it "is valid with a name, email" do
     expect(user).to be_valid
@@ -75,6 +74,13 @@ RSpec.describe User, type: :model do
     it "is invalid when a password less than 5 charactars" do
       user.password = user.password_confirmation = "a" * 5
       expect(user).to_not be_valid
+    end
+  end
+
+  describe "authenticated? should return false for a user with nil digest" do
+    # ダイジェストが存在しない場合のauthenticated?のテスト
+    it "is invalid without remember_digest" do
+      expect(user.authenticated?("")).to eq false
     end
   end
 

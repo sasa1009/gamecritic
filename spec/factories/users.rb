@@ -4,5 +4,6 @@ FactoryBot.define do
     email { "Example@gmail.com" }
     password { "password" }
     password_confirmation { "password" }
+    remember_digest { nil }
   end
 end

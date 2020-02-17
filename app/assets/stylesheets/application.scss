@@ -1,0 +1,112 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ */
+
+ // Custom bootstrap variables must be set or imported *before* bootstrap.
+@import "bootstrap";
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+// header
+header {
+  nav {
+    height: 90px;
+    padding: 0 80px;
+    #logo {
+      font-size: 3rem;
+      // margin-left: 50px;
+      margin-top: 18px;
+    }
+    ul {
+      height: 80px;
+      float: right;
+      width: 280px;
+      text-align: right;
+      li {
+        font-size: 2rem;
+        margin-top: 30px;
+        a {
+          margin-right: 10px;
+        }
+        .dropdown-item {
+          font-size: 1.5rem;
+          width: 130px;
+          height: 40px;
+          text-align: center;
+          vertical-align: middle;
+        }
+      }
+    }
+  }
+}
+
+// debug
+.debug_dump {
+  clear: both;
+  float: left;
+  width: 100%;
+  margin-top: 45px;
+}
+
+// wrapper
+.wrapper {
+  width: 970px;
+  margin: 30px auto 0;
+}
+
+// form
+.registration-form {
+  h1 {
+    font-size: 3rem;
+  }
+  p {
+    font-size: 2rem;
+    margin-top: 20px;
+  }
+  .form {
+    width: 600px;
+    margin-top: 20px;
+    label {
+      font-size: 1.7rem;
+    }
+    input {
+      font-size: 1.7rem;
+    }
+    .btn {
+      height: 40px;
+      width: 100px;
+      // background-color: #59bb0c;
+      // border-color: #4ea30a;
+    }
+  }
+}
+
+// error messages
+#error_explanation {
+  // color: red;
+  // ul {
+  //   margin-bottom: 30px;
+  // }
+  font-size: 1.5rem;
+}
+
+// alert
+.alert {
+  font-size: 1.5rem;
+}

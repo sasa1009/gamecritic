@@ -19,8 +19,17 @@
   box-sizing: border-box;
 }
 
+.clearfix::after {
+  content: '';
+  display: block;
+  clear: both;
+}
+
 html {
   font-size: 62.5%;
+  a:hover {
+    text-decoration: none;
+  }
 }
 
 // header
@@ -56,14 +65,6 @@ header {
   }
 }
 
-// debug
-.debug_dump {
-  clear: both;
-  float: left;
-  width: 100%;
-  margin-top: 45px;
-}
-
 // wrapper
 .wrapper {
   width: 970px;
@@ -95,6 +96,26 @@ header {
       // border-color: #4ea30a;
     }
   }
+  .name_and_image {
+    .image {
+      float: left;
+      text-align: center;
+      height: 100px;
+      .gravatar_link {
+        font-size: 1.2rem;
+        text-align: center;
+      }
+    }
+    .user_name {
+      vertical-align: middle;
+      float: left;
+      margin-left: 20px;
+      height: 100px;
+      h1 {
+        margin-top: 32px;
+      }
+    }
+  }
 }
 
 // error messages
@@ -109,4 +130,28 @@ header {
 // alert
 .alert {
   font-size: 1.5rem;
+}
+
+// users index
+.users {
+  list-style: none;
+  // margin: 20px 0 0 0;
+  li {
+    overflow: auto;
+    padding: 10px 0;
+    a {
+      margin-left: 20px;
+      font-size: 2rem;
+      color: black;
+    }
+  }
+}
+
+// page nation
+.page {
+  margin: 20px 0;
+  font-size: 1.5rem;
+  .page-link {
+    color: #333333;
+  }
 }

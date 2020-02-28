@@ -1,0 +1,9 @@
+<li>
+  <%= gravatar_for user, size: 70 %>
+  <%= link_to user.name, user , class: "name" %>
+  <% if current_user.admin? && !current_user?(user) %>
+    <span class="name">  |</span>
+    <%= link_to "delete", user, method: :delete, class: "delete",
+                                  data: { confirm: "本当に削除しますか？" } %>
+  <% end %>
+</li>

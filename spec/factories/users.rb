@@ -6,6 +6,14 @@ FactoryBot.define do
     password_confirmation { "password" }
   end
 
+  factory :admin, class: User do
+    name { "Admin User" }
+    email { "admin@gmail.com" }
+    password { "password" }
+    password_confirmation { "password" }
+    admin { true }
+  end
+
   factory :archer, class: User do
     name { "Sterling Archer" }
     email { "archer@gmail.com" }

@@ -4,6 +4,7 @@ RSpec.describe "Users", type: :request do
 
   let!(:user) { FactoryBot.create(:user) }
   let!(:archer) { FactoryBot.create(:archer) }
+  let!(:admin) { FactoryBot.create(:admin) }
   let(:user_params) { { name: '',
                         email: '',
                         password: '',
@@ -127,6 +128,52 @@ RSpec.describe "Users", type: :request do
       end
       it_behaves_like 'access to the settiong page is redirected to login page'
       it_behaves_like 'patch request to the update action is redirected to login page'
+    end
+  end
+
+  describe "admin attribute" do
+    before do
+      log_in_as(archer)
+    end
+    it "should not be edited via the web" do
+      expect(archer.admin).to eq false
+      expect {
+        patch user_path(archer), params: { user: { password: "password",
+                                                   password_confirmation: "password",
+                                                   admin: true } }
+      }.to_not change { User.find_by(name: "Sterling Archer").admin }
+    end
+  end
+
+  describe "delete" do
+    shared_examples 'is redirected to login page' do
+      it {
+        expect {
+          delete user_path(archer)
+        }.to_not change { User.count }
+        expect(response).to redirect_to login_path
+      }
+    end
+
+    context "without login" do
+      it_behaves_like 'is redirected to login page'
+    end
+
+    context "with non admin user" do
+      before do
+        log_in_as(user)
+      end
+      it_behaves_like 'is redirected to login page'
+    end
+
+    context "with admin user" do
+      it "should delete user" do
+        log_in_as(admin)
+        expect {
+          delete user_path(archer)
+        }.to change { User.count }
+        expect(response).to redirect_to users_path
+      end
     end
   end
 end

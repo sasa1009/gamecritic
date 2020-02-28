@@ -140,9 +140,23 @@ header {
     overflow: auto;
     padding: 10px 0;
     a {
+      vertical-align: middle;
+    }
+    span {
+      vertical-align: middle;
+    }
+    .name {
       margin-left: 20px;
       font-size: 2rem;
       color: black;
+    }
+    .delete {
+      font-size: 1.5rem;
+      color: #007bff;
+      margin-left: 13px;
+    }
+    .delete:hover {
+      opacity: 0.8;
     }
   }
 }

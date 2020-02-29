@@ -167,11 +167,15 @@ RSpec.describe "Users", type: :request do
     end
 
     context "with admin user" do
-      it "should delete user" do
+      it "should delete user or shoud not delete user who already deleted" do
         log_in_as(admin)
         expect {
           delete user_path(archer)
-        }.to change { User.count }
+        }.to change { User.count }.by(-1)
+        expect(response).to redirect_to users_path
+        expect {
+          delete user_path(archer)
+        }.to_not change { User.count }
         expect(response).to redirect_to users_path
       end
     end

@@ -41,7 +41,7 @@ RSpec.describe "Sessions", type: :request do
 
     context "without remembering" do
       it "doesn't contain remember_token in cookies" do
-        log_in_as(user, remember_me: "0")
+        log_in_as(user, remember_me: nil)
         expect(response.cookies['remember_token']).to eq nil
       end
     end

@@ -1,0 +1,15 @@
+<h1>すべてのユーザ</h1>
+
+<div class="page" id="upside">
+  <%= paginate @users %>
+  <%= page_entries_info @users %>
+</div>
+
+<ul class="users">
+  <%= render @users %>
+</ul>
+
+<div class="page">
+  <%= paginate @users %>
+  <%= page_entries_info @users %>
+</div>

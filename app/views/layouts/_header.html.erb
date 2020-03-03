@@ -3,14 +3,15 @@
     <%= link_to "gamecritic", '#', id: "logo" ,class: "navbar-brand"%>
     <ul class="list-inline">
       <li class="list-inline-item"><%= link_to "About", '#', class: "text-light" %></li>
-      <li class="list-inline-item"><%= link_to "Users", '#', class: "text-light" %></li>
       <% if logged_in? %>
+        <li class="list-inline-item"><%= link_to "Users", users_path, class: "text-light" %></li>
         <li class="dropdown list-inline-item">
           <a class="dropdown-toggle text-light" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Menu
           </a>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
             <%= link_to "Profile", current_user, class: "dropdown-item" %>
+            <%= link_to "Setting", edit_user_path(current_user) , class: "dropdown-item" %>
             <%= link_to "Logout", logout_path, method: :delete, class: "dropdown-item" %>
           </div>
         </li>

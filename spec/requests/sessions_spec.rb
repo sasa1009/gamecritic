@@ -31,14 +31,47 @@ RSpec.describe "Sessions", type: :request do
         expect(is_logged_in?).to be_truthy
       end
     end
+
+    context "with remembering" do
+      it "contain remember_token in cookies" do
+        log_in_as(user, remember_me: "1")
+        expect(response.cookies['remember_token']).to_not eq nil
+      end
+    end
+
+    context "without remembering" do
+      it "doesn't contain remember_token in cookies" do
+        log_in_as(user, remember_me: nil)
+        expect(response.cookies['remember_token']).to eq nil
+      end
+    end
   end
 
   describe "logout" do
+    let(:user) { FactoryBot.create(:user) }
+
+    before do
+      # ログインする
+      log_in_as(user)
+    end
+
     it "is redirected to login page" do
       delete logout_path
       expect(response).to redirect_to login_path
       expect(is_logged_in?).to be_falsey
     end
-  end
 
+    context "when other tab has already logouted" do
+      it "is redirected to login page" do
+        # 1番目のウィンドウでログアウトする
+        delete logout_path
+        expect(response).to redirect_to login_path
+        expect(session[:user_id]).to eq nil
+        # 2番目のウィンドウでログアウトする
+        delete logout_path
+        expect(response).to redirect_to login_path
+        expect(session[:user_id]).to eq nil
+      end
+    end
+  end
 end

@@ -8,6 +8,7 @@ RSpec.describe 'UsersLogin', type: :system, js: true do
     find("#password").set("")
     click_button "ログイン"
     expect(page).to have_selector(".alert-danger")
+    expect(page).to have_selector("#session_remember_me")
     expect(page).to have_link("Login", href: login_path)
     expect(page).to have_link("Signup", href: signup_path)
     visit login_path

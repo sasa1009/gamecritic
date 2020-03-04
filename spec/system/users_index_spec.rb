@@ -4,6 +4,7 @@ RSpec.describe 'UsersIndex', type: :system, js: true do
   before do
     @archer = FactoryBot.create(:archer)
     @admin = FactoryBot.create(:admin)
+    @michael = FactoryBot.create(:michael)
     @users = FactoryBot.create_list(:user, 30)
   end
 
@@ -12,6 +13,7 @@ RSpec.describe 'UsersIndex', type: :system, js: true do
       sign_in_as(@admin)
       visit users_path
       expect(page).to have_content(@users.first.name)
+      expect(page).to_not have_content(@michael.name)
       expect(page).to_not have_content(@users[23].name)
       expect(page).to have_selector("ul.pagination")
       expect(page).to have_selector(".delete")

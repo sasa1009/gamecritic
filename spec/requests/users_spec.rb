@@ -5,6 +5,7 @@ RSpec.describe "Users", type: :request do
   let!(:user) { FactoryBot.create(:user) }
   let!(:archer) { FactoryBot.create(:archer) }
   let!(:admin) { FactoryBot.create(:admin) }
+  let!(:michael) { FactoryBot.create(:michael) }
   let(:user_params) { { name: '',
                         email: '',
                         password: '',
@@ -60,15 +61,41 @@ RSpec.describe "Users", type: :request do
           post signup_path, params: { user: valid_user_params }
         }.to change(User, :count).by(1)
       end
-      it "is redirected to profile page" do
+      it "is redirected to games index page" do
         post signup_path, params: { user: valid_user_params }
-        expect(response).to redirect_to "/users/#{User.last.id}"
-        expect(is_logged_in?).to be_truthy
+        expect(response).to redirect_to games_index_path
+        expect(is_logged_in?).to eq false
+      end
+      specify "account activation feature" do
+        post signup_path, params: { user: valid_user_params }
+        user = assigns(:user)
+        expect(user.activated?).to eq false
+        # 有効化していない状態でログインしてみる
+        log_in_as(user)
+        expect(is_logged_in?).to be false
+        # 有効化トークンが不正な場合
+        get edit_account_activation_path("invalid token", email: user.email)
+        expect(is_logged_in?).to be false
+        # トークンは正しいがメールアドレスが無効な場合
+        get edit_account_activation_path(user.activation_token, email: 'wrong')
+        expect(is_logged_in?).to be false
+        # 有効化トークンが正しい場合
+        get edit_account_activation_path(user.activation_token, email: user.email)
+        expect(is_logged_in?).to be true
+        expect(user.reload.activated?).to eq true
+        expect(response).to redirect_to user_path(user)
       end
     end
   end
 
   describe "GET show" do
+    context "access to the profile page without activated" do
+      it "is redirected to games index page" do
+        get user_path(michael)
+        expect(response).to redirect_to games_index_path
+      end
+    end
+
     context "access to the profile page" do
       it "responds successfully" do
         get user_path(user)

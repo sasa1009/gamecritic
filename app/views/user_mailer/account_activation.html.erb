@@ -1,0 +1,10 @@
+<h1>Gamecritic</h1>
+
+<p><%= @user.name %> さん、こんにちは。</p>
+
+<p>
+Gamecriticへようこそ！以下のリンクをクリックしてアカウントの登録を完了してください。
+</p>
+
+<%= link_to "アカウント登録完了", edit_account_activation_url(@user.activation_token,
+                                                    email: @user.email) %>

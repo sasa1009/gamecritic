@@ -4,11 +4,12 @@ class UsersController < ApplicationController
   before_action :admin_user,     only: :destroy
 
   def index
-    @users = User.page(params[:page])
+    @users = User.where(activated: true).page(params[:page])
   end
 
   def show
     @user = User.find(params[:id])
+    redirect_to games_index_path and return unless @user.activated?
   end
 
   def new
@@ -18,9 +19,11 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      log_in(@user)
-      flash[:success] = "登録が成功しました"
-      redirect_to @user
+      logger.debug(@user)
+      @user.send_activation_email
+      flash[:info] = "メールアドレスの確認のためにメールを送信しました。
+                      メール内のリンクをクリックしてアカウントの登録を完了して下さい。"
+      redirect_to games_index_path
     else
       render 'new'
     end

@@ -91,9 +91,15 @@ header {
     }
     .btn {
       height: 40px;
-      width: 100px;
+      width: 140px;
       // background-color: #59bb0c;
       // border-color: #4ea30a;
+    }
+    .password-reset {
+      margin-top: 10px;
+      a {
+        font-size: 1.5rem;
+      }
     }
   }
   .name_and_image {

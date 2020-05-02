@@ -18,6 +18,18 @@ FactoryBot.define do
     activated_at { Time.zone.now }
   end
 
+  factory :reset, class: User do
+    name { "Reset User" }
+    email { "reset@gmail.com" }
+    password { "password" }
+    password_confirmation { "password" }
+    activated { true }
+    activated_at { Time.zone.now }
+    reset_token { User.new_token }
+    reset_digest { User.digest(reset_token) }
+    reset_sent_at { Time.zone.now }
+  end
+
   factory :archer, class: User do
     name { "Sterling Archer" }
     email { "archer@gmail.com" }

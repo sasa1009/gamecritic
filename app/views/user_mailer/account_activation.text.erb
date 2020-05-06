@@ -1,0 +1,5 @@
+<%= @user.name %> さん、こんにちは。
+
+Gamecriticへようこそ！以下のURLにアクセスしてアカウントの登録を完了してください。
+
+<%= edit_account_activation_url(@user.activation_token, email: @user.email) %>

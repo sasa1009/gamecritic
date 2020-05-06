@@ -1,0 +1,14 @@
+<div class="registration-form">
+  <h1>パスワードの再設定</h1>
+  <p>アカウント作成時に登録したメールアドレスを入力してください。<br>
+  メールを送信しますので、メール内のリンクからパスワードを再設定してください。</p>
+  <div class="form">
+    <%= form_for(:password_reset, url: password_resets_path) do |f| %>
+      <div class="form-group" >
+        <%= f.label :email, "メールアドレス" %>
+        <%= f.email_field :email, class: "form-control", id: "email" %>
+      </div>
+      <%= f.submit "メールを送信", class: "btn btn-success" %>
+    <% end %>
+  </div>
+</div>

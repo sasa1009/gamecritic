@@ -9,7 +9,7 @@ class AccountActivationsController < ApplicationController
       redirect_to user
     else
       flash[:danger] = "不正なリンクです"
-      redirect_to games_index_path
+      redirect_to games_path
     end
   end
 

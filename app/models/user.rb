@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  has_many :games
+
   attr_accessor :remember_token, :activation_token, :reset_token
   before_save   :downcase_email
   before_create :create_activation_digest
@@ -11,7 +13,7 @@ class User < ApplicationRecord
   validates :password, presence: true, length: {minimum: 6}, allow_nil: true
 
   #activatedがtrueのユーザー一覧を返す
-  scope :activated_user, -> { User.where(activated: true) }
+  scope :activated_user, -> { where(activated: true) }
 
   # 渡された文字列のハッシュ値を返す
   def User.digest(string)

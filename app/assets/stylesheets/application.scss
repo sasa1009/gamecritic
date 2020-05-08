@@ -124,6 +124,16 @@ header {
   }
 }
 
+// games form
+.games_form {
+  select {
+    font-size: 1.4rem;
+  }
+  textarea {
+    font-size: 1.4rem;
+  }
+}
+
 // error messages
 #error_explanation {
   // color: red;

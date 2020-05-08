@@ -13,7 +13,7 @@ class SessionsController < ApplicationController
         redirect_back_or user
       else
         flash[:warning] = "アカウントの登録が完了していません。メール内のリンクから登録を完了して下さい。"
-        redirect_to games_index_path
+        redirect_to games_path
       end
     else
       flash.now[:danger] = "メールアドレスかパスワードが間違っています"

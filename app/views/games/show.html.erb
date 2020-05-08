@@ -1,0 +1,7 @@
+<h2><%= @game.title %></h2>
+<p><%= @game.release_date.strftime("%F") %></p>
+<p><%= @game.developer %></p>
+<p><%= @game.summary %></p>
+<%= link_to "ゲームデータを編集", edit_game_path(@game) %>
+<%= link_to "ゲームデータを削除", @game, method: :delete, class: "delete",
+                              data: { confirm: "本当に削除しますか？" } %>

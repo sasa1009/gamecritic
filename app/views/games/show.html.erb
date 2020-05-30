@@ -1,7 +1,25 @@
-<h2><%= @game.title %></h2>
-<p><%= @game.release_date.strftime("%F") %></p>
-<p><%= @game.developer %></p>
-<p><%= @game.summary %></p>
-<%= link_to "ゲームデータを編集", edit_game_path(@game) %>
-<%= link_to "ゲームデータを削除", @game, method: :delete, class: "delete",
-                              data: { confirm: "本当に削除しますか？" } %>
+<div class="game_info clearfix">
+  <div class="jacket">
+    <% if @game.jacket.attached? %>
+      <div>
+        <%= image_tag @game.jacket.variant(resize:'250x320').processed %>
+      </div>
+    <% end %>
+  </div>
+  <div class="info">
+    <h2 class="title"><%= @game.title %></h2>
+    <p class="release_date"><%= @game.release_date.strftime("%F") %></p>
+    <p class="developer"><%= @game.developer %></p>
+    <p class="summary"><%= @game.summary %></p>
+    <% if logged_in? && current_user.admin? %>
+      <%= link_to "ゲームデータを編集", edit_game_path(@game), id: "edit" %>
+      <%= link_to "ゲームデータを削除", @game, method: :delete, class: "delete", id: "delete",
+                                        data: { confirm: "本当に削除しますか？" } %>
+    <% end %>
+  </div>
+</div>
+<% if @game.youtube_url? %>
+  <div class="youtube">
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/<%= @game.youtube_url%>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  </div>
+<% end %>

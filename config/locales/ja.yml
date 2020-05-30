@@ -23,6 +23,8 @@ ja:
         developer: メーカー
         release_date: 発売日
         summary: 概要
+        jacket: ジャケット画像
+        youtube_url: YouTube URL
   date:
     abbr_day_names:
     - 日

@@ -17,5 +17,18 @@
     <%= f.label :summary %>
     <%= f.text_area :summary, class: "form-control", id: "summary" %>
   </div>
+  <% if @game.jacket.attached? %>
+    <div>
+      <%= image_tag @game.jacket %>
+    </div>
+  <% end %>
+  <div class="form-group">
+    <%= f.label :jacket %>
+    <%= f.file_field :jacket, class: "form-control", id: "file_field" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :youtube_url %>
+    <%= f.text_field :youtube_url, class: "form-control", id: "youtube_url" %>
+  </div>
   <%= f.submit yield(:button_text), class: "btn btn-success" %>
 <% end %>

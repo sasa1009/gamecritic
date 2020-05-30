@@ -61,4 +61,7 @@ Rails.application.configure do
   # Use an evented file watcher to asynchronously detect changes in source code,
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
+
+  # Store uploded file on the local file system (see config/strage.yml for options)
+  config.active_storage.service = :local
 end

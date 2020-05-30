@@ -6,6 +6,8 @@ services:
       - "5432:5432"
     volumes:
       - data:/var/lib/postgresql/data:cached
+    environment:
+      POSTGRES_PASSWORD: postgres
   redis:
     image: redis
     ports:
@@ -33,6 +35,11 @@ services:
     links:
       - db
       - chrome
+    extra_hosts:
+      - "api.rubygems.org:151.101.128.70"
+      - "api.rubygems.org:151.101.0.70"
+      - "api.rubygems.org:151.101.64.70"
+      - "api.rubygems.org:151.101.192.70"
   spring:
     <<: *app
     command: bundle exec spring server

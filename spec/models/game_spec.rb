@@ -22,12 +22,11 @@ RSpec.describe Game, type: :model do
       sekiro.valid?
       expect(sekiro.errors[:release_date]).to include("を入力してください")
     end
-  end
 
-  context "checking class method" do
-    # 与えられた文字列の最後の１１文字を返す
-    specify "get_video_id returns last 11 charactars in given string" do
-      expect(Game.get_video_id("https://youtu.be/rXMX4YJ7Lks")).to eq "rXMX4YJ7Lks"
+    it "is invalid without a youtube_video_id" do
+      sekiro.youtube_video_id = ""
+      sekiro.valid?
+      expect(sekiro.errors[:youtube_video_id]).to include("が正しくありません")
     end
   end
 end

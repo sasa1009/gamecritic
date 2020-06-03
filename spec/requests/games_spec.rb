@@ -60,7 +60,7 @@ RSpec.describe "Games", type: :request do
                                              developer: "",
                                              release_date: "",
                                              summary: "",
-                                             youtube_url: "" } }
+                                             youtube_video_id: "" } }
         }.to_not change(Game, :count)
       end
     end
@@ -73,7 +73,7 @@ RSpec.describe "Games", type: :request do
                                              developer: "Atlus",
                                              release_date: "2020-03-31 00:00:00",
                                              summary: "奪え、その意志で。ペルソナ5新生(ザ・ロイヤル)―。",
-                                             youtube_url: "https://youtu.be/o9QjlLdYK5I" } }
+                                             youtube_video_id: "https://youtu.be/o9QjlLdYK5I" } }
         }.to change(Game, :count).by(1)
         expect(response).to redirect_to game_path(Game.last)
       end
@@ -101,7 +101,7 @@ RSpec.describe "Games", type: :request do
                                            developer: "",
                                            release_date: "",
                                            summary: "奪え、その意志で。ペルソナ5新生(ザ・ロイヤル)―。",
-                                           youtube_url: "" } }
+                                           youtube_video_id: "" } }
         expect(Game.find(game.id).summary).to_not eq ("奪え、その意志で。ペルソナ5新生(ザ・ロイヤル)―。")
       end
     end
@@ -113,7 +113,7 @@ RSpec.describe "Games", type: :request do
                                            developer: game.developer,
                                            release_date: game.release_date,
                                            summary: "奪え、その意志で。ペルソナ5新生(ザ・ロイヤル)―。",
-                                           youtube_url: game.youtube_url } }
+                                           youtube_video_id: game.youtube_video_id } }
         expect(Game.find(game.id).summary).to eq ("奪え、その意志で。ペルソナ5新生(ザ・ロイヤル)―。")
         expect(response).to redirect_to game_path(game)
       end

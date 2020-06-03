@@ -49,6 +49,8 @@ RSpec.describe 'GamesPost', type: :system, js: true do
 
     context "with valid information" do
       # 適切な情報を入力した場合ゲームデータが作成される。
+      # ジャケット画像とYouTube URLを入力するとゲーム詳細画面に追加される
+      # ジャケット画像をアップロードした場合、game.jacket.attached?がtrueになる。
       it "creates game data and redirect to the game's information page" do
         find("#title").set("Persona 5 Royal")
         find("#developer").set("Atlus")
@@ -56,9 +58,14 @@ RSpec.describe 'GamesPost', type: :system, js: true do
         find("#game_release_date_2i").set("3")
         find("#game_release_date_3i").set("31")
         find("#summary").set("奪え、その意志で。ペルソナ5新生(ザ・ロイヤル)―。")
+        find("#file_field").set(Rails.root.join('spec', 'fixtures', 'files', 'ペルソナ５.jpg'), filename: 'ペルソナ５.jpg')
+        find("#youtube_video_id").set("https://youtu.be/dFWXBQH9f5s")
         click_button("投稿")
         expect(page).to have_current_path game_path(Game.last)
         expect(page).to have_selector(".alert-info")
+        expect(page).to have_selector(".jacket")
+        expect(page).to have_selector(".youtube")
+        expect(Game.last.jacket.attached?).to eq true
       end
     end
   end

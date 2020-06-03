@@ -1,7 +1,8 @@
 class GamesController < ApplicationController
   before_action :logged_in_user, except: [:index, :show]
   before_action :admin_user, except: [:index, :show]
-
+  before_action :find_resource, except: [:index, :new, :create]
+  
   def index
     @games = Game.page(params[:page])
   end
@@ -11,9 +12,7 @@ class GamesController < ApplicationController
   end
 
   def create
-    @game = Game.new(game_params)
-    @game.user_id = current_user.id
-    @game.youtube_url = Game.get_video_id(game_params[:youtube_url])
+    @game = current_user.games.new(game_params)
     if @game.save
       flash[:info] = "ゲームデータが登録されました。"
       redirect_to @game
@@ -23,19 +22,14 @@ class GamesController < ApplicationController
   end
 
   def show
-    @game = Game.find(params[:id])
   end
 
   def edit
-    @game = Game.find(params[:id])
   end
 
   def update
-    @game = Game.find(params[:id])
-    # youtube_urlの値を編集
-    params_data = game_params
-    params_data["youtube_url"] = Game.get_video_id(params_data["youtube_url"])
-    if @game.update_attributes(params_data)
+    # youtube_video_idの値を編集
+    if @game.update_attributes(game_params)
       flash[:success] = "ゲームデータが更新されました。"
       redirect_to @game
     else
@@ -44,7 +38,7 @@ class GamesController < ApplicationController
   end
 
   def destroy
-    if @game = Game.find(params[:id])
+    if 
       @game.destroy
       flash[:success] = "ゲームデータが削除されました"
       redirect_to root_path
@@ -58,6 +52,10 @@ class GamesController < ApplicationController
 
     def game_params
       params.require(:game).permit(:title, :developer, :release_date,
-                                   :summary, :jacket, :youtube_url)
+                                   :summary, :jacket, :youtube_video_id)
+    end
+
+    def find_resource
+      @game = Game.find(params[:id])
     end
 end

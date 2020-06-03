@@ -44,17 +44,15 @@ RSpec.describe 'GamesEditAndDelete', type: :system, js: true do
       visit edit_game_path(sekiro)
     end
 
-    # ジャケット画像とYouTube URLを入力するとゲーム詳細画面に追加される
-    # ジャケット画像をアップロードした場合、game.jacket.attached?がtrueになる。
+    # 編集ページで記入した内容がゲーム詳細画面に反映される
     it "edits the game data and redirect to the game's information page" do
-      find("#file_field").set(Rails.root.join('spec', 'fixtures', 'files', 'SEKIRO.jpg'), filename: 'SEKIRO.jpg')
-      find("#youtube_url").set("https://youtu.be/rXMX4YJ7Lks")
+      find("#title").set("Persona 5 Royal")
+      find("#developer").set("Atlus")
       find_button("編集").click
       expect(page).to have_current_path game_path(sekiro)
       expect(page).to have_selector(".alert-success")
-      expect(page).to have_selector(".jacket")
-      expect(page).to have_selector(".youtube")
-      expect(sekiro.jacket.attached?).to eq true
+      expect(page).to have_content("Persona 5 Royal")
+      expect(page).to have_content("Atlus")
     end
   end
 

@@ -28,7 +28,6 @@ class GamesController < ApplicationController
   end
 
   def update
-    # youtube_video_idの値を編集
     if @game.update_attributes(game_params)
       flash[:success] = "ゲームデータが更新されました。"
       redirect_to @game
@@ -38,8 +37,7 @@ class GamesController < ApplicationController
   end
 
   def destroy
-    if 
-      @game.destroy
+    if @game.destroy
       flash[:success] = "ゲームデータが削除されました"
       redirect_to root_path
     else

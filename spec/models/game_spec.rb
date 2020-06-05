@@ -23,10 +23,20 @@ RSpec.describe Game, type: :model do
       expect(sekiro.errors[:release_date]).to include("を入力してください")
     end
 
-    it "is invalid without a youtube_video_id" do
-      sekiro.youtube_video_id = ""
+    it "is invalid when wrong string in youtube_video_id" do
+      sekiro.youtube_video_id = "https://ja.stackoverflow.com/"
       sekiro.valid?
       expect(sekiro.errors[:youtube_video_id]).to include("が正しくありません")
+    end
+
+    it "is valid without a youtube_video_id" do
+      sekiro.youtube_video_id = nil
+      expect(sekiro).to be_valid
+    end
+
+    it "is valid with YouTube URL in youtube_video_id" do
+      sekiro.youtube_video_id = "https://youtu.be/Zdv28QsMeio"
+      expect(sekiro).to be_valid
     end
   end
 end

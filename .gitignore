@@ -32,3 +32,7 @@
 /mail_body.rb
 
 /.viminfo
+
+/.DS_Store
+/spec/.DS_Store
+/spec/fixtures/.DS_Store

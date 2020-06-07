@@ -6,6 +6,9 @@ FactoryBot.define do
     release_date { "2020-05-02 12:50:16" }
     summary { "MyText" }
     youtube_video_id { "https://youtu.be/EyCZP1wDxEM" }
+    after(:build) do |sekiro|
+      sekiro.jacket.attach(io: File.open(Rails.root.join('spec', 'fixtures', 'files', 'SEKIRO.jpg')), filename: 'SEKIRO.jpg', content_type: 'image/jpeg')
+    end
   end
 
   factory :sekiro, class: Game do
@@ -16,5 +19,8 @@ FactoryBot.define do
     summary { "隻腕の狼、戦国に忍ぶ。
                史上最も血なまぐさい時代・戦国。連れ攫われた皇子を奪還し、自らの左腕を斬り落とした侍に復讐を果たすため、孤独な忍びの戦いが始まる。" }
     youtube_video_id { "https://youtu.be/rXMX4YJ7Lks" }
+    after(:build) do |sekiro|
+      sekiro.jacket.attach(io: File.open(Rails.root.join('spec', 'fixtures', 'files', 'SEKIRO.jpg')), filename: 'SEKIRO.jpg', content_type: 'image/jpeg')
+    end
   end
 end

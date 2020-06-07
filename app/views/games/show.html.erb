@@ -22,4 +22,8 @@
   <div class="youtube">
     <iframe width="560" height="315" src="https://www.youtube.com/embed/<%= @game.youtube_video_id%>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
   </div>
+<% else %>
+  <div class="alert alert-secondary no_youtube" role="alert">
+    YouTube URLを追加して下さい。
+  </div>
 <% end %>

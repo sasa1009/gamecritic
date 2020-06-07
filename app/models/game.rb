@@ -4,6 +4,7 @@ class Game < ApplicationRecord
   validates :developer,  presence: true
   validates :release_date,  presence: true
   validates :youtube_video_id, length: { is: 11, message: "が正しくありません" }, format: { with: /[0-9A-Za-z_-]{11}/, message: "が正しくありません" }, if: :youtube_video_id_present?
+  validate :validate_jacket
   
   has_one_attached :jacket
 
@@ -25,5 +26,25 @@ class Game < ApplicationRecord
   # youtube_video_idに値があるか調べる
   def youtube_video_id_present?
     self.youtube_video_id.present?
+  end
+
+  # jacket画像のバリデーション
+  def validate_jacket
+    if !jacket.attached?
+      errors.add(:jacket, "を指定して下さい")
+    else
+      if jacket.blob.byte_size > 5.megabytes
+        jacket.purge
+        errors.add(:jacket, "は5メガバイト以下の画像を指定して下さい")
+      elsif !image?
+        jacket.purge
+        errors.add(:jacket, "はイメージファイルを指定して下さい")
+      end
+    end
+  end
+
+  # jacketで指定されたファイルがイメージファイルかどうかを調べる
+  def image?
+    %w[image/jpg image/jpeg image/gif image/png].include?(jacket.blob.content_type)
   end
 end

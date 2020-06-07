@@ -66,6 +66,9 @@ RSpec.describe "Games", type: :request do
     end
 
     context "with valid data" do
+      before do
+        @image = fixture_file_upload(Rails.root.join('spec', 'fixtures', 'files', 'ペルソナ５.jpg'), 'image/jpeg')
+      end
       # 各項目が入力されている場合ゲームデータが保存される。その場合、ゲーム詳細画面にリダイレクトされる。
       it "adds game and redirected to the game's information page" do
         expect {
@@ -73,7 +76,8 @@ RSpec.describe "Games", type: :request do
                                              developer: "Atlus",
                                              release_date: "2020-03-31 00:00:00",
                                              summary: "奪え、その意志で。ペルソナ5新生(ザ・ロイヤル)―。",
-                                             youtube_video_id: "https://youtu.be/o9QjlLdYK5I" } }
+                                             youtube_video_id: "https://youtu.be/o9QjlLdYK5I",
+                                             jacket: @image } }
         }.to change(Game, :count).by(1)
         expect(response).to redirect_to game_path(Game.last)
       end

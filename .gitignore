@@ -33,6 +33,4 @@
 
 /.viminfo
 
-/.DS_Store
-/spec/.DS_Store
-/spec/fixtures/.DS_Store
+.DS_Store

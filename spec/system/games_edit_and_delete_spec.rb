@@ -49,13 +49,13 @@ RSpec.describe 'GamesEditAndDelete', type: :system, js: true do
     it "edits the game data and redirect to the game's information page" do
       find("#title").set("Persona 5 Royal")
       find("#developer").set("Atlus")
-      find("youtube_video_id").set("")
+      find("#youtube_video_id").set("")
       find_button("編集").click
       expect(page).to have_current_path game_path(sekiro)
       expect(page).to have_selector(".alert-success")
       expect(page).to have_content("Persona 5 Royal")
       expect(page).to have_content("Atlus")
-      expect(page).to have_selector("no_youtube")
+      expect(page).to have_selector(".no_youtube")
     end
   end
 

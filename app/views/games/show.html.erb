@@ -10,7 +10,7 @@
     <h2 class="title"><%= @game.title %></h2>
     <p class="release_date"><%= @game.release_date.strftime("%F") %></p>
     <p class="developer"><%= @game.developer %></p>
-    <p class="summary"><%= @game.summary %></p>
+    <p class=""><%= simple_format(@game.summary,class: 'summary') %></p>
     <% if logged_in? && current_user.admin? %>
       <%= link_to "ゲームデータを編集", edit_game_path(@game), id: "edit" %>
       <%= link_to "ゲームデータを削除", @game, method: :delete, class: "delete", id: "delete",
@@ -21,9 +21,5 @@
 <% if @game.youtube_video_id? %>
   <div class="youtube">
     <iframe width="560" height="315" src="https://www.youtube.com/embed/<%= @game.youtube_video_id%>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-  </div>
-<% else %>
-  <div class="alert alert-secondary no_youtube" role="alert">
-    YouTube URLを追加して下さい。
   </div>
 <% end %>

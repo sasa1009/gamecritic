@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_05_172208) do
+ActiveRecord::Schema.define(version: 2020_06_07_203003) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,7 +44,19 @@ ActiveRecord::Schema.define(version: 2020_06_05_172208) do
     t.text "summary"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "youtube_video_id", null: false
+    t.string "youtube_video_id"
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.integer "score", null: false
+    t.text "title"
+    t.text "review"
+    t.bigint "user_id"
+    t.bigint "game_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["game_id"], name: "index_reviews_on_game_id"
+    t.index ["user_id"], name: "index_reviews_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -64,4 +76,6 @@ ActiveRecord::Schema.define(version: 2020_06_05_172208) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "reviews", "games"
+  add_foreign_key "reviews", "users"
 end

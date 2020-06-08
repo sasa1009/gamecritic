@@ -55,7 +55,6 @@ RSpec.describe 'GamesEditAndDelete', type: :system, js: true do
       expect(page).to have_selector(".alert-success")
       expect(page).to have_content("Persona 5 Royal")
       expect(page).to have_content("Atlus")
-      expect(page).to have_selector(".no_youtube")
     end
   end
 

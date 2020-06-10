@@ -1,0 +1,15 @@
+<div class="index_game_info clearfix">
+  <div class="index_jacket">
+    <% if game.jacket.attached? %>
+      <a href="/games/<%= game.id %>">
+        <%= image_tag game.jacket.variant(resize:'140').processed %>
+      </a>
+    <% end %>
+  </div>
+  <li class="index_info">
+    <h3><%= link_to game.title, game, class: "index_game_title" %></h3>
+    <p><%= game.release_date.strftime("%F") %></p>
+    <p><%= game.developer %></p>
+    <p><%= game.summary %></p>
+  </li>
+</div>

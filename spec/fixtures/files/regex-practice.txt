@@ -1,0 +1,30 @@
+<select name="game_console">
+none,
+wii_u,Wii U
+ps4,プレステ4
+gb,ゲームボーイ
+</select>
+
+value="[a-z0-9_]"
+>.+<
+<option value="([a-z0-9_]+)">(.+)<\/option>
+<option value="([a-z0-9_]+)">(.*)<\/option>
+<option value="([a-z0-9_]+)"( selected)?>(.*)<\/option>
+<option value="([a-z0-9_]+)"(?: selected)?>(.*)<\/option>
+
+https://www.youtube.com/watch?v=4cQvddE4mpg
+https://www.youtube.com/watch?v=XRp0W-_BNj4
+https://www.youtube.com/watch?v=_-8zWICSaDU&list=PLO3E3Cv6CpBiy_75peDraR3LY_9boN1n0&index=3
+
+
+https://youtu.be/4cQvddE4mpg
+https://youtu.be/XRp0W-_BNj4
+https://youtu.be/_-8zWICSaDU
+
+
+https://www.youtube.com/watch?v=[0-9A-Za-z_-]{11}
+https://youtu.be/[0-9A-Za-z_-]{11}
+https:\/\/youtu.be\/([0-9A-Za-z_-]{11})
+
+https:\/\/www.youtube.com\/watch\?v=([&=0-9A-Za-z_-]+)
+https:\/\/www.youtube.com\/watch\?v=([0-9A-Za-z_-]{11})[&=0-9A-Za-z_-]*

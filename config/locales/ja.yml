@@ -9,6 +9,7 @@ ja:
           has_many: "%{record}が存在しているので削除できません"
     models:
       user: ユーザー
+      game: ゲーム
     attributes:
       user:
         name: ユーザ名
@@ -17,6 +18,13 @@ ja:
         password_confirmation: パスワード（確認用）
         created_at: 登録日時
         updated_at: 更新日時
+      game:
+        title: タイトル
+        developer: メーカー
+        release_date: 発売日
+        summary: 概要
+        jacket: ジャケット画像
+        youtube_video_id: YouTube URL
   date:
     abbr_day_names:
     - 日

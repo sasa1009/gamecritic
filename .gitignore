@@ -30,3 +30,7 @@
 /.bash_history
 
 /mail_body.rb
+
+/.viminfo
+
+.DS_Store

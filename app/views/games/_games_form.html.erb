@@ -1,0 +1,34 @@
+<%= form_for @game, url: { action: yield(:action) } do |f| %>
+  <%= render 'shared/error_messages', object: @game %>
+
+  <div class="form-group">
+    <%= f.label :title %>
+    <%= f.text_field :title, class: "form-control", id: "title" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :developer %>
+    <%= f.text_field :developer, class: "form-control", id: "developer" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :release_date %><br>
+    <%= f.date_select :release_date, class: "form-control", id: "release_date" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :summary %>
+    <%= f.text_area :summary, class: "form-control", id: "summary" %>
+  </div>
+  <% if @game.jacket.attached? %>
+    <div>
+      <%= image_tag @game.jacket %>
+    </div>
+  <% end %>
+  <div class="form-group">
+    <%= f.label :jacket %>
+    <%= f.file_field :jacket, class: "form-control", id: "file_field" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :youtube_video_id %>
+    <%= f.text_field :youtube_video_id, class: "form-control", id: "youtube_video_id" %>
+  </div>
+  <%= f.submit yield(:button_text), class: "btn btn-success" %>
+<% end %>

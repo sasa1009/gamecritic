@@ -29,7 +29,7 @@ RSpec.describe 'UsersSignup', type: :system, js: true do
         find("#password").set("password")
         find("#password_confirmation").set("password")
         click_button "登録"
-        expect(page).to have_current_path games_index_path
+        expect(page).to have_current_path root_path
         expect(page).to have_selector(".alert-info")
 
         expect(ActionMailer::Base.deliveries.size).to eq(1)

@@ -7,11 +7,6 @@ class UsersController < ApplicationController
     @users = User.activated_user.page(params[:page])
   end
 
-  def show
-    @user = User.find(params[:id])
-    redirect_to games_index_path and return unless @user.activated?
-  end
-
   def new
     @user = User.new
   end
@@ -22,10 +17,15 @@ class UsersController < ApplicationController
       @user.send_activation_email
       flash[:info] = "メールアドレスの確認のためにメールを送信しました。
                       メール内のリンクをクリックしてアカウントの登録を完了して下さい。"
-      redirect_to games_index_path
+      redirect_to root_path
     else
       render 'new'
     end
+  end
+
+  def show
+    @user = User.find(params[:id])
+    redirect_to root_path and return unless @user.activated?
   end
 
   def edit
@@ -62,23 +62,9 @@ class UsersController < ApplicationController
 
     # beforeアクション
 
-    # ログイン済みユーザーかどうか確認
-    def logged_in_user
-      unless logged_in?
-        store_location
-        flash[:danger] = "ログインして下さい"
-        redirect_to login_url
-      end
-    end
-
     # 正しいユーザーかどうか確認
     def correct_user
       @user = User.find(params[:id])
       redirect_to(login_path) unless current_user?(@user)
-    end
-
-    # 管理者かどうか確認
-    def admin_user
-      redirect_to(login_path) unless current_user.admin?
     end
 end

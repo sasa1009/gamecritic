@@ -36,7 +36,7 @@ html {
 header {
   nav {
     height: 90px;
-    padding: 0 80px;
+    padding: 0 30px;
     #logo {
       font-size: 3rem;
       // margin-left: 50px;
@@ -124,6 +124,70 @@ header {
   }
 }
 
+// games form
+.games_form {
+  select {
+    font-size: 1.4rem;
+  }
+  textarea {
+    font-size: 1.4rem;
+  }
+  #file_field {
+    font-size: 1.4rem;
+    height: 36px;
+  }
+}
+
+// games index
+// .index_games:nth-child(n + 2) {
+//   margin-top: 20px;
+// }
+.index_games {
+  div:nth-child(n + 2) {
+    margin-top: 20px;
+  }
+  .index_game_info {
+    .index_jacket {
+      width: 150px;
+      float: left;
+    }
+    .index_jacket:hover {
+      opacity: 0.7;
+    }
+    .index_info {
+      width: 730px;
+      float: left;
+      margin: 20px;
+      list-style: none;
+      a {
+        color: black;
+      }
+      a:hover {
+        opacity: 0.5;
+      }
+    }
+  }
+}
+
+// games show
+.game_info {
+  .jacket {
+    float: left;
+    width: 280px;
+  }
+  .info {
+    float: left;
+    width: 650px;
+    margin-left: 30px;
+    .release_date, .developer, .summary, a {
+      font-size: 1.4rem;
+    }
+  }
+}
+.youtube {
+  margin-top: 20px;
+}
+
 // error messages
 #error_explanation {
   // color: red;
@@ -174,4 +238,11 @@ header {
   .page-link {
     color: #333333;
   }
+}
+
+// footer
+footer {
+  margin-top: 20px;
+  height: 70px;
+  background-color: #343a40;
 }

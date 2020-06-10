@@ -63,7 +63,7 @@ RSpec.describe "Users", type: :request do
       end
       it "is redirected to games index page" do
         post signup_path, params: { user: valid_user_params }
-        expect(response).to redirect_to games_index_path
+        expect(response).to redirect_to root_path
         expect(is_logged_in?).to eq false
       end
       specify "account activation feature" do
@@ -92,7 +92,7 @@ RSpec.describe "Users", type: :request do
     context "access to the profile page without activated" do
       it "is redirected to games index page" do
         get user_path(michael)
-        expect(response).to redirect_to games_index_path
+        expect(response).to redirect_to root_path
       end
     end
 

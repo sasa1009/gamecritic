@@ -2,9 +2,10 @@ class GamesController < ApplicationController
   before_action :logged_in_user, except: [:index, :show]
   before_action :admin_user, except: [:index, :show]
   before_action :find_resource, except: [:index, :new, :create]
+  before_action :br_to_newline, only: [:edit]
   
   def index
-    @games = Game.page(params[:page])
+    @games = Game.order_desc.page(params[:page]).per(6)
   end
 
   def new
@@ -22,6 +23,7 @@ class GamesController < ApplicationController
   end
 
   def show
+    @reviews = @game.reviews.review_with_value.page(params[:page]).per(10)
   end
 
   def edit
@@ -55,5 +57,10 @@ class GamesController < ApplicationController
 
     def find_resource
       @game = Game.find(params[:id])
+    end
+
+    # summaryカラムに含まれている<br>タグを改行コードに変換する
+    def br_to_newline
+      @game.summary = @game.summary.gsub(/<br>/, "\n")
     end
 end

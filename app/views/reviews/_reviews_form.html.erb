@@ -1,0 +1,17 @@
+<%= form_for @review, url: { action: yield(:action) } do |f| %>
+  <%= render 'shared/error_messages', object: @review %>
+  <div class="form-group">
+    <%= f.label :score %>
+    <%= f.select :score, [1,2,3,4,5,6,7,8,9,10], {prompt: "スコアを選択してください"} , {class: "form-control", id: "score"} %>
+  </div>
+  <div class="form-group">
+    <%= f.label :title %>
+    <%= f.text_area :title, class: "form-control", id: "title" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :review %>
+    <%= f.text_area :review, class: "form-control", id: "review" %>
+  </div>
+  <%= hidden_field_tag(:game_id, @review.game_id) %>
+  <%= f.submit yield(:button_text), class: "btn btn-success" %>
+<% end %>

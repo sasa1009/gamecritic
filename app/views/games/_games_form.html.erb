@@ -19,7 +19,7 @@
   </div>
   <% if @game.jacket.attached? %>
     <div>
-      <%= image_tag @game.jacket %>
+      <%= image_tag @game.jacket.variant(resize:'250x320').processed %>
     </div>
   <% end %>
   <div class="form-group">

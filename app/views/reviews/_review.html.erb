@@ -1,0 +1,19 @@
+<div class="card">
+  <div class="card-body">
+    <div class="clearfix">
+      <div class="badge badge-success score">
+        <span><%= review.score %></span>
+      </div>
+      <div class="review_content">
+        <p class="card-title"><%= review.title %></p>
+        <p class="card-text"><%= simple_format(review.review, class: "card-text") %></p>
+      </div>
+    </div>
+    <div class="">
+      <% if current_user == review.user %>
+        <%= link_to "レビューを編集する", edit_review_path(id: review.id) %>
+        <%= link_to "レビューを削除する", review_path(id: review.id), method: :delete, data: { confirm: "本当に削除しますか？" } %>
+      <% end %>
+    </div>
+  </div>
+</div>

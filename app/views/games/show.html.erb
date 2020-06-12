@@ -6,6 +6,26 @@
       </div>
     <% end %>
   </div>
+  <div class="score">
+    <div class="clearfix score_inner_top">
+      <p>ユーザースコア</p>
+      <div class="badge badge-success average_score">
+        <span ><%= Review.average(:score).to_i %></span>
+      </div>
+    </div>
+    <div class="score_inner_bottom">
+      <p>あなたのスコア</p>
+      <% if @game.reviews.find_by(user_id: current_user.id).present? %>
+        <div class="badge badge-success user_score">
+          <span ><%= @game.reviews.find_by(user_id: current_user.id).score %></span>
+        </div>
+      <% else %>
+        <p class="no_score">スコアはまだ投稿されていません</p>
+        <%= link_to "レビューを書く", new_review_path(game_id: @game.id), id: "new_review_btn", class: "btn btn-primary new_review_1" %>
+      <% end %>
+    </div>
+    
+  </div>
   <div class="info">
     <h2 class="title"><%= @game.title %></h2>
     <p class="release_date"><%= @game.release_date.strftime("%F") %></p>
@@ -23,3 +43,21 @@
     <iframe width="560" height="315" src="https://www.youtube.com/embed/<%= @game.youtube_video_id%>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
   </div>
 <% end %>
+<div class="review_header">
+  <% unless @game.reviews.find_by(user_id: current_user.id).present? %>
+    <%= link_to "レビューを書く", new_review_path(game_id: @game.id), id: "new_review_btn", class: "btn btn-primary new_review_2" %>
+  <% end %>
+</div>
+<div class="review_wrapper">
+  <div class="review_pagenation_top" id="upside">
+    <%= paginate @reviews %>
+    <%= page_entries_info @reviews %>
+  </div>
+  <ul class="index_reviews">
+    <%= render @reviews %>
+  </ul>
+  <div class="review_pagenation_bottom">
+    <%= paginate @reviews %>
+    <%= page_entries_info @reviews %>
+  </div>
+</div>

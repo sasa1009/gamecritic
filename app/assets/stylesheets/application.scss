@@ -35,12 +35,13 @@ html {
 // header
 header {
   nav {
+    max-width: 1050px;
     height: 90px;
-    padding: 0 30px;
+    padding: 0 20px;
+    margin: 0 auto;
     #logo {
       font-size: 3rem;
-      // margin-left: 50px;
-      margin-top: 18px;
+      margin-top: 16px;
     }
     ul {
       height: 80px;
@@ -67,7 +68,8 @@ header {
 
 // wrapper
 .wrapper {
-  width: 970px;
+  max-width: 970px;
+  padding: 20px;
   margin: 30px auto 0;
 }
 
@@ -92,8 +94,6 @@ header {
     .btn {
       height: 40px;
       width: 140px;
-      // background-color: #59bb0c;
-      // border-color: #4ea30a;
     }
     .password-reset {
       margin-top: 10px;
@@ -106,7 +106,7 @@ header {
     .image {
       float: left;
       text-align: center;
-      height: 100px;
+      height: 70px;
       .gravatar_link {
         font-size: 1.2rem;
         text-align: center;
@@ -115,10 +115,9 @@ header {
     .user_name {
       vertical-align: middle;
       float: left;
-      margin-left: 20px;
-      height: 100px;
+      height: 70px;
       h1 {
-        margin-top: 32px;
+        margin-top: 15px;
       }
     }
   }
@@ -139,9 +138,6 @@ header {
 }
 
 // games index
-// .index_games:nth-child(n + 2) {
-//   margin-top: 20px;
-// }
 .index_games {
   div:nth-child(n + 2) {
     margin-top: 20px;
@@ -155,7 +151,7 @@ header {
       opacity: 0.7;
     }
     .index_info {
-      width: 730px;
+      width: 650px;
       float: left;
       margin: 20px;
       list-style: none;
@@ -174,10 +170,59 @@ header {
   .jacket {
     float: left;
     width: 280px;
+    // div {
+    //   text-align: center;
+    // }
+  }
+  .score {
+    width: 120px;
+    float: left;
+    div {
+      p {
+        font-size: 1.6rem;
+        text-align: center;
+      }
+    }
+    .score_inner_top {
+      margin-bottom: 30px;
+      .average_score {
+        width: 70px;
+        height: 70px;
+        padding-top: 15px;
+        margin-left: 25px;
+        span {
+          font-size: 4rem;
+        }
+      }
+    }
+    .score_inner_bottom {
+      .user_score {
+        width: 70px;
+        height: 70px;
+        padding-top: 15px;
+        margin-left: 25px;
+        span {
+          font-size: 4rem;
+        }
+      }
+      .no_score {
+        font-size: 1rem;
+        text-align: left;
+        margin-bottom: 0;
+        color: dimgray;
+      }
+      .new_review_1 {
+        height: 30px;
+        width: 120px;
+        font-size: 1.4rem;
+        padding: 4px;
+        margin-top: 10px;
+      }
+    }
   }
   .info {
     float: left;
-    width: 650px;
+    width: 480px;
     margin-left: 30px;
     .release_date, .developer, .summary, a {
       font-size: 1.4rem;
@@ -187,13 +232,80 @@ header {
 .youtube {
   margin-top: 20px;
 }
-
+.new_review_2 {
+  height: 30px;
+  width: 120px;
+  font-size: 1.4rem;
+  padding: 4px;
+  margin: 10px 15px 0 0;
+  float: right;
+}
+.review_header {
+  width: 700px;
+  height: 50px;
+  margin-top: 10px;
+  background-color: #343a40;
+}
+.review_wrapper {
+  width: 700px;
+  background-color: lightsteelblue;
+  position: relative;
+}
+.review_pagenation_top {
+  font-size: 1.3rem;
+  .page-link {
+    color: #333333;
+  }
+  position: absolute;
+  top: 20px;
+  left: 20px;
+}
+.review_pagenation_bottom {
+  font-size: 1.3rem;
+  .page-link {
+    color: #333333;
+  }
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+}
+.index_reviews {
+  padding: 100px 15px 100px 15px;
+  margin: 0 auto;
+  li:nth-child(n + 2) {
+    margin-top: 10px;
+  }
+  .card {
+    width: 650px;
+    margin: 0 auto;
+    .score {
+      width: 50px;
+      height: 50px;
+      padding-top: 10px;
+      float: left;
+      span {
+        font-size: 3rem;
+      }
+    }
+    .review_content {
+      float: left;
+      width: 480px;
+      padding-left: 20px;
+      .card-title {
+        font-size: 1.8rem;
+        margin-bottom: 0px;
+      }
+      .card-text {
+        font-size: 1.5rem;
+      }
+    }
+  }
+  .card:nth-child(n + 2) {
+    margin-top: 5px;
+  }
+}
 // error messages
 #error_explanation {
-  // color: red;
-  // ul {
-  //   margin-bottom: 30px;
-  // }
   font-size: 1.5rem;
 }
 
@@ -205,7 +317,6 @@ header {
 // users index
 .users {
   list-style: none;
-  // margin: 20px 0 0 0;
   li {
     overflow: auto;
     padding: 10px 0;
@@ -231,18 +342,56 @@ header {
   }
 }
 
+// review form
+.review_form {
+  // height: 400px;
+  width: 600px;
+  .title {
+    margin-top: 20px;
+    h1 {
+      font-size: 3rem;
+    }
+  }
+  .review_form_inner {
+    margin-top: 20px;
+    label {
+      font-size: 2rem;
+    }
+    #score {
+      width: 220px;
+      height: 40px;
+      font-size: 1.5rem;
+    }
+    #title {
+      width: 600px;
+      height: 40px;
+      font-size: 1.4rem;
+    }
+    #review {
+      width: 600px;
+      height: 200px;
+      font-size: 1.4rem;
+    }
+    .btn {
+      height: 40px;
+      width: 140px;
+      font-size: 1.8rem;
+      padding-top: 6px;
+    }
+  }
+}
+
 // page nation
 .page {
   margin: 20px 0;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   .page-link {
     color: #333333;
   }
 }
 
 // footer
-footer {
-  margin-top: 20px;
+.footer {
   height: 70px;
   background-color: #343a40;
 }

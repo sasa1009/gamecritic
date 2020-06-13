@@ -4,15 +4,20 @@ class ReviewsController < ApplicationController
   before_action :br_to_newline, only: [:edit]
 
   def new
-    @review = Review.new
-    @review.game_id = params[:game_id]
+    if logged_in?
+      @review = Review.new
+      @review.game_id = params[:game_id]
+    else
+      redirect_to login_path
+      flash[:warning] = "レビューを投稿するためにはログインが必要です"
+    end
   end
 
   def create
     @review = current_user.reviews.new(review_params)
     @review.game_id = params[:game_id]
     if @review.save
-      flash[:info] = "レビューが投稿されました。"
+      flash[:info] = "レビューが投稿されました"
       redirect_to Game.find(params[:game_id])
     else
       render "new"
@@ -27,7 +32,7 @@ class ReviewsController < ApplicationController
 
   def update
     if @review.update_attributes(review_params)
-      flash[:success] = "レビューが更新されました。"
+      flash[:success] = "レビューが更新されました"
       redirect_to game_path(@review.game_id)
     else
       render "edit"

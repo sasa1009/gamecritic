@@ -15,7 +15,7 @@
     </div>
     <div class="score_inner_bottom">
       <p>あなたのスコア</p>
-      <% if @game.reviews.find_by(user_id: current_user.id).present? %>
+      <% if logged_in? && @game.reviews.find_by(user_id: current_user.id).present? %>
         <div class="badge badge-success user_score">
           <span ><%= @game.reviews.find_by(user_id: current_user.id).score %></span>
         </div>
@@ -44,7 +44,11 @@
   </div>
 <% end %>
 <div class="review_header">
-  <% unless @game.reviews.find_by(user_id: current_user.id).present? %>
+  <% if logged_in? %>
+    <% unless @game.reviews.find_by(user_id: current_user.id).present? %>
+      <%= link_to "レビューを書く", new_review_path(game_id: @game.id), id: "new_review_btn", class: "btn btn-primary new_review_2" %>
+    <% end %>
+  <% else %>
     <%= link_to "レビューを書く", new_review_path(game_id: @game.id), id: "new_review_btn", class: "btn btn-primary new_review_2" %>
   <% end %>
 </div>

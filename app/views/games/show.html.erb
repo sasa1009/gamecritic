@@ -10,7 +10,7 @@
     <div class="clearfix score_inner_top">
       <p>ユーザースコア</p>
       <div class="badge badge-success average_score">
-        <span ><%= Review.average(:score).to_i %></span>
+        <span ><%= @game.reviews.average(:score).to_i %></span>
       </div>
     </div>
     <div class="score_inner_bottom">

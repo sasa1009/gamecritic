@@ -6,6 +6,22 @@
       </a>
     <% end %>
   </div>
+  <div class="index_score">
+    <p>ユーザースコア</p>
+    <div class="badge badge-success average_score">
+      <span ><%= game.reviews.average(:score).to_f.round(1) %></span>
+    </div>
+    <% if logged_in? %>
+      <% if game.reviews.find_by(user_id: current_user.id).present? %>
+        <div class="user_score_wrapper">
+          <p>あなたのスコア</p>
+          <div class="badge badge-success user_score">
+            <span ><%= game.reviews.find_by(user_id: current_user.id).score %></span>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
   <li class="index_info">
     <h3><%= link_to game.title, game, class: "index_game_title" %></h3>
     <p><%= game.release_date.strftime("%F") %></p>

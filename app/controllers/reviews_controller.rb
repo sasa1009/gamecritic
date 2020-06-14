@@ -2,15 +2,11 @@ class ReviewsController < ApplicationController
   before_action :find_resource, except: [:new, :create]
   # reviewカラムに含まれている<br>タグを改行コードに変換する
   before_action :br_to_newline, only: [:edit]
+  before_action :logged_in_user, only: [:new, :create, :edit, :update, :destroy]
 
   def new
-    if logged_in?
-      @review = Review.new
-      @review.game_id = params[:game_id]
-    else
-      redirect_to login_path
-      flash[:warning] = "レビューを投稿するためにはログインが必要です"
-    end
+    @review = Review.new
+    @review.game_id = params[:game_id]
   end
 
   def create
@@ -31,20 +27,30 @@ class ReviewsController < ApplicationController
   end
 
   def update
-    if @review.update_attributes(review_params)
-      flash[:success] = "レビューが更新されました"
-      redirect_to game_path(@review.game_id)
+    if current_user == User.find(@review.user_id)
+      if @review.update_attributes(review_params)
+        flash[:success] = "レビューが更新されました"
+        redirect_to game_path(@review.game_id)
+      else
+        render "edit"
+      end
     else
-      render "edit"
+      flash[:danger] = "このレビューは編集できません"
+      redirect_to game_path(@review.game_id)
     end
   end
 
   def destroy
-    if @review.destroy
-      flash[:success] = "レビューが削除されました"
-      redirect_to game_path(@review.game_id)
+    if current_user == User.find(@review.user_id)
+      if @review.destroy
+        flash[:success] = "レビューが削除されました"
+        redirect_to game_path(@review.game_id)
+      else
+        flash[:danger] = "レビューは存在しません"
+        redirect_to game_path(@review.game_id)
+      end
     else
-      flash[:danger] = "レビューは存在しません"
+      flash[:danger] = "このレビューは削除できません"
       redirect_to game_path(@review.game_id)
     end
   end

@@ -150,16 +150,56 @@ header {
     .index_jacket:hover {
       opacity: 0.7;
     }
-    .index_info {
-      width: 650px;
+    .index_score {
+      width: 100px;
       float: left;
-      margin: 20px;
+      margin: 0;
+      text-align: center;
+      p {
+        font-size: 1.4rem;
+        margin-bottom: 0;
+      }
+      .average_score {
+        width: 60px;
+        height: 60px;
+        padding-top: 17px;
+        margin-top: 10px;
+        text-align: center;
+        span {
+          font-size: 2.7rem;
+        }
+      }
+      .user_score_wrapper {
+        margin-top: 10px;
+        p {
+          font-size: 1.2rem;
+          margin-bottom: 0;
+        }
+        .user_score {
+          width: 50px;
+          height: 50px;
+          padding-top: 12px;
+          margin-top: 10px;
+          text-align: center;
+          span {
+            font-size: 2.4rem;
+          }
+        }
+      }
+    }
+    .index_info {
+      width: 540px;
+      float: left;
+      margin: 0 20px 0;
       list-style: none;
       a {
         color: black;
       }
       a:hover {
         opacity: 0.5;
+      }
+      p {
+        font-size: 1.2rem;
       }
     }
   }
@@ -170,9 +210,6 @@ header {
   .jacket {
     float: left;
     width: 280px;
-    // div {
-    //   text-align: center;
-    // }
   }
   .score {
     width: 120px;
@@ -186,10 +223,10 @@ header {
     .score_inner_top {
       margin-bottom: 30px;
       .average_score {
-        width: 70px;
-        height: 70px;
-        padding-top: 15px;
-        margin-left: 25px;
+        width: 80px;
+        height: 80px;
+        padding-top: 20px;
+        margin-left: 20px;
         span {
           font-size: 4rem;
         }

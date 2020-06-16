@@ -1,4 +1,5 @@
 class GamesController < ApplicationController
+  include ReviewsHelper
   before_action :logged_in_user, except: [:index, :show]
   before_action :admin_user, except: [:index, :show]
   before_action :find_resource, except: [:index, :new, :create]
@@ -22,7 +23,8 @@ class GamesController < ApplicationController
   end
 
   def show
-    @reviews = @game.reviews.review_with_value.page(params[:page]).per(10)
+    games = Game.includes(:reviews)
+    @reviews = games.find{|g| g.id == params[:id].to_i}.reviews.review_with_value.page(params[:page]).per(10)
   end
 
   def edit

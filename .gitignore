@@ -35,6 +35,3 @@
 
 .DS_Store
 
-# All image files
-/app/assets/images/*
-/spec/fixtures/files/*

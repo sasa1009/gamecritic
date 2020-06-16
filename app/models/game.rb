@@ -13,45 +13,48 @@ class Game < ApplicationRecord
   # 入力されたYouTubeのアドレスからvideo idを取得する
   before_validation :get_youtube_video_id
 
-  private
+  #release_dateが最近のものから順に並べる
+  scope :order_desc, -> { order(release_date: "desc") }
 
-    #release_dateが最近のものから順に並べる
-    scope :order_desc, -> { order(release_date: "desc") }
-  
-    def get_youtube_video_id
-      regex1 = /https:\/\/www.youtube.com\/watch\?v=([0-9A-Za-z_-]{11})[&=0-9A-Za-z_-]*/
-      regex2 = /https:\/\/youtu.be\/([0-9A-Za-z_-]{11})/
-      if self.youtube_video_id == nil
-        # Do nothing
-      elsif self.youtube_video_id.match(regex1)
-        self.youtube_video_id = self.youtube_video_id.match(regex1)[1]
-      elsif self.youtube_video_id.match(regex2)
-        self.youtube_video_id = self.youtube_video_id.match(regex2)[1]
+  def get_youtube_video_id
+    regex1 = /https:\/\/www.youtube.com\/watch\?v=([0-9A-Za-z_-]{11})[&=0-9A-Za-z_-]*/
+    regex2 = /https:\/\/youtu.be\/([0-9A-Za-z_-]{11})/
+    if self.youtube_video_id == nil
+      # Do nothing
+    elsif self.youtube_video_id.match(regex1)
+      self.youtube_video_id = self.youtube_video_id.match(regex1)[1]
+    elsif self.youtube_video_id.match(regex2)
+      self.youtube_video_id = self.youtube_video_id.match(regex2)[1]
+    end
+  end
+
+  # youtube_video_idに値があるか調べる
+  def youtube_video_id_present?
+    self.youtube_video_id.present?
+  end
+
+  # jacket画像のバリデーション
+  def validate_jacket
+    if !jacket.attached?
+      errors.add(:jacket, "を指定して下さい")
+    else
+      if jacket.blob.byte_size > 5.megabytes
+        jacket.purge
+        errors.add(:jacket, "は5メガバイト以下の画像を指定して下さい")
+      elsif !image?
+        jacket.purge
+        errors.add(:jacket, "はイメージファイルを指定して下さい")
       end
     end
+  end
 
-    # youtube_video_idに値があるか調べる
-    def youtube_video_id_present?
-      self.youtube_video_id.present?
-    end
+  # jacketで指定されたファイルがイメージファイルかどうかを調べる
+  def image?
+    %w[image/jpg image/jpeg image/gif image/png].include?(jacket.blob.content_type)
+  end
 
-    # jacket画像のバリデーション
-    def validate_jacket
-      if !jacket.attached?
-        errors.add(:jacket, "を指定して下さい")
-      else
-        if jacket.blob.byte_size > 5.megabytes
-          jacket.purge
-          errors.add(:jacket, "は5メガバイト以下の画像を指定して下さい")
-        elsif !image?
-          jacket.purge
-          errors.add(:jacket, "はイメージファイルを指定して下さい")
-        end
-      end
-    end
-
-    # jacketで指定されたファイルがイメージファイルかどうかを調べる
-    def image?
-      %w[image/jpg image/jpeg image/gif image/png].include?(jacket.blob.content_type)
-    end
+  # ゲームのアベレージスコアを取得する
+  def get_average_score
+    self.reviews.average(:score).to_f.round(1)
+  end
 end

@@ -222,22 +222,22 @@ header {
     }
     .score_inner_top {
       margin-bottom: 30px;
+      text-align: center;
       .average_score {
         width: 80px;
         height: 80px;
         padding-top: 20px;
-        margin-left: 20px;
         span {
           font-size: 4rem;
         }
       }
     }
     .score_inner_bottom {
+      text-align: center;
       .user_score {
         width: 70px;
         height: 70px;
         padding-top: 15px;
-        margin-left: 25px;
         span {
           font-size: 4rem;
         }

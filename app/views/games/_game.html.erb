@@ -12,11 +12,11 @@
       <span ><%= game.reviews.average(:score).to_f.round(1) %></span>
     </div>
     <% if logged_in? %>
-      <% if game.reviews.find_by(user_id: current_user.id).present? %>
+      <% if posted?(game) %>
         <div class="user_score_wrapper">
           <p>あなたのスコア</p>
           <div class="badge badge-success user_score">
-            <span ><%= game.reviews.find_by(user_id: current_user.id).score %></span>
+            <span ><%= user_score(game) %></span>
           </div>
         </div>
       <% end %>

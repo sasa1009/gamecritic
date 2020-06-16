@@ -2,7 +2,6 @@ class GamesController < ApplicationController
   before_action :logged_in_user, except: [:index, :show]
   before_action :admin_user, except: [:index, :show]
   before_action :find_resource, except: [:index, :new, :create]
-  before_action :br_to_newline, only: [:edit]
   
   def index
     @games = Game.order_desc.page(params[:page]).per(6)
@@ -15,7 +14,7 @@ class GamesController < ApplicationController
   def create
     @game = current_user.games.new(game_params)
     if @game.save
-      flash[:info] = "ゲームデータが登録されました。"
+      flash[:info] = "ゲームデータが登録されました"
       redirect_to @game
     else
       render 'new'
@@ -31,7 +30,7 @@ class GamesController < ApplicationController
 
   def update
     if @game.update_attributes(game_params)
-      flash[:success] = "ゲームデータが更新されました。"
+      flash[:success] = "ゲームデータが更新されました"
       redirect_to @game
     else
       render "edit"
@@ -57,10 +56,5 @@ class GamesController < ApplicationController
 
     def find_resource
       @game = Game.find(params[:id])
-    end
-
-    # summaryカラムに含まれている<br>タグを改行コードに変換する
-    def br_to_newline
-      @game.summary = @game.summary.gsub(/<br>/, "\n")
     end
 end

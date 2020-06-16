@@ -1,7 +1,6 @@
 class ReviewsController < ApplicationController
   before_action :find_resource, except: [:new, :create]
   # reviewカラムに含まれている<br>タグを改行コードに変換する
-  before_action :br_to_newline, only: [:edit]
   before_action :logged_in_user, only: [:new, :create, :edit, :update, :destroy]
 
   def new
@@ -13,7 +12,7 @@ class ReviewsController < ApplicationController
     @review = current_user.reviews.new(review_params)
     @review.game_id = params[:game_id]
     if @review.save
-      flash[:info] = "レビューが投稿されました"
+      flash[:success] = "レビューが投稿されました"
       redirect_to Game.find(params[:game_id])
     else
       render "new"
@@ -64,10 +63,5 @@ class ReviewsController < ApplicationController
 
     def find_resource
       @review = Review.find(params[:id])
-    end
-
-    # reviewカラムに含まれている<br>タグを改行コードに変換する
-    def br_to_newline
-      @review.review = @review.review.gsub(/<br>/, "\n")
     end
 end

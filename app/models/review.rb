@@ -2,13 +2,10 @@ class Review < ApplicationRecord
   belongs_to :user
   belongs_to :game
 
-  validates :user_id, uniqueness: { scope: :game_id, message: "は既にレビューを投稿しています。" }
+  validates :user_id, uniqueness: { scope: :game_id, message: "は既にレビューを投稿しています" }
   validates :title, length: { maximum: 50 } 
   validates :review, length: { maximum: 500 } 
   validate :validate_score
-
-  # reviewカラムに含まれている改行コードを<br>タグに変換する
-  before_save :newline_to_br
 
   private
 
@@ -31,8 +28,4 @@ class Review < ApplicationRecord
       end
     end
 
-    # reviewカラムに含まれている改行コードを<br>タグに変換する
-    def newline_to_br
-      self.review = self.review.gsub(/\R/, "<br>")
-    end
 end

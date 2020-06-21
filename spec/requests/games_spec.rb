@@ -87,7 +87,7 @@ RSpec.describe "Games", type: :request do
   # ゲーム詳細画面表示機能
   describe "GET show" do
     it "can access to the game's information page" do
-      get game_path(game)
+      get game_path(sekiro)
       expect(response).to have_http_status "200"
     end
   end
@@ -101,25 +101,25 @@ RSpec.describe "Games", type: :request do
     context "with invalid data" do
       # タイトル、メーカーが空文字の場合ゲームデータが更新されない。
       it "can't update game data" do
-        patch game_path(game), params: { game: { title: "",
+        patch game_path(sekiro), params: { game: { title: "",
                                            developer: "",
                                            release_date: "",
                                            summary: "奪え、その意志で。ペルソナ5新生(ザ・ロイヤル)―。",
                                            youtube_video_id: "" } }
-        expect(Game.find(game.id).summary).to_not eq ("奪え、その意志で。ペルソナ5新生(ザ・ロイヤル)―。")
+        expect(Game.find(sekiro.id).summary).to_not eq ("奪え、その意志で。ペルソナ5新生(ザ・ロイヤル)―。")
       end
     end
 
     context "with valid data" do
       # 各項目が入力されている場合ゲームデータが更新される。その場合、ゲーム詳細画面にリダイレクトされる。
       it "update game data and redirected to the game's information page" do
-        patch game_path(game), params: { game: { title: game.title,
-                                           developer: game.developer,
-                                           release_date: game.release_date,
+        patch game_path(sekiro), params: { game: { title: sekiro.title,
+                                           developer: sekiro.developer,
+                                           release_date: sekiro.release_date,
                                            summary: "奪え、その意志で。ペルソナ5新生(ザ・ロイヤル)―。",
-                                           youtube_video_id: game.youtube_video_id } }
-        expect(Game.find(game.id).summary).to eq ("奪え、その意志で。ペルソナ5新生(ザ・ロイヤル)―。")
-        expect(response).to redirect_to game_path(game)
+                                           youtube_video_id: sekiro.youtube_video_id } }
+        expect(Game.find(sekiro.id).summary).to eq ("奪え、その意志で。ペルソナ5新生(ザ・ロイヤル)―。")
+        expect(response).to redirect_to game_path(sekiro)
       end
     end
   end
@@ -132,7 +132,7 @@ RSpec.describe "Games", type: :request do
     # adminユーザーがアクセスした場合、ゲームデータが削除される。
     it "deletes the game data" do
       expect {
-        delete game_path(game)
+        delete game_path(sekiro)
       }.to change(Game, :count).by(-1)
       expect(response).to redirect_to root_path
     end

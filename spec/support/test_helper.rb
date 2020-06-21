@@ -16,4 +16,7 @@ module TestHelper
     click_button "ログイン"
   end
 
+  def take_screenshot
+    page.save_screenshot("tmp/screenshots/screenshot-#{DateTime.now}.png")
+  end
 end

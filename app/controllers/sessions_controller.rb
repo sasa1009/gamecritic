@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
         params[:session][:remember_me] ? remember(user) : forget(user)
         redirect_back_or user
       else
-        flash[:warning] = "アカウントの登録が完了していません。メール内のリンクから登録を完了して下さい。"
+        flash[:warning] = "アカウントの登録が完了していません。メール内のリンクから登録を完了して下さい"
         redirect_to root_path
       end
     else

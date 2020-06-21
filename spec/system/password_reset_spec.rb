@@ -35,7 +35,7 @@ RSpec.describe 'PasswordReset', type: :system, js: true do
       find("#password_confirmation").set("reset_password")
       click_button("パスワード更新")
       expect(page).to have_selector(".alert-success")
-      expect(page).to have_content("パスワードが更新されました。")
+      expect(page).to have_content("パスワードが更新されました")
       expect(page).to have_current_path user_path(reset_user)
     end
 

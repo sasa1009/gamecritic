@@ -1,9 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe "Games", type: :request do
-  let!(:user) { FactoryBot.create(:user) }
   let!(:admin) { FactoryBot.create(:admin) }
-  let!(:game) { FactoryBot.create(:game, user_id: admin.id) }
+  let!(:user) { FactoryBot.create(:user) }
+  let!(:sekiro) { FactoryBot.create(:sekiro, user_id: admin.id) }
 
   # ゲーム一覧機能
   describe "GET index" do

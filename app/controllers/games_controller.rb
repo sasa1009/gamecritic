@@ -23,7 +23,7 @@ class GamesController < ApplicationController
   end
 
   def show
-    games = Game.includes(:reviews)
+    games = Game.includes(:reviews, :user)
     @reviews = games.find{|g| g.id == params[:id].to_i}.reviews.review_with_value.page(params[:page]).per(10)
   end
 

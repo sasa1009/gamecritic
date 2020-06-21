@@ -1,9 +1,19 @@
 FactoryBot.define do
-  factory :review do
-    user_id { 1 }
-    game_id { 1 }
-    score { 1 }
-    title { "MyText" }
-    review { "MyText" }
+  factory :review, class: Review do
+    score { 5 }
+    title { "適正なレビュー" }
+    review { "これは適正なレビューです" }
+  end
+
+  factory :valid_review, class: Review do
+    score { 9 }
+    title { "適正なレビュー" }
+    review { "これは適正なレビューです" }
+  end
+
+  factory :invalid_review, class: Review do
+    score { }
+    title { }
+    review { }
   end
 end

@@ -1,10 +1,11 @@
 class GamesController < ApplicationController
+  include ReviewsHelper
   before_action :logged_in_user, except: [:index, :show]
   before_action :admin_user, except: [:index, :show]
   before_action :find_resource, except: [:index, :new, :create]
   
   def index
-    @games = Game.page(params[:page])
+    @games = Game.order_desc.page(params[:page]).per(6)
   end
 
   def new
@@ -14,7 +15,7 @@ class GamesController < ApplicationController
   def create
     @game = current_user.games.new(game_params)
     if @game.save
-      flash[:info] = "ゲームデータが登録されました。"
+      flash[:info] = "ゲームデータが登録されました"
       redirect_to @game
     else
       render 'new'
@@ -22,6 +23,8 @@ class GamesController < ApplicationController
   end
 
   def show
+    games = Game.includes(:reviews, :user)
+    @reviews = games.find{|g| g.id == params[:id].to_i}.reviews.review_with_value.page(params[:page]).per(10)
   end
 
   def edit
@@ -29,7 +32,7 @@ class GamesController < ApplicationController
 
   def update
     if @game.update_attributes(game_params)
-      flash[:success] = "ゲームデータが更新されました。"
+      flash[:success] = "ゲームデータが更新されました"
       redirect_to @game
     else
       render "edit"

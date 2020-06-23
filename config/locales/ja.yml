@@ -25,6 +25,11 @@ ja:
         summary: 概要
         jacket: ジャケット画像
         youtube_video_id: YouTube URL
+      review:
+        score: スコア
+        title: タイトル
+        review: レビュー
+        user_id: あなた
   date:
     abbr_day_names:
     - 日

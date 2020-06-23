@@ -16,7 +16,7 @@ class UsersController < ApplicationController
     if @user.save
       @user.send_activation_email
       flash[:info] = "メールアドレスの確認のためにメールを送信しました。
-                      メール内のリンクをクリックしてアカウントの登録を完了して下さい。"
+                      メール内のリンクをクリックしてアカウントの登録を完了して下さい"
       redirect_to root_path
     else
       render 'new'

@@ -6,11 +6,31 @@
       </div>
     <% end %>
   </div>
+  <div class="score">
+    <div class="clearfix score_inner_top">
+      <p>ユーザースコア</p>
+      <div class="badge badge-success average_score">
+        <span ><%= @game.get_average_score %></span>
+      </div>
+    </div>
+    <div class="score_inner_bottom">
+      <p>あなたのスコア</p>
+      <% if logged_in? && posted?(@game) %>
+        <div class="badge badge-success user_score">
+          <span ><%= user_score(@game) %></span>
+        </div>
+      <% else %>
+        <p class="no_score">スコアはまだ投稿されていません</p>
+        <%= link_to "レビューを書く", new_review_path(game_id: @game.id), id: "new_review_btn", class: "btn btn-primary new_review_1" %>
+      <% end %>
+    </div>
+    
+  </div>
   <div class="info">
     <h2 class="title"><%= @game.title %></h2>
     <p class="release_date"><%= @game.release_date.strftime("%F") %></p>
     <p class="developer"><%= @game.developer %></p>
-    <p class=""><%= simple_format(@game.summary,class: 'summary') %></p>
+    <p class=""><%= simple_format(@game.summary, class: "summary") %></p>
     <% if logged_in? && current_user.admin? %>
       <%= link_to "ゲームデータを編集", edit_game_path(@game), id: "edit" %>
       <%= link_to "ゲームデータを削除", @game, method: :delete, class: "delete", id: "delete",
@@ -23,3 +43,4 @@
     <iframe width="560" height="315" src="https://www.youtube.com/embed/<%= @game.youtube_video_id%>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
   </div>
 <% end %>
+<%= render "reviews/reviews_index" %>

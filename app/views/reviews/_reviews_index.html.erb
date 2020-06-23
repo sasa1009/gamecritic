@@ -1,0 +1,22 @@
+<div class="review_header">
+  <% if logged_in? %>
+    <% unless posted?(@game) %>
+      <%= link_to "レビューを書く", new_review_path(game_id: @game.id), id: "new_review_btn", class: "btn btn-primary new_review_2" %>
+    <% end %>
+  <% else %>
+    <%= link_to "レビューを書く", new_review_path(game_id: @game.id), id: "new_review_btn", class: "btn btn-primary new_review_2" %>
+  <% end %>
+</div>
+<div class="review_wrapper">
+  <div class="review_pagenation_top" id="upside">
+    <%= paginate @reviews %>
+    <%= page_entries_info @reviews %>
+  </div>
+  <ul class="index_reviews">
+    <%= render @reviews %>
+  </ul>
+  <div class="review_pagenation_bottom">
+    <%= paginate @reviews %>
+    <%= page_entries_info @reviews %>
+  </div>
+</div>

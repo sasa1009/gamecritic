@@ -1,5 +1,7 @@
 class Game < ApplicationRecord
   belongs_to :user
+  has_many :reviews, dependent: :destroy
+
   validates :title,  presence: true
   validates :developer,  presence: true
   validates :release_date,  presence: true
@@ -10,7 +12,10 @@ class Game < ApplicationRecord
 
   # 入力されたYouTubeのアドレスからvideo idを取得する
   before_validation :get_youtube_video_id
-  
+
+  #release_dateが最近のものから順に並べる
+  scope :order_desc, -> { order(release_date: "desc") }
+
   def get_youtube_video_id
     regex1 = /https:\/\/www.youtube.com\/watch\?v=([0-9A-Za-z_-]{11})[&=0-9A-Za-z_-]*/
     regex2 = /https:\/\/youtu.be\/([0-9A-Za-z_-]{11})/
@@ -46,5 +51,10 @@ class Game < ApplicationRecord
   # jacketで指定されたファイルがイメージファイルかどうかを調べる
   def image?
     %w[image/jpg image/jpeg image/gif image/png].include?(jacket.blob.content_type)
+  end
+
+  # ゲームのアベレージスコアを取得する
+  def get_average_score
+    self.reviews.average(:score).to_f.round(1)
   end
 end

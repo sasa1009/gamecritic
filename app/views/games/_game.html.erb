@@ -8,14 +8,14 @@
   </div>
   <div class="index_score">
     <p>ユーザースコア</p>
-    <div class="badge badge-success average_score">
+    <div class="badge badge-success average_score <%=review_color(game.get_average_score)%>">
       <span ><%= game.get_average_score %></span>
     </div>
     <% if logged_in? %>
       <% if posted?(game) %>
         <div class="user_score_wrapper">
           <p>あなたのスコア</p>
-          <div class="badge badge-success user_score">
+          <div class="badge badge-success user_score <%=review_color(user_score(game))%>">
             <span ><%= user_score(game) %></span>
           </div>
         </div>
@@ -26,6 +26,11 @@
     <h3><%= link_to game.title, game, class: "index_game_title" %></h3>
     <p><%= game.release_date.strftime("%F") %></p>
     <p><%= game.developer %></p>
-    <p class=""><%= simple_format(game.summary,class: '') %></p>
+    <div class="summary_second_wrapper">
+      <div class="summary_first_wrapper">
+        <%= simple_format(game.summary, class: "summary") %>
+      </div>
+    </div>
   </li>
 </div>
+

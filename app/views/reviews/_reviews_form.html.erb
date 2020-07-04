@@ -1,7 +1,7 @@
 <%= form_for @review, url: { action: yield(:action) } do |f| %>
   <%= render 'shared/error_messages', object: @review %>
   <div class="form-group">
-    <%= f.label :score %>
+    <div><%= f.label :score %><span>(スコアだけ投稿できます)</span></div>
     <%= f.select :score, (1..10).to_a, {prompt: "スコアを選択してください"} , {class: "form-control", id: "score"} %>
   </div>
   <div class="form-group">
@@ -9,8 +9,16 @@
     <%= f.text_area :title, class: "form-control", id: "title" %>
   </div>
   <div class="form-group">
-    <%= f.label :review %>
+    <div><%= f.label :review %><span>(レビューを空欄にするとゲーム詳細ページにレビューが表示されません)</span></div>
     <%= f.text_area :review, class: "form-control", id: "review" %>
+  </div>
+  <div class="form-group">
+    <div><%= f.label :images %><span class="file_number">１</span></div>
+    <%= f.file_field :images, multiple: true, class: "form-control file1", id: "file_field" %>
+  </div>
+  <div class="form-group">
+    <div><%= f.label :images %><span class="file_number">２</span></div>
+    <%= f.file_field :images, multiple: true, class: "form-control file2", id: "file_field" %>
   </div>
   <%= hidden_field_tag(:game_id, @review.game_id) %>
   <%= f.submit yield(:button_text), class: "btn btn-success" %>

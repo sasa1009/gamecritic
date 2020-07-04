@@ -1,13 +1,17 @@
 require 'rails_helper'
 
 RSpec.describe Review, type: :model do
-  let!(:admin) { FactoryBot.create(:admin) }
-  let!(:user) { FactoryBot.create(:user) }
-  let!(:sekiro) { FactoryBot.create(:sekiro, user_id: admin.id) }
-  let!(:review1) { FactoryBot.create(:review, user_id: admin.id, game_id: sekiro.id) }
-  let!(:review2) { FactoryBot.build(:review) }
+  let(:admin) { FactoryBot.create(:admin) }
+  let(:user) { FactoryBot.create(:user) }
+  let(:sekiro) { FactoryBot.create(:sekiro, user_id: admin.id) }
+  let(:review1) { FactoryBot.create(:review, user_id: admin.id, game_id: sekiro.id) }
+  let(:review2) { FactoryBot.build(:review) }
+  let(:review_with_image) { FactoryBot.build(:review_with_image) }
 
   context "checking validation" do
+    before do
+      review1
+    end
     # user_idとgame_idが一意でないといけない
     it "is invalid when user_id and game_id are not unique" do
       review2.user_id = admin.id
@@ -50,5 +54,16 @@ RSpec.describe Review, type: :model do
     expect(review1.errors[:score]).to include("が正しくありません")
     review1.score = 4
     expect(review1).to be_valid
+  end
+
+  context "checking image uploading feature" do
+    it "returns true true when image is attached" do
+      expect(review_with_image.images.attached?).to eq true
+    end
+  
+    it "returns true true when image is attached" do
+      review_with_image.images.purge
+      expect(review_with_image.images.attached?).to eq false
+    end
   end
 end

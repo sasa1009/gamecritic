@@ -11,28 +11,5 @@
   <%= paginate @games %>
   <%= page_entries_info @games %>
 </div>
-<script type="text/javascript">
-  var wrappers = document.querySelectorAll("div.summary_second_wrapper");
-  document.querySelectorAll("div.summary_first_wrapper").forEach((wrapper, index) => {
-    var height = wrapper.clientHeight;
-    if (height > 100) {
-      wrapper.className = "less_summary";
-      var expand = document.createElement("a");
-      expand.textContent = "全てを表示▼";
-      expand.className = "expand";
-      wrapper.parentNode.insertBefore(expand, wrapper.nextSibling); 
-      expand.addEventListener("click", () => {
-        accordion(wrapper, expand);
-      });
-    }
-  });
-  function accordion(target, expand) {
-    if (target.className === "less_summary") {
-      target.className = "summary_first_wrapper";
-      expand.textContent = "折りたたむ▲";
-    } else {
-      target.className = "less_summary";
-      expand.textContent = "全てを表示▼";
-    }
-  }
-</script>
+<%= javascript_include_tag "games/index.js" %>
+

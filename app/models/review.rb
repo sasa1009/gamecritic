@@ -13,7 +13,7 @@ class Review < ApplicationRecord
   has_many_attached :images
 
   #titleとreviewに値が入力されているreviewインスタンスを返す
-  scope :review_with_value, -> { where.not(review: "").order(updated_at: "desc") }
+  scope :review_with_value, -> { where.not(review: "", review: nil).order(updated_at: "desc") }
 
   # scoreのバリデーション(1~10の数字以外はエラーになる)
   def validate_score
@@ -33,16 +33,19 @@ class Review < ApplicationRecord
 
   # images画像のバリデーション
   def validate_images
-    if !!images[2]
-      images.purge
-      errors.add(:images, "は２つまで指定できます")
+    if images.size >= 3
+      add_error("は２つまで指定できます")
     elsif !image_file?
-      images.purge
-      errors.add(:images, "はイメージファイルを指定して下さい")
+      add_error("はイメージファイルを指定して下さい")
     elsif !image_is_less_than_2mb?
-      images.purge
-      errors.add(:images, "は2メガバイト以下の画像を指定して下さい")
+      add_error("は2メガバイト以下の画像を指定して下さい")
     end
+  end
+
+  # 添付された画像を破棄してエラーメッセージを追加する
+  def add_error(string)
+    images.purge
+    errors.add(:images, string)
   end
 
   # imagesで指定されたファイルがイメージファイルかどうかを調べる

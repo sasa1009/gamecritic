@@ -12,10 +12,9 @@ RSpec.describe 'GamesIndex', type: :system, js: true do
     end
     id = Game.first.id
     user_id = User.first.id
-    for i in 0..9 do
+    (0..9).each do |i|
       game = Game.find(id + i)
-      case i
-      when 0 then
+      if i == 0
         for x in 1..10 do
           user = User.find(user_id + x)
           x % 2 == 0 ? score = 7 : score = 10
@@ -26,7 +25,7 @@ RSpec.describe 'GamesIndex', type: :system, js: true do
         game.reviews.create(user_id: admin.id,
                             score: 6,
                             review: "hogehoge" )
-      when 1 then
+      elsif i == 1
         for x in 1..10 do
           user = User.find(user_id + x.to_i)
           x % 2 == 0 ? score = 4 : score = 7
@@ -37,7 +36,7 @@ RSpec.describe 'GamesIndex', type: :system, js: true do
         game.reviews.create(user_id: admin.id,
                             score: 3,
                             review: "hogehoge" )
-      when 2..9 then
+      else  
         for x in 1..10 do
           user = User.find(user_id + x.to_i)
           game.reviews.create(user_id: user.id,

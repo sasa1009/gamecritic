@@ -30,6 +30,7 @@ ja:
         title: タイトル
         review: レビュー
         user_id: あなた
+        images: イメージ
   date:
     abbr_day_names:
     - 日

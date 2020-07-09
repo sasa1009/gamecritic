@@ -53,7 +53,7 @@ RSpec.describe "Reviews", type: :request do
                                        review: {
                                         score: 5,
                                         title: "hoge",
-                                        review: "fuga"} }
+                                        review: "fuga" } }
         }.to change(Review, :count).by(1)
       end
     end

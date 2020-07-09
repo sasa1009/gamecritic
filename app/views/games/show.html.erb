@@ -9,14 +9,14 @@
   <div class="score">
     <div class="clearfix score_inner_top">
       <p>ユーザースコア</p>
-      <div class="badge badge-success average_score">
+      <div class="badge badge-success average_score <%=review_color(@game.get_average_score)%>">
         <span ><%= @game.get_average_score %></span>
       </div>
     </div>
     <div class="score_inner_bottom">
       <p>あなたのスコア</p>
       <% if logged_in? && posted?(@game) %>
-        <div class="badge badge-success user_score">
+        <div class="badge badge-success user_score <%=review_color(user_score(@game))%>">
           <span ><%= user_score(@game) %></span>
         </div>
       <% else %>
@@ -24,13 +24,16 @@
         <%= link_to "レビューを書く", new_review_path(game_id: @game.id), id: "new_review_btn", class: "btn btn-primary new_review_1" %>
       <% end %>
     </div>
-    
   </div>
   <div class="info">
     <h2 class="title"><%= @game.title %></h2>
     <p class="release_date"><%= @game.release_date.strftime("%F") %></p>
     <p class="developer"><%= @game.developer %></p>
-    <p class=""><%= simple_format(@game.summary, class: "summary") %></p>
+    <div class="summary_second_wrapper">
+      <div id="summary_first_wrapper">
+        <%= simple_format(@game.summary, id: "summary", class: "summary") %>
+      </div>
+    </div>
     <% if logged_in? && current_user.admin? %>
       <%= link_to "ゲームデータを編集", edit_game_path(@game), id: "edit" %>
       <%= link_to "ゲームデータを削除", @game, method: :delete, class: "delete", id: "delete",
@@ -44,3 +47,4 @@
   </div>
 <% end %>
 <%= render "reviews/reviews_index" %>
+<%= javascript_include_tag "games/show.js" %>

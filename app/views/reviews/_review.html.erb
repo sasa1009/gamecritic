@@ -1,15 +1,79 @@
 <div class="card">
   <div class="card-body">
     <div class="clearfix">
-      <div class="badge badge-success score">
+      <div class="badge badge-success score <%=review_color(review.score)%>">
         <span><%= review.score %></span>
       </div>
       <div class="review_content">
+        <%= link_to review.user.name, review.user, class: "user_name"%>
         <p class="card-title"><%= review.title %></p>
-        <p class="card-text"><%= simple_format(review.review, class: "card-text") %></p>
+        <div class="text_second_wrapper">
+          <div class="text_first_wrapper">
+            <%= simple_format(review.review, class: "card-text") %>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="">
+    <div class="images">
+      <% case review.images.count %>
+      <% when 1 %>
+        <a type="button" data-toggle="modal" data-target="#imagesModal">
+          <%= image_tag review.images[0].variant(resize:'350x300').processed %>
+        </a>
+        <!-- Modal -->
+        <div class="modal fade" id="imagesModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <%= image_tag review.images[0].variant(resize:'600x600').processed %>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% when 2 %>
+        <a class= "image1" type="button" data-toggle="modal" data-target="#imagesModal1">
+          <%= image_tag review.images[0].variant(resize:'250x250').processed %>
+        </a>
+        <a class= "image2" type="button" data-toggle="modal" data-target="#imagesModal2">
+          <%= image_tag review.images[1].variant(resize:'250x250').processed %>
+        </a>
+        <!-- Modal -->
+        <div class="modal fade" id="imagesModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close close1" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <%= image_tag review.images[0].variant(resize:'600x600').processed %>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal fade" id="imagesModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close close2" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <%= image_tag review.images[1].variant(resize:'600x600').processed %>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <div class="review_manage">
       <% if current_user == review.user %>
         <%= link_to "レビューを編集する", edit_review_path(id: review.id) %>
         <%= link_to "レビューを削除する", review_path(id: review.id), method: :delete, data: { confirm: "本当に削除しますか？" } %>

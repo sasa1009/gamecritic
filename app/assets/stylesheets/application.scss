@@ -126,7 +126,8 @@ header {
 // games form
 .games_form {
   select {
-    font-size: 1.4rem;
+    font-size: 1.6rem;
+    vertical-align: middle;
   }
   textarea {
     font-size: 1.4rem;
@@ -172,7 +173,7 @@ header {
       .user_score_wrapper {
         margin-top: 10px;
         p {
-          font-size: 1.2rem;
+          font-size: 1.4rem;
           margin-bottom: 0;
         }
         .user_score {
@@ -192,6 +193,9 @@ header {
       float: left;
       margin: 0 20px 0;
       list-style: none;
+      h3 {
+        margin-bottom: 5px;
+      }
       a {
         color: black;
       }
@@ -199,7 +203,28 @@ header {
         opacity: 0.5;
       }
       p {
-        font-size: 1.2rem;
+        font-size: 1.4rem;
+        margin-bottom: 5px;
+      }
+      .summary_second_wrapper {
+        padding-bottom: 14px;
+        margin-top: 10px;
+        position: relative;
+        .less_summary {
+          height: 100px;
+          overflow: hidden;
+        }
+        .summary {
+          font-size: 1.4rem;
+          margin-bottom: 0px;
+        }
+        .expand {
+          color: darkgray;
+          position: absolute;
+          bottom: 0;
+          right: 10px;
+          cursor: pointer;
+        }
       }
     }
   }
@@ -261,14 +286,39 @@ header {
     float: left;
     width: 480px;
     margin-left: 30px;
-    .release_date, .developer, .summary, a {
+    .release_date, .developer, a {
       font-size: 1.4rem;
+    }
+    .summary_second_wrapper {
+      padding-bottom: 15px;
+      position: relative;
+      .summary {
+        font-size: 1.4rem;
+        margin-bottom: 0px;
+      }
+      .less_summary {
+        font-size: 1.4rem;
+        height: 222px;
+        overflow: hidden;
+      }
+      a {
+        color: darkgray;
+        position: absolute;
+        bottom: 0;
+        right: 10px;
+      }
+      a:hover {
+        opacity: 0.7;
+        cursor: pointer;
+      }
     }
   }
 }
 .youtube {
   margin-top: 20px;
 }
+
+// review index
 .new_review_2 {
   height: 30px;
   width: 120px;
@@ -328,19 +378,73 @@ header {
       float: left;
       width: 480px;
       padding-left: 20px;
+      .user_name {
+        font-size: 1.8rem;
+        color: black;
+      }
+      .user_name:hover {
+        opacity: 0.7;
+      }
       .card-title {
         font-size: 1.8rem;
         margin-bottom: 0px;
       }
-      .card-text {
-        font-size: 1.5rem;
+      .text_second_wrapper {
+        padding-bottom: 15px;
+        margin: 10px 0 10px;
+        position: relative;
+        .text_first_wrapper {
+
+        }
+        .card-text {
+          font-size: 1.4rem;
+          margin-bottom: 0px;
+        }
+        .less_text {
+          height: 100px;
+          overflow: hidden;
+        }
+        .expand {
+          color: darkgray;
+          position: absolute;
+          bottom: 0;
+          right: 10px;
+          cursor: pointer;
+        }
       }
+    }
+    .images {
+      text-align: center;
+      a:hover {
+        opacity: 0.7;
+      }
+      .modal-content {
+        background-color: ghostwhite;
+        button {
+          background-color: ghostwhite;
+        }
+      }
+    }
+    .review_manage {
+      margin-top: 5px;
     }
   }
   .card:nth-child(n + 2) {
     margin-top: 5px;
   }
 }
+
+// score badge color
+.green {
+  background-color: #28a745;
+}
+.yellow {
+  background-color: #ffd700;
+}
+.red {
+  background-color: red;
+}
+
 // error messages
 #error_explanation {
   font-size: 1.5rem;
@@ -391,6 +495,12 @@ header {
   }
   .review_form_inner {
     margin-top: 20px;
+    span {
+      font-size: 1.1rem;
+      vertical-align: 20%;
+      color: gray;
+      margin-left: 10px;
+    }
     label {
       font-size: 2rem;
     }
@@ -408,6 +518,18 @@ header {
       width: 600px;
       height: 200px;
       font-size: 1.4rem;
+    }
+    #file_field {
+      font-size: 1.4rem;
+      height: 36px;
+    }
+    .field_with_errors {
+      display: inline;
+    }
+    .file_number {
+      font-size: 2rem;
+      vertical-align: 0%;
+      color: black;
     }
     .btn {
       height: 40px;

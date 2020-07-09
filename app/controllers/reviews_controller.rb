@@ -1,6 +1,5 @@
 class ReviewsController < ApplicationController
   before_action :find_resource, except: [:new, :create]
-  # reviewカラムに含まれている<br>タグを改行コードに変換する
   before_action :logged_in_user, only: [:new, :create, :edit, :update, :destroy]
 
   def new
@@ -27,6 +26,7 @@ class ReviewsController < ApplicationController
 
   def update
     if current_user == User.find(@review.user_id)
+      @review.images.purge
       if @review.update_attributes(review_params)
         flash[:success] = "レビューが更新されました"
         redirect_to game_path(@review.game_id)
@@ -58,7 +58,8 @@ class ReviewsController < ApplicationController
     def review_params
       params.require(:review).permit(:score,
                                     :title,
-                                    :review)
+                                    :review,
+                                    images: [])
     end
 
     def find_resource

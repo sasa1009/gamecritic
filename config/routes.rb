@@ -11,4 +11,5 @@ Rails.application.routes.draw do
   resources :password_resets, only: [:new, :create, :edit, :update]
   resources :games, except: [:index]
   resources :reviews, except: [:index]
+  resources :recruitments, except: [:index]
 end

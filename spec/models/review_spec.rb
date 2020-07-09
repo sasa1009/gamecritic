@@ -56,6 +56,7 @@ RSpec.describe Review, type: :model do
     expect(review1).to be_valid
   end
 
+  # ファイルアップロード機能のテスト
   context "checking image uploading feature" do
     it "returns true true when image is attached" do
       expect(review_with_image.images.attached?).to eq true

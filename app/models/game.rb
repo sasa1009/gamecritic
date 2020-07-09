@@ -1,6 +1,7 @@
 class Game < ApplicationRecord
   belongs_to :user
   has_many :reviews, dependent: :destroy
+  has_many :recruitments, dependent: :destroy
 
   validates :title,  presence: true
   validates :developer,  presence: true

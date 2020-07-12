@@ -12,7 +12,7 @@
       <span ><%= game.get_average_score %></span>
     </div>
     <% if logged_in? %>
-      <% if posted?(game) %>
+      <% if review_posted?(game) %>
         <div class="user_score_wrapper">
           <p>あなたのスコア</p>
           <div class="badge badge-success user_score <%=review_color(user_score(game))%>">

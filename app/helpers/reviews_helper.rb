@@ -1,6 +1,6 @@
 module ReviewsHelper
 
-  def posted?(game)
+  def review_posted?(game)
     game.reviews.find {|r| r.user_id == current_user.id }.present?
   end
 

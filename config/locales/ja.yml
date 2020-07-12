@@ -31,6 +31,9 @@ ja:
         review: レビュー
         user_id: あなた
         images: イメージ
+      recruitment:
+        title: タイトル
+        description: 本文
   date:
     abbr_day_names:
     - 日

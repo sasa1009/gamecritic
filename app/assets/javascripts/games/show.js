@@ -1,3 +1,32 @@
+$(function() {
+  // フレンド募集の最後の投稿の直後にクリアフィックスを追加
+  var clearfix = $('<div>', { class:'clearfix' });
+  $(".index_recruitments").append(clearfix);
+  // フレンド募集内でモーダルにアクセスするためのリンクを表示する
+  // $("div.description_wrapper").each(function(index){
+  //   var height = $(this).height(); 
+  //   if (height > 120) {
+  //     var modal_link = $('<a>', { text:"全てを表示",class:'modal_link' });
+  //     modal_link.attr('data-toggle', 'modal');
+  //     modal_link.attr('data-target', 'exampleModal');
+  //     $(this).append(modal_link);
+  //   }
+  //   console.log(height);
+  // });
+});
+
+// フレンド募集内でモーダルにアクセスするためのリンクを表示する
+var descriptions = document.querySelectorAll("p.description");
+document.querySelectorAll("div.description_wrapper").forEach((wrapper, index) => {
+  if (wrapper.clientHeight > 120) {
+    var modallink = document.createElement("a");
+    modallink.textContent = "全てを表示";
+    modallink.className = "modallink";
+    modallink.setAttribute('data-toggle', 'modal');
+    modallink.setAttribute('data-target', 'exampleModal');
+    descriptions[index].parentNode.insertBefore(modallink, descriptions[index].nextSibling); 
+  }
+});
 // games/showでのアコーディオン機能
 var wrapper = document.getElementById("summary_first_wrapper");
 var height = wrapper.clientHeight;
@@ -40,3 +69,4 @@ function accordion2(target, expand, string) {
     expand.textContent = "全てを表示▼";
   }
 }
+

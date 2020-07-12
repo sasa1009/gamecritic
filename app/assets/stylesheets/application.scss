@@ -324,17 +324,50 @@ header {
   width: 120px;
   font-size: 1.4rem;
   padding: 4px;
-  margin: 10px 15px 0 0;
-  float: right;
+  position: absolute;
+  top: 20px;
+  right: 20px;
 }
 .review_header {
-  width: 700px;
-  height: 50px;
-  margin-top: 10px;
-  background-color: #343a40;
+  width: 800px;
+  height: 60px;
+  margin-top: 15px;
+  border-bottom: solid 5px dimgray;
+  .nav-item {
+    text-align: center;
+    font-size: 2rem;
+    width: 400px;
+    height: 60px;
+    padding-top: 7px;
+    .nav-link {
+      color: black;
+    }
+  }
+  .nav-item:hover {
+    opacity: 0.7;
+    .nav-link {
+      border: none;
+    }
+  }
+  .active {
+    border: solid 2px dimgray;
+    border-radius: 7px 7px 0 0;
+    background-color: dimgray;
+    .nav-link {
+      color: white;
+    }
+  }
+  .inactive {
+    border-bottom: solid 5px dimgray;
+    border-radius: 7px 7px 0 0;
+    background-color: whitesmoke;
+    .nav-link {
+      color: black;
+    }
+  }
 }
 .review_wrapper {
-  width: 700px;
+  width: 800px;
   background-color: lightsteelblue;
   position: relative;
 }
@@ -359,9 +392,6 @@ header {
 .index_reviews {
   padding: 100px 15px 100px 15px;
   margin: 0 auto;
-  li:nth-child(n + 2) {
-    margin-top: 10px;
-  }
   .card {
     width: 650px;
     margin: 0 auto;
@@ -432,6 +462,57 @@ header {
   .card:nth-child(n + 2) {
     margin-top: 5px;
   }
+}
+
+// recruitment index
+.recruitment_wrapper {
+  width: 800px;
+  background-color: moccasin;
+  position: relative;
+  .index_recruitments {
+    padding: 100px 20px 100px 20px;
+    .card {
+      width: 370px;
+      height: 220px;
+      .user_name {
+        font-size: 1.8rem;
+        color: black;
+      }
+      .card-title {
+        font-size: 1.8rem;
+        margin-bottom: 0px;
+      }
+      .recruitment_wrapper {
+        width: 342px;
+        background-color: white;
+        .card-text {
+          font-size: 1.4rem;
+          margin-bottom: 0px;
+          max-height: 120px;
+          overflow: hidden;
+        }
+      }
+    }
+    .card:nth-child(odd) {
+      float: left;
+    }
+    .card:nth-child(even) {
+      float: right;
+    }
+    .card:nth-child(n + 3) {
+      margin-top: 15px;
+    }
+  
+  }
+}
+.new_recruitment_button {
+  height: 30px;
+  width: 180px;
+  font-size: 1.4rem;
+  padding: 4px;
+  position: absolute;
+  top: 20px;
+  right: 20px;
 }
 
 // score badge color

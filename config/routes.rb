@@ -9,7 +9,11 @@ Rails.application.routes.draw do
   resources :users, except: [:new, :create]
   resources :account_activations, only: [:edit]
   resources :password_resets, only: [:new, :create, :edit, :update]
-  resources :games, except: [:index]
+  resources :games, except: [:index] do
+    member do
+      get 'recruitments'
+    end
+  end
   resources :reviews, except: [:index]
   resources :recruitments, except: [:index]
 end

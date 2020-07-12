@@ -1,0 +1,18 @@
+<% if logged_in? %>
+  <% unless recruitment_posted?(@game) %>
+    <%= link_to "フレンド募集を書く", new_recruitment_path(game_id: @game.id), class: "btn btn-primary new_recruitment_button" %>
+  <% end %>
+<% else %>
+  <%= link_to "フレンド募集を書く", new_recruitment_path(game_id: @game.id), id: "new_review_btn", class: "btn btn-primary new_recruitment_button" %>
+<% end %>
+<div class="review_pagenation_top" id="upside">
+  <%= paginate @recruitments %>
+  <%= page_entries_info @recruitments %>
+</div>
+<ul class="index_recruitments">
+  <%= render @recruitments %>
+</ul>
+<div class="review_pagenation_bottom">
+  <%= paginate @recruitments %>
+  <%= page_entries_info @recruitments %>
+</div>

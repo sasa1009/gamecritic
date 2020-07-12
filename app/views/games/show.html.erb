@@ -15,7 +15,7 @@
     </div>
     <div class="score_inner_bottom">
       <p>あなたのスコア</p>
-      <% if logged_in? && posted?(@game) %>
+      <% if logged_in? && review_posted?(@game) %>
         <div class="badge badge-success user_score <%=review_color(user_score(@game))%>">
           <span ><%= user_score(@game) %></span>
         </div>
@@ -46,5 +46,21 @@
     <iframe width="560" height="315" src="https://www.youtube.com/embed/<%= @game.youtube_video_id%>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
   </div>
 <% end %>
-<%= render "reviews/reviews_index" %>
+<ul class="nav nav-tabs review_header">
+  <li class="nav-item <%= @show ? "active" : "inactive" %>">
+    <%= link_to "レビュー", game_path(@game), class: "nav-link" %>
+  </li>
+  <li class="nav-item <%= @show ? "inactive" : "active" %>">
+    <%= link_to "フレンド募集", recruitments_game_path(@game), class: "nav-link" %>
+  </li>
+</ul>
+  <% if @show %>
+    <div class="review_wrapper">
+      <%= render "reviews/reviews_index" %>
+    </div>
+  <% else %>
+    <div class="recruitment_wrapper">
+      <%= render "recruitments/recruitments_index" %>
+    </div>
+  <% end %>
 <%= javascript_include_tag "games/show.js" %>

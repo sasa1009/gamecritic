@@ -1,7 +1,8 @@
 class GamesController < ApplicationController
   include ReviewsHelper
-  before_action :logged_in_user, except: [:index, :show]
-  before_action :admin_user, except: [:index, :show]
+  include RecruitmentsHelper
+  before_action :logged_in_user, except: [:index, :show, :recruitments]
+  before_action :admin_user, except: [:index, :show, :recruitments]
   before_action :find_resource, except: [:index, :new, :create, :show]
   
   def index
@@ -25,6 +26,13 @@ class GamesController < ApplicationController
   def show
     @game = Game.includes(reviews: :user).find(params[:id])
     @reviews = @game.reviews.review_with_value.page(params[:page]).per(10)
+    @show = 1
+  end
+
+  def recruitments
+    @game = Game.includes(:recruitments).find(params[:id])
+    @recruitments = @game.recruitments.page(params[:page]).per(10)
+    render "show"
   end
 
   def edit

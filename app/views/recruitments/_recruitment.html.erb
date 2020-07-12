@@ -1,0 +1,33 @@
+<div class="card recruitment">
+  <div class="card-body">
+    <div class="recruitment_content clearfix">
+      <%= link_to recruitment.user.name, recruitment.user, class: "user_name"%>
+      <p class="card-title"><%= recruitment.title %></p>
+      <div class="description_wrapper">
+        <%= simple_format(recruitment.description, class: "description") %>
+      </div>
+    </div>
+    <div class="review_manage">
+      <% if current_user == recruitment.user %>
+        <%= link_to "投稿を編集する", edit_recruitment_path(id: recruitment.id) %>
+        <%= link_to "投稿を削除する", recruitment_path(id: recruitment.id), method: :delete, data: { confirm: "本当に削除しますか？" } %>
+      <% end %>
+    </div>
+  </div>
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel"><%= recruitment.title %></h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <%= simple_format(recruitment.description) %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

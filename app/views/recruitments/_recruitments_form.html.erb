@@ -6,7 +6,7 @@
   </div>
   <div class="form-group">
     <div><%= f.label :description %></div>
-    <%= f.text_area :description, class: "form-control", id: "review" %>
+    <%= f.text_area :description, class: "form-control", id: "description" %>
   </div>
   <%= hidden_field_tag(:game_id, @recruitment.game_id) %>
   <%= f.submit yield(:button_text), class: "btn btn-success" %>

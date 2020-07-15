@@ -34,6 +34,9 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
+    if params[:user][:remove_profile_image]
+      @user.profile_image.purge 
+    end   
     if @user.update_attributes(user_params)
       flash[:success] = "プロフィールが更新されました"
       redirect_to @user
@@ -57,7 +60,7 @@ class UsersController < ApplicationController
 
     def user_params
       params.require(:user).permit(:name, :email, :password,
-                                   :password_confirmation)
+                                   :password_confirmation, :profile_image)
     end
 
     # beforeアクション

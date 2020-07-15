@@ -1,10 +1,19 @@
 <div class="card recruitment">
   <div class="card-body">
     <div class="recruitment_content clearfix">
+      <% if recruitment.user.profile_image.attached?%>
+        <%= image_tag recruitment.user.profile_image.variant(resize:'50x50').processed, class: "profile_image" %>
+      <% else %>
+        <%= image_tag 'NO_IMAGE2.jpeg', class: "no_image" %>
+      <% end %>
       <%= link_to recruitment.user.name, recruitment.user, class: "user_name"%>
-      <p class="card-title"><%= recruitment.title %></p>
-      <div class="description_wrapper">
-        <%= simple_format(recruitment.description, class: "description") %>
+      <div class="description_second_wrapper">
+        <div class="description_first_wrapper">
+          <% if recruitment.title? %>
+            <p class="card-title"><%= recruitment.title %></p>
+          <% end %>
+          <%= simple_format(recruitment.description, class: "description") %>
+        </div>
       </div>
     </div>
     <div class="review_manage">
@@ -14,20 +23,18 @@
       <% end %>
     </div>
   </div>
-  <!-- Modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel"><%= recruitment.title %></h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <%= simple_format(recruitment.description) %>
-        </div>
-      </div>
-    </div>
-  </div>
+  <div class="modal js-modal">
+    <div class="modal__bg js-modal-close"></div>
+    <div class="modal__content">
+      <% if recruitment.user.profile_image.attached?%>
+        <%= image_tag recruitment.user.profile_image.variant(resize:'50x50').processed, class: "profile_image" %>
+      <% else %>
+        <%= image_tag 'NO_IMAGE2.jpeg', class: "no_image" %>
+      <% end %>
+      <%= link_to recruitment.user.name, recruitment.user, class: "user_name"%>
+      <p class="card-title"><%= recruitment.title %></p>
+      <%= simple_format(recruitment.description, class: "description") %>
+      <a class="js-modal-close" href="">閉じる</a>
+    </div><!--modal__inner-->
+  </div><!--modal-->
 </div>

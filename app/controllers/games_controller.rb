@@ -30,8 +30,8 @@ class GamesController < ApplicationController
   end
 
   def recruitments
-    @game = Game.includes(:recruitments).find(params[:id])
-    @recruitments = @game.recruitments.page(params[:page]).per(10)
+    @game = Game.includes(recruitments: :user).find(params[:id])
+    @recruitments = @game.recruitments.sort_recruitment.page(params[:page]).per(10)
     render "show"
   end
 

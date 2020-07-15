@@ -77,7 +77,7 @@ RSpec.describe 'ReviewsEditAndDelete', type: :system, js: true do
           expect(find(".card-text")).to_not have_content("テスト")
         end
         # 画面に「レビューを書く」ボタンが表示されている
-        within(".review_header") do
+        within(".review_wrapper") do
           expect(find(".new_review_2")).to have_content("レビューを書く")
         end
         visit root_path

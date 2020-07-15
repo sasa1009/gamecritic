@@ -1,4 +1,11 @@
-<h1>
-  <%= gravatar_for @user %>
-  <%= @user.name %>
-</h1>
+<div class="profile">
+  <div class="name_and_image">
+    <% if @user.profile_image.attached?%>
+      <%= image_tag @user.profile_image.variant(resize:'100x100').processed, class: "profile_image" %>
+    <% else %>
+      <%= image_tag 'NO_IMAGE2.jpeg', class: "no_image" %>
+    <% end %>
+    <p class="user_name"><%= @user.name %></p>
+  </div>
+</div>
+

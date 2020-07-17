@@ -8,7 +8,7 @@ class Recruitment < ApplicationRecord
   validates :title, length: { maximum: 50 } 
   validates :description, presence: true, length: { maximum: 500 } 
 
-  #titleとreviewに値が入力されているreviewインスタンスを返す
+  #recruitmentをupdated_atの降順に並べ替え
   scope :sort_recruitment, -> { order(updated_at: "desc") }
 
 end

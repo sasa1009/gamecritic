@@ -1,12 +1,9 @@
 <% provide(:url, user_path) %>
 <% provide(:button_text, "更新") %>
+<% provide(:size, "80x80") %>
 <div class="registration-form">
   <div class="clearfix name_and_image">
-    <% if @user.profile_image.attached?%>
-      <%= image_tag @user.profile_image.variant(resize:'80x80').processed, class: "profile_image" %>
-    <% else %>
-      <%= image_tag 'NO_IMAGE2.jpeg', class: "no_image" %>
-    <% end %>
+    <%= render "users/profile_image", user: @user %>
     <p class="user_name"><%= @user.name %></p>
   </div>
   <div class="form">

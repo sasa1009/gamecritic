@@ -1,10 +1,7 @@
+<% provide(:size, "100x100") %>
 <div class="profile">
   <div class="name_and_image">
-    <% if @user.profile_image.attached?%>
-      <%= image_tag @user.profile_image.variant(resize:'100x100').processed, class: "profile_image" %>
-    <% else %>
-      <%= image_tag 'NO_IMAGE2.jpeg', class: "no_image" %>
-    <% end %>
+    <%= render "users/profile_image", user: @user %>
     <p class="user_name"><%= @user.name %></p>
   </div>
 </div>

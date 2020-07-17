@@ -207,4 +207,18 @@ RSpec.describe "Users", type: :request do
       end
     end
   end
+
+  # profile imageに関するテスト
+  describe "profile_image" do
+    before do
+      log_in_as(user)
+      @image = fixture_file_upload(Rails.root.join('spec', 'fixtures', 'files', 'ゲラルト編集.jpeg'), 'image/jpeg')
+    end
+    
+    it "attaches image file to profile_image" do
+      patch user_path(user), params: { user: {
+                                   profile_image: @image }}
+      expect(User.find(user.id).profile_image.attached?).to eq true
+    end
+  end
 end

@@ -20,7 +20,7 @@ $(function() {
         $('.modal-'+index).fadeIn();
         return false;
       });
-      $('.modal-'+index).find('.modal-close-'+index).on('click',function(){
+      $('.modal-close-'+index).on('click',function(){
         $('.modal-'+index).fadeOut();
         return false;
       });

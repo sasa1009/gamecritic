@@ -1,11 +1,8 @@
+<% provide(:size, "50x50") %>
 <div class="card recruitment">
   <div class="card-body">
     <div class="recruitment_content clearfix">
-      <% if recruitment.user.profile_image.attached?%>
-        <%= image_tag recruitment.user.profile_image.variant(resize:'50x50').processed, class: "profile_image" %>
-      <% else %>
-        <%= image_tag 'NO_IMAGE2.jpeg', class: "no_image" %>
-      <% end %>
+      <%= render "users/profile_image", user: recruitment.user %>
       <%= link_to recruitment.user.name, recruitment.user, class: "user_name"%>
       <div class="description_second_wrapper">
         <div class="description_first_wrapper">
@@ -26,11 +23,7 @@
   <div class="modal js-modal">
     <div class="modal__bg js-modal-close"></div>
     <div class="modal__content">
-      <% if recruitment.user.profile_image.attached?%>
-        <%= image_tag recruitment.user.profile_image.variant(resize:'50x50').processed, class: "profile_image" %>
-      <% else %>
-        <%= image_tag 'NO_IMAGE2.jpeg', class: "no_image" %>
-      <% end %>
+      <%= render "users/profile_image", user: recruitment.user %>
       <%= link_to recruitment.user.name, recruitment.user, class: "user_name"%>
       <p class="card-title"><%= recruitment.title %></p>
       <%= simple_format(recruitment.description, class: "description") %>

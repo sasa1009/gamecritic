@@ -26,7 +26,6 @@ class GamesController < ApplicationController
   def show
     @game = Game.includes(reviews: :user).find(params[:id])
     @reviews = @game.reviews.review_with_value.page(params[:page]).per(10)
-    @show = 1
   end
 
   def recruitments

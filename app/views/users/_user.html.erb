@@ -1,9 +1,6 @@
+<% provide(:size, "90x90") %>
 <li>
-  <% if user.profile_image.attached?%>
-    <%= image_tag user.profile_image.variant(resize:'90x90').processed, class: "profile_image" %>
-  <% else %>
-    <%= image_tag 'NO_IMAGE2.jpeg', class: "no_image" %>
-  <% end %>
+  <%= render "users/profile_image", user: user %>
   <%= link_to user.name, user , class: "name" %>
   <% if current_user.admin? && !current_user?(user) %>
     <span class="name">  |</span>

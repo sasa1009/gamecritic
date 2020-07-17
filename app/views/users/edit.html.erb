@@ -1,9 +1,8 @@
 <% provide(:url, user_path) %>
 <% provide(:button_text, "更新") %>
-<% provide(:size, "80x80") %>
 <div class="registration-form">
   <div class="clearfix name_and_image">
-    <%= render "users/profile_image", user: @user %>
+    <%= render "users/profile_image", user: @user, size: "80x80" %>
     <p class="user_name"><%= @user.name %></p>
   </div>
   <div class="form">

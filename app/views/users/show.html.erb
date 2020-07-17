@@ -1,7 +1,6 @@
-<% provide(:size, "100x100") %>
 <div class="profile">
   <div class="name_and_image">
-    <%= render "users/profile_image", user: @user %>
+    <%= render "users/profile_image", user: @user, size: "100x100" %>
     <p class="user_name"><%= @user.name %></p>
   </div>
 </div>

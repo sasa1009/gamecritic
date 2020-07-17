@@ -1,6 +1,5 @@
-<% provide(:size, "90x90") %>
 <li>
-  <%= render "users/profile_image", user: user %>
+  <%= render "users/profile_image", user: user, size: "90x90" %>
   <%= link_to user.name, user , class: "name" %>
   <% if current_user.admin? && !current_user?(user) %>
     <span class="name">  |</span>

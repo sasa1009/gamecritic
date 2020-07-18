@@ -29,11 +29,13 @@ RSpec.describe 'UsersEdit', type: :system, js: true do
     find("#email").set("edited@gmail.com")
     find("#password").set("")
     find("#password_confirmation").set("")
+    find("#file_field").set(Rails.root.join('spec', 'fixtures', 'files', 'ゲラルト編集.jpeg'), filename: 'ゲラルト編集.jpeg')
     click_button "更新"
     expect(page).to_not have_selector("#error_explanation")
     expect(page).to have_selector(".alert-success")
     expect(page).to have_current_path user_path(user)
     expect(page).to have_content("Edited User")
+    expect(page).to have_selector("img.profile_image")
   end
 
 end

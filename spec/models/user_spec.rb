@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   let(:user) { FactoryBot.create(:user) }
+  let(:lana) { FactoryBot.create(:lana) }
 
   it "is valid with a name, email" do
     expect(user).to be_valid
@@ -81,6 +82,21 @@ RSpec.describe User, type: :model do
     # ダイジェストが存在しない場合のauthenticated?のテスト
     it "is invalid without remember_digest" do
       expect(user.authenticated?(:remember, "")).to eq false
+    end
+  end
+
+  # profile imageに関するテスト
+  describe "profile_image" do
+    # profile_imageが画像ファイルでない場合エラーになる
+    it "is invalid when profile_image is not a image file" do
+      lana.profile_image.attach(io: File.open(Rails.root.join('spec', 'fixtures', 'files', 'regex-practice.txt')), filename: 'regex-practice.txt', content_type: 'text')
+      expect(lana).to_not be_valid
+    end
+
+    it "is invalid when profile_image file size is too large" do
+      # profile_imageに添付された画像ファイルが2メガバイト以上の場合エラーになる
+      lana.profile_image.attach(io: File.open(Rails.root.join('spec', 'fixtures', 'files', '大きい画像.jpg')), filename: '大きい画像.jpg', content_type: 'image/jpeg')
+      expect(lana).to_not be_valid
     end
   end
 

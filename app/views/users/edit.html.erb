@@ -2,15 +2,8 @@
 <% provide(:button_text, "更新") %>
 <div class="registration-form">
   <div class="clearfix name_and_image">
-    <div class="image">
-      <%= gravatar_for @user %><br>
-      <a href="http://gravatar.com/emails" target="_blank" class="gravatar_link" rel="noopener">写真を変更する</a>
-    </div>
-    <div class="user_name">
-      <h1>
-        <%= @user.name %>
-      </h1>
-    </div>
+    <%= render "users/profile_image", user: @user, size: "80x80" %>
+    <p class="user_name"><%= @user.name %></p>
   </div>
   <div class="form">
     <%= render "form" %>

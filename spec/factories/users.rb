@@ -55,6 +55,9 @@ FactoryBot.define do
     password_confirmation { "password" }
     activated { true }
     activated_at { Time.zone.now }
+    after(:build) do |lana|
+      lana.profile_image.attach(io: File.open(Rails.root.join('spec', 'fixtures', 'files', 'ゲラルト編集.jpeg')), filename: 'ゲラルト編集.jpeg', content_type: 'image/jpeg')
+    end
   end
 
   factory :malory, class: User do

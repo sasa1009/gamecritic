@@ -1,6 +1,9 @@
 class User < ApplicationRecord
   has_many :games
   has_many :reviews, dependent: :destroy
+  has_many :recruitments, dependent: :destroy
+
+  has_one_attached :profile_image
 
   attr_accessor :remember_token, :activation_token, :reset_token
   before_save   :downcase_email
@@ -12,6 +15,7 @@ class User < ApplicationRecord
                     uniqueness: { case_sensitive: false }
   has_secure_password
   validates :password, presence: true, length: {minimum: 6}, allow_nil: true
+  validate :validate_profile_image
 
   #activatedがtrueのユーザー一覧を返す
   scope :activated_user, -> { where(activated: true) }
@@ -73,6 +77,24 @@ class User < ApplicationRecord
     reset_sent_at < 2.hours.ago
   end
 
+  # profile_image画像のバリデーション
+  def validate_profile_image
+    if profile_image.attached?
+      if profile_image.blob.byte_size > 2.megabytes
+        profile_image.purge
+        errors.add(:profile_image, "は2メガバイト以下の画像を指定して下さい")
+      elsif !image?
+        profile_image.purge
+        errors.add(:profile_image, "はイメージファイルを指定して下さい")
+      end
+    end
+  end
+
+  # profile_imageで指定されたファイルがイメージファイルかどうかを調べる
+  def image?
+    %w[image/jpg image/jpeg image/gif image/png].include?(profile_image.blob.content_type)
+  end
+  
   private
 
     # メールアドレスをすべて小文字にする

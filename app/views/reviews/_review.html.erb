@@ -17,11 +17,11 @@
     <div class="images">
       <% case review.images.count %>
       <% when 1 %>
-        <a type="button" data-toggle="modal" data-target="#imagesModal">
+        <a type="button" data-toggle="modal" data-target="#imagesModal<%= review.user.id %>">
           <%= image_tag review.images[0].variant(resize:'350x300').processed %>
         </a>
         <!-- Modal -->
-        <div class="modal fade" id="imagesModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="imagesModal<%= review.user.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content">
               <div class="modal-header">
@@ -30,20 +30,20 @@
                 </button>
               </div>
               <div class="modal-body">
-                <%= image_tag review.images[0].variant(resize:'600x600').processed %>
+                <%= image_tag review.images[0].variant(resize:'600x450').processed %>
               </div>
             </div>
           </div>
         </div>
       <% when 2 %>
-        <a class= "image1" type="button" data-toggle="modal" data-target="#imagesModal1">
+        <a class= "image1" type="button" data-toggle="modal" data-target="#imagesModal1-<%= review.user.id %>">
           <%= image_tag review.images[0].variant(resize:'250x250').processed %>
         </a>
-        <a class= "image2" type="button" data-toggle="modal" data-target="#imagesModal2">
+        <a class= "image2" type="button" data-toggle="modal" data-target="#imagesModal2-<%= review.user.id %>">
           <%= image_tag review.images[1].variant(resize:'250x250').processed %>
         </a>
         <!-- Modal -->
-        <div class="modal fade" id="imagesModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="imagesModal1-<%= review.user.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content">
               <div class="modal-header">
@@ -52,12 +52,12 @@
                 </button>
               </div>
               <div class="modal-body">
-                <%= image_tag review.images[0].variant(resize:'600x600').processed %>
+                <%= image_tag review.images[0].variant(resize:'600x450').processed %>
               </div>
             </div>
           </div>
         </div>
-        <div class="modal fade" id="imagesModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="imagesModal2-<%= review.user.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content">
               <div class="modal-header">
@@ -66,7 +66,7 @@
                 </button>
               </div>
               <div class="modal-body">
-                <%= image_tag review.images[1].variant(resize:'600x600').processed %>
+                <%= image_tag review.images[1].variant(resize:'600x450').processed %>
               </div>
             </div>
           </div>

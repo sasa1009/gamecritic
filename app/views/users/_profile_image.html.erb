@@ -1,0 +1,5 @@
+<% if user.profile_image.attached? %>
+  <%= image_tag user.profile_image.variant(resize: size).processed, class: "profile_image" %>
+<% else %>
+  <%= image_tag 'NO_IMAGE2.jpeg', class: "no_image" %>
+<% end %>

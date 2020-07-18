@@ -18,6 +18,7 @@ ja:
         password_confirmation: パスワード（確認用）
         created_at: 登録日時
         updated_at: 更新日時
+        profile_image: プロフィール画像
       game:
         title: タイトル
         developer: メーカー
@@ -31,6 +32,9 @@ ja:
         review: レビュー
         user_id: あなた
         images: イメージ
+      recruitment:
+        title: タイトル
+        description: 本文
   date:
     abbr_day_names:
     - 日

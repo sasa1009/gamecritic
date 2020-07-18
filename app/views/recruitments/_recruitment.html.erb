@@ -1,0 +1,32 @@
+<div class="card recruitment">
+  <div class="card-body">
+    <div class="recruitment_content clearfix">
+      <%= render "users/profile_image", user: recruitment.user, size: "50x50" %>
+      <%= link_to recruitment.user.name, recruitment.user, class: "user_name"%>
+      <div class="description_second_wrapper">
+        <div class="description_first_wrapper">
+          <% if recruitment.title? %>
+            <p class="card-title"><%= recruitment.title %></p>
+          <% end %>
+          <%= simple_format(recruitment.description, class: "description") %>
+        </div>
+      </div>
+    </div>
+    <div class="review_manage">
+      <% if current_user == recruitment.user %>
+        <%= link_to "投稿を編集する", edit_recruitment_path(id: recruitment.id) %>
+        <%= link_to "投稿を削除する", recruitment_path(id: recruitment.id), method: :delete, data: { confirm: "本当に削除しますか？" } %>
+      <% end %>
+    </div>
+  </div>
+  <div class="modal js-modal">
+    <div class="modal__bg js-modal-close"></div>
+    <div class="modal__content">
+      <%= render "users/profile_image", user: recruitment.user, size: "50x50" %>
+      <%= link_to recruitment.user.name, recruitment.user, class: "user_name"%>
+      <p class="card-title"><%= recruitment.title %></p>
+      <%= simple_format(recruitment.description, class: "description") %>
+      <a class="js-modal-close" href="">閉じる</a>
+    </div><!--modal__inner-->
+  </div><!--modal-->
+</div>

@@ -100,7 +100,7 @@ RSpec.describe 'ReviewsPost', type: :system, js: true do
         expect(page).to have_selector(".modal-body", visible: false)
         expect(page).to have_selector("img", visible: false)
         within("div.game_info") do
-          # games/index.html.erbのゲーム詳細情報に自分が投稿したスコアが表示されている
+          # games/show.html.erbのゲーム詳細情報に自分が投稿したスコアが表示されている
           expect(find("div.user_score")).to have_content("5")
           # レビューの平均値に応じてスコアを囲むバッジが色分けされている
           expect(find("div.score")).to have_selector(".yellow")

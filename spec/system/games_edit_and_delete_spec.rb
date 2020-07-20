@@ -45,7 +45,6 @@ RSpec.describe 'GamesEditAndDelete', type: :system, js: true do
     end
 
     # 編集ページで記入した内容がゲーム詳細画面に反映される
-    # YouTube URLを入力しなかった場合、ゲーム詳細画面にそのことを知らせるバッジが表示される
     it "edits the game data and redirect to the game's information page" do
       find("#title").set("Persona 5 Royal")
       find("#developer").set("Atlus")

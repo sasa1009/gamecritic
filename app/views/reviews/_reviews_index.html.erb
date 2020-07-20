@@ -1,16 +1,18 @@
-<% if logged_in? %>
-  <% unless review_posted?(@game) %>
-    <%= link_to "レビューを書く", new_review_path(game_id: @game.id), id: "new_review_btn", class: "btn btn-primary new_review_2" %>
-  <% end %>
-<% else %>
-  <%= link_to "レビューを書く", new_review_path(game_id: @game.id), id: "new_review_btn", class: "btn btn-primary new_review_2" %>
+<% if controller.controller_name == "games" %>
+  <%= render "reviews/write_review" %>
 <% end %>
 <div class="review_pagenation_top" id="upside">
   <%= paginate @reviews %>
   <%= page_entries_info @reviews %>
 </div>
 <ul class="index_reviews">
-  <%= render @reviews %>
+  <% @reviews.each_with_index do |review, index| %>
+    <% if controller.controller_name == "games" %>
+      <%= render "reviews/review", review: review, index: index %>
+    <% else %>
+      <%= render "reviews/review_alt", review: review, index: index %>
+    <% end %>
+  <% end %>
 </ul>
 <div class="review_pagenation_bottom">
   <%= paginate @reviews %>

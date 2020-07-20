@@ -15,7 +15,8 @@ RSpec.describe "Users", type: :request do
   let(:valid_user_params) { { name: 'Edited User',
                         email: 'edited@gmail.com',
                         password: 'password',
-                        password_confirmation: 'password' }
+                        password_confirmation: 'password',
+                        self_introduction:'あ' * 500 }
 
   }
 

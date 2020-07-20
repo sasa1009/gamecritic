@@ -111,23 +111,72 @@ header {
 
 // users show
 .profile {
-  .profile_image {
-    border-radius: 50%;
+  width: 800px;
+  margin: 0 auto;
+  .image {
+    width: 250px;
+    float: left;
+    .profile_image {
+      border-radius: 50%;
+    }
+    .no_image {
+      border-radius: 50%;
+      width: 200px;
+      height: 200px;
+    }
   }
-  .no_image {
-    border-radius: 50%;
+  .introduction {
+    width: 550px;
+    padding-top: 30px;
+    float: right;
+    .user_name {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+    .self_introduction_second_wrapper {
+      padding-bottom: 18px;
+      position: relative;
+      .self_introduction_first_wrapper {
+        .self_introduction {
+          font-size: 1.4rem;
+        }
+      }
+      .less_introduction {
+        overflow: hidden;
+        height: 210px;
+      }
+      .expand {
+        font-size: 12px;
+        color: darkgray;
+        position: absolute;
+        bottom: 0;
+        right: 10px;
+        cursor: pointer;
+      }
+    }
+  }
+}
+.user_posts {
+  width: 800px;
+  margin: 20px auto 0 auto;
+}
+
+// users show review index
+.review_alt {
+  .score_and_image {
     width: 100px;
-    height: 100px;
-  }
-  .user_name {
-    display: inline;
-    font-size: 2.5rem;
-    vertical-align: middle;
-    margin-left: 10px;
+    float: left;
+    margin-left: 15px;
+    .score {
+      margin-top: 10px;
+      span {
+        font-size: 3rem;
+      }
+    }
   }
 }
 
-// form
+// users form
 .registration-form {
   h1 {
     font-size: 3rem;
@@ -154,6 +203,10 @@ header {
       a {
         font-size: 1.5rem;
       }
+    }
+    #self_introduction {
+      height: 80px;
+      font-size: 1.2rem;
     }
     #file_field {
       font-size: 1.3rem;
@@ -272,11 +325,11 @@ header {
         margin-bottom: 5px;
       }
       .summary_second_wrapper {
-        padding-bottom: 14px;
+        padding-bottom: 18px;
         margin-top: 10px;
         position: relative;
         .less_summary {
-          height: 100px;
+          height: 105px;
           overflow: hidden;
         }
         .summary {
@@ -285,6 +338,7 @@ header {
         }
         .expand {
           color: darkgray;
+          font-size: 12px;
           position: absolute;
           bottom: 0;
           right: 10px;
@@ -365,6 +419,9 @@ header {
         font-size: 1.4rem;
         height: 210px;
         overflow: hidden;
+      }
+      #expand {
+        font-size: 12px;
       }
       a {
         color: darkgray;
@@ -485,7 +542,7 @@ header {
         margin-bottom: 0px;
       }
       .text_second_wrapper {
-        padding-bottom: 15px;
+        padding-bottom: 18px;
         margin: 10px 0 10px;
         position: relative;
         .text_first_wrapper {
@@ -501,6 +558,7 @@ header {
         }
         .expand {
           color: darkgray;
+          font-size: 12px;
           position: absolute;
           bottom: 0;
           right: 10px;
@@ -546,6 +604,20 @@ header {
         font-size: 1.5rem;
         color: black;
         margin-left: 5px;
+      }
+      .game_title_wrapper {
+        max-width: 340px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        margin-bottom: 8px;
+      }
+      .game_title {
+        font-size: 1.5rem;
+        color: black;
+      }
+      .game_title:hover {
+        opacity: 0.7;
       }
       .user_name:hover {
         opacity: 0.7;
@@ -604,8 +676,20 @@ header {
           top: 50%;
           transform: translate(-50%,-50%);
           width: 60%;
+          .jacket_wrapper {
+            margin-bottom: 5px;
+          }
+          .game_title {
+            font-size: 1.5rem;
+            color: black;
+            margin: 5px 0 5px 0;
+          }
+          .game_title:hover {
+            opacity: 0.7;
+          }
           .card-title, .description {
             font-size: 1.2rem;
+            margin-top: 5px;
           }
         }
       }

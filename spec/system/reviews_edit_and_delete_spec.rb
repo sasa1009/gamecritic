@@ -87,6 +87,32 @@ RSpec.describe 'ReviewsEditAndDelete', type: :system, js: true do
         end
       end
     end
+
+    # ユーザープロフィールページからのレビュー編集
+    context "via the user profile page" do
+      before do
+        sign_in_as(admin)
+      end
+      it "is redirected to the user profile page" do
+        visit user_path(admin)
+        within(".review_alt:nth-child(1)") do
+          find_link("レビューを編集する").click
+        end
+        select(value = "7", from: "review[score]") 
+        find("#title").set("編集後")
+        find("#review").set("テスト")
+        click_button("編集")
+        # 各項目を入力して「編集」ボタンをクリックするとレビューが更新されてユーザープロフィールページにリダイレクトされる
+        expect(page).to have_current_path(user_path(admin))
+        within(".review_alt:nth-child(1)") do
+          accept_confirm do
+            find_link("レビューを削除する").click
+          end
+        end
+        # ユーザープロフィールページのレビュータブからレビューを削除するとレビューが削除されてユーザープロフィールページにリダイレクトされる
+        expect(page).to have_current_path(user_path(admin))
+      end
+    end
   end
 end
 

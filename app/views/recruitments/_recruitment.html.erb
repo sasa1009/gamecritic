@@ -1,8 +1,12 @@
 <div class="card recruitment">
   <div class="card-body">
     <div class="recruitment_content clearfix">
-      <%= render "users/profile_image", user: recruitment.user, size: "50x50" %>
-      <%= link_to recruitment.user.name, recruitment.user, class: "user_name"%>
+      <% if controller.controller_name == "games" %>
+        <%= render "users/profile_image", user: recruitment.user, size: "50x50" %>
+        <%= link_to recruitment.user.name, recruitment.user, class: "user_name"%>
+      <% else %>
+        <div class="game_title_wrapper"><%= link_to recruitment.game.title, recruitment.game, class: "game_title"%></div>
+      <% end %>
       <div class="description_second_wrapper">
         <div class="description_first_wrapper">
           <% if recruitment.title? %>
@@ -22,8 +26,17 @@
   <div class="modal js-modal">
     <div class="modal__bg js-modal-close"></div>
     <div class="modal__content">
-      <%= render "users/profile_image", user: recruitment.user, size: "50x50" %>
-      <%= link_to recruitment.user.name, recruitment.user, class: "user_name"%>
+      <% if controller.controller_name == "games" %>
+        <%= render "users/profile_image", user: recruitment.user, size: "50x50" %>
+        <%= link_to recruitment.user.name, recruitment.user, class: "user_name"%>
+      <% else %>
+        <% if recruitment.game.jacket.attached? %>
+          <div class="jacket_wrapper">
+            <%= image_tag recruitment.game.jacket.variant(resize:'100x100').processed %>
+          </div>
+        <% end %>
+        <%= link_to recruitment.game.title, recruitment.game, class: "game_title"%>
+      <% end %>
       <p class="card-title"><%= recruitment.title %></p>
       <%= simple_format(recruitment.description, class: "description") %>
       <a class="js-modal-close" href="">閉じる</a>

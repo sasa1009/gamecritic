@@ -42,7 +42,6 @@ module SessionsHelper
     cookies.delete(:remember_token)
   end
 
-
   # 現在のユーザーをログアウトする
   def log_out
     forget(current_user)
@@ -54,6 +53,28 @@ module SessionsHelper
   def redirect_back_or(default)
     redirect_to(session[:forwarding_url] || default)
     session.delete(:forwarding_url)
+  end
+
+  # レビューかフレンド募集を編集する際にゲーム詳細ページから編集した場合はゲーム詳細ページに、ユーザープロフィールページから編集した場合はユーザープロフィールページにリダイレクトする
+  def redirect_to_previous_page(default)
+    if session["previous_page"]
+      if session["previous_page"]["controller"] == "games"
+        if session["previous_page"]["action"] == "show"
+          redirect_to(game_path(session["previous_page"]["id"]))
+        elsif session["previous_page"]["action"] == "recruitments"
+          redirect_to(recruitments_game_path(session["previous_page"]["id"]))
+        end
+      elsif session["previous_page"]["action"] == "show"
+        redirect_to(user_path(session["previous_page"]["id"]))
+      elsif session["previous_page"]["action"] == "recruitment"
+        redirect_to(recruitment_user_path(session["previous_page"]["id"]))
+      else
+        redirect_to(default)
+      end
+    else
+      redirect_to(default)
+    end
+    session.delete(:previous_page)
   end
 
   # アクセスしようとしたURLを覚えておく

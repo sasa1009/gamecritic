@@ -24,8 +24,16 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
+    @user = User.includes(reviews: :user).find(params[:id])
     redirect_to root_path and return unless @user.activated?
+    @reviews = @user.reviews.sort_review.page(params[:page]).per(10)
+  end
+
+  def recruitment
+    @user = User.includes(recruitments: :user).find(params[:id])
+    redirect_to root_path and return unless @user.activated?
+    @recruitments = @user.recruitments.sort_recruitment.page(params[:page]).per(10)
+    render "show"
   end
 
   def edit
@@ -60,7 +68,8 @@ class UsersController < ApplicationController
 
     def user_params
       params.require(:user).permit(:name, :email, :password,
-                                   :password_confirmation, :profile_image)
+                                   :password_confirmation, :profile_image,
+                                   :self_introduction)
     end
 
     # beforeアクション

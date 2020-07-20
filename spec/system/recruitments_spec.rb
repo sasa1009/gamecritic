@@ -108,10 +108,10 @@ RSpec.describe 'Recruitments', type: :system, js: true do
       end
       FactoryBot.create(:valid_recruitment, game_id: kingdom_hearts.id, user_id: lana.id, description: "あ"*500)
       sign_in_as(admin)
-      visit recruitments_game_path(kingdom_hearts)
     end
 
-    it "is editing procedure" do
+    it "is procedure of editing and deleting " do
+      visit recruitments_game_path(kingdom_hearts)
       # 自分の投稿に「投稿を編集する」リンクがある
       within("div.card:nth-child(6)") do
         click_link("投稿を編集する")
@@ -140,6 +140,26 @@ RSpec.describe 'Recruitments', type: :system, js: true do
       within("div.recruitment_wrapper") do
         expect(page).to_not have_content(admin.name)
       end
+    end
+
+    # ユーザープロフィールページからのフレンド募集投稿の編集と削除
+    it "is redirected to the user profile page when edit and delete recruitment via user profile page" do
+      visit recruitment_user_path(admin)
+      within("div.card:nth-child(1)") do
+        click_link("投稿を編集する")
+      end
+      # 投稿を編集して編集ボタンを押すとユーザープロフィールページのフレンド募集タブにリダイレクトされる
+      find("#title").set("フレンド募集の編集（タイトル）")
+      find("#description").set("フレンド募集の編集（本文）")
+      click_button("編集")
+      expect(page).to have_current_path recruitment_user_path(admin)
+      within("div.card:nth-child(1)") do
+        accept_confirm do
+          click_link("投稿を削除する")
+        end
+      end
+      # 「投稿を削除する」リンクをクリックするとフレンド募集投稿が削除されてユーザープロフィールページのフレンド募集タブにリダイレクトされる
+      expect(page).to have_current_path recruitment_user_path(admin)
     end
   end
 end

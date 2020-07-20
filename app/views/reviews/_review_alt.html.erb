@@ -1,11 +1,18 @@
-<div class="card">
+<div class="card review_alt">
   <div class="card-body">
     <div class="clearfix">
-      <div class="badge badge-success score <%=review_color(review.score)%>">
-        <span><%= review.score %></span>
+      <div class="score_and_image">
+        <% if review.game.jacket.attached? %>
+          <div>
+            <%= image_tag review.game.jacket.variant(resize:'100x100').processed %>
+          </div>
+        <% end %>
+        <div class="badge badge-success score <%=review_color(review.score)%>">
+          <span><%= review.score %></span>
+        </div>
       </div>
       <div class="review_content">
-        <%= link_to review.user.name, review.user, class: "user_name"%>
+        <%= link_to review.game.title, review.game, class: "user_name"%>
         <p class="card-title"><%= review.title %></p>
         <div class="text_second_wrapper">
           <div class="text_first_wrapper">

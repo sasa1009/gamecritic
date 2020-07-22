@@ -86,43 +86,42 @@ RSpec.describe "Reviews", type: :request do
       expect(response).to redirect_to game_path(Game.find(review1.game_id))
     end
 
-    # context "redirecting" do
-    #   # ゲーム詳細ページにある「レビューを編集する」リンクからレビューを編集するとゲーム詳細ページにリダイレクトされる
-    #   it "is redirected to the review tab in the game's detail page when review is edited via the game's detail page" do
-    #     log_in_as(admin)
-    #   # ゲーム詳細画面のレビュータブにアクセス
-    #     get game_path(sekiro)
-    #   # レビュー編集ページにアクセス
-    #     get edit_review_path(review1)
-    #   # レビューの投稿を編集するとゲーム詳細画面のレビュータブにリダイレクトされる
-    #     patch review_path(review1), params: { review: {
-    #                                             score: 5,
-    #                                             title: "hoge",
-    #                                             review: "更新後のレビューです"},
-    #                                           game_id: review1.game_id,
-    #                                           id: review1.id }
-    #     debugger
-    #     expect(Review.find(review1.id).review).to include("更新後のレビューです")
-    #     expect(response).to redirect_to game_path(review1.game_id)
-    #   end
-      
-    #   # ユーザー詳細ページにある「レビューを編集する」リンクからレビューを編集するとゲーム詳細ページにリダイレクトされる
-    #   it "is redirected to the review tab in the user's profile page when review is edited via the user's profile page" do
-    #     log_in_as(admin)
-    #   # ユーザープロフィール画面のレビュータブにアクセス
-    #     get user_path(admin)
-    #   # レビュー編集ページにアクセス
-    #     get edit_review_path(review1)
-    #   # レビューの投稿を編集するとユーザープロフィール画面のレビュータブにリダイレクトされる
-    #     patch review_path(review1), params: { review: {
-    #                                             score: 5,
-    #                                             title: "hoge",
-    #                                             review: "更新後のレビューです"},
-    #                                           game_id: review1.game_id,
-    #                                           id: review1.id }
-    #     expect(response).to redirect_to user_path(review1.user_id)
-    #   end
-    # end
+    context "via game's detail page" do
+      # session["previous_page"]にゲーム詳細ページのハッシュを代入
+      let(:rspec_session) { { "previous_page" => { "controller" => "games", "action" => "show", "id" => "#{review1.game_id}" } } }
+      # ゲーム詳細ページにある「レビューを編集する」リンクからレビューを編集するとゲーム詳細ページにリダイレクトされる
+      it "is redirected to the review tab in the game's detail page" do
+        rspec_session
+        log_in_as(admin)
+      # レビューの投稿を編集するとゲーム詳細画面のレビュータブにリダイレクトされる
+        patch review_path(review1), params: { review: {
+                                                score: 5,
+                                                title: "hoge",
+                                                review: "更新後のレビューです"},
+                                              game_id: review1.game_id,
+                                              id: review1.id }
+        expect(Review.find(review1.id).review).to include("更新後のレビューです")
+        expect(response).to redirect_to game_path(review1.game_id)
+      end
+    end
+
+    context "via user profile page" do
+      # session["previous_page"]にユーザープロフィールページのハッシュを代入
+      let(:rspec_session) { { "previous_page" => { "controller" => "users", "action" => "show", "id" => "#{admin.id}" } } }
+      # ユーザー詳細ページにある「レビューを編集する」リンクからレビューを編集するとゲーム詳細ページにリダイレクトされる
+      it "is redirected to the review tab in the user profile page" do
+        rspec_session
+        log_in_as(admin)
+      # レビューの投稿を編集するとユーザープロフィール画面のレビュータブにリダイレクトされる
+        patch review_path(review1), params: { review: {
+                                                score: 5,
+                                                title: "hoge",
+                                                review: "更新後のレビューです"},
+                                              game_id: review1.game_id,
+                                              id: review1.id }
+        expect(response).to redirect_to user_path(review1.user_id)
+      end
+    end
   end
 
   describe "deleting review" do

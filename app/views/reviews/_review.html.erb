@@ -5,7 +5,10 @@
         <span><%= review.score %></span>
       </div>
       <div class="review_content">
-        <%= link_to review.user.name, review.user, class: "user_name"%>
+        <div class="name_and_image">
+          <%= render "users/profile_image", user: review.user, size: "50x50" %>
+          <%= link_to review.user.name, review.user, class: "user_name"%>
+        </div>
         <p class="card-title"><%= review.title %></p>
         <div class="text_second_wrapper">
           <div class="text_first_wrapper">

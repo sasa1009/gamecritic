@@ -103,6 +103,36 @@ RSpec.describe "Recruitments", type: :request do
                                                                description: "fugafuga"}}
         expect(Recruitment.find(valid_recruitment.id).description).to include("fugafuga")
       end
+
+      context "via user profile page" do
+        # session["previous_page"]にユーザープロフィールページのハッシュを代入
+        let(:rspec_session) { { "previous_page" => { "controller" => "users", "action" => "recruitment", "id" => "#{admin.id}" } } }
+        # ユーザー詳細ページにある「投稿を編集する」リンクからレビューを編集するとゲーム詳細ページにリダイレクトされる
+        it "is redirected to the recruitment tab in the user profile page" do
+          rspec_session
+          # レビューの投稿を編集するとユーザープロフィール画面のレビュータブにリダイレクトされる
+          patch recruitment_path(valid_recruitment), params: { game_id: sekiro.id,
+                                                                recruitment: {
+                                                                  title: "hogehoge",
+                                                                  description: "fugafuga"}}
+          expect(response).to redirect_to recruitment_user_path(valid_recruitment.user_id)
+        end
+      end
+
+      context "via game's detail page" do
+        # session["previous_page"]にゲーム詳細ページのハッシュを代入
+        let(:rspec_session) { { "previous_page" => { "controller" => "games", "action" => "recruitments", "id" => "#{valid_recruitment.game_id}" } } }
+        # ユーザー詳細ページにある「投稿を編集する」リンクからレビューを編集するとゲーム詳細ページにリダイレクトされる
+        it "is redirected to the recruitment tab in the user profile page" do
+          rspec_session
+          # レビューの投稿を編集するとユーザープロフィール画面のレビュータブにリダイレクトされる
+          patch recruitment_path(valid_recruitment), params: { game_id: sekiro.id,
+                                                                recruitment: {
+                                                                  title: "hogehoge",
+                                                                  description: "fugafuga"}}
+          expect(response).to redirect_to recruitments_game_path(valid_recruitment.game_id)
+        end
+      end
     end
   end
 

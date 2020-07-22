@@ -63,6 +63,8 @@ module SessionsHelper
           redirect_to(game_path(session["previous_page"]["id"]))
         elsif session["previous_page"]["action"] == "recruitments"
           redirect_to(recruitments_game_path(session["previous_page"]["id"]))
+        else
+          redirect_to(default)
         end
       elsif session["previous_page"]["action"] == "show"
         redirect_to(user_path(session["previous_page"]["id"]))
@@ -74,7 +76,7 @@ module SessionsHelper
     else
       redirect_to(default)
     end
-    session.delete(:previous_page)
+    session.delete("previous_page")
   end
 
   # アクセスしようとしたURLを覚えておく

@@ -78,6 +78,7 @@ RSpec.describe 'UsersShow', type: :system, js: true do
           # 投稿した画像がある
           expect(page).to have_selector("a.image1")
           expect(page).to have_selector("a.image2")
+          page.evaluate_script('$(".fade").removeClass("fade")')
           # 画像をクリックするとモーダルが表示される
           find("a.image1").click
           expect(page).to have_selector("div.modal-body")

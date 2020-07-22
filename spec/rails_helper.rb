@@ -78,7 +78,7 @@ RSpec.configure do |config|
      host! "http://#{Capybara.server_host}:#{Capybara.server_port}"
    end
 
-  # テストケース共通の事前処理
+  # リクエストスペックの事前処理
   config.before(:each, type: :request) do
 
     # let(:rspec_session) で指定された値を セッションの初期値とします

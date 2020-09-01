@@ -15,6 +15,7 @@ class User < ApplicationRecord
                     uniqueness: { case_sensitive: false }
   has_secure_password
   validates :password, presence: true, length: {minimum: 6}, allow_nil: true
+  validates :self_introduction, length: { maximum: 1000 }
   validate :validate_profile_image
 
   #activatedがtrueのユーザー一覧を返す

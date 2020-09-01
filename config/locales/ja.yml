@@ -19,6 +19,7 @@ ja:
         created_at: 登録日時
         updated_at: 更新日時
         profile_image: プロフィール画像
+        self_introduction: 自己紹介
       game:
         title: タイトル
         developer: メーカー

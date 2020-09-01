@@ -1,9 +1,5 @@
-<% if logged_in? %>
-  <% unless recruitment_posted?(@game) %>
-    <%= link_to "フレンド募集を書く", new_recruitment_path(game_id: @game.id), class: "btn btn-primary new_recruitment_button" %>
-  <% end %>
-<% else %>
-  <%= link_to "フレンド募集を書く", new_recruitment_path(game_id: @game.id), id: "new_review_btn", class: "btn btn-primary new_recruitment_button" %>
+<% if controller.controller_name == "games" %>
+  <%= render "recruitments/write_recruitment" %>
 <% end %>
 <div class="review_pagenation_top" id="upside">
   <%= paginate @recruitments %>

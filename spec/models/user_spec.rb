@@ -78,6 +78,23 @@ RSpec.describe User, type: :model do
     end
   end
 
+  # self_introductionに関するテスト
+  describe "self introduction format" do
+    # self_introductionカラムが1000文字の場合は適正
+    it "is valid when self introduction has no more than 1000 characters" do
+      user.self_introduction = "あ" * 500
+      expect(user).to be_valid
+    end
+    
+    # self_introductionカラムが1000文字以上だとエラーになる
+    it "is invalid when self introduction has more than 1000 characters" do
+      user.self_introduction = "あ" * 1001
+      user.valid?
+      expect(user.errors[:self_introduction]).to include("は1000文字以内で入力してください")
+    end
+
+  end
+
   describe "authenticated? should return false for a user with nil digest" do
     # ダイジェストが存在しない場合のauthenticated?のテスト
     it "is invalid without remember_digest" do

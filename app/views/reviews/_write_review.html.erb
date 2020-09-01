@@ -1,0 +1,7 @@
+<% if logged_in? %>
+  <% unless review_posted?(@game) %>
+    <%= link_to "レビューを書く", new_review_path(game_id: @game.id), id: "new_review_btn", class: "btn btn-primary new_review_2" %>
+  <% end %>
+<% else %>
+  <%= link_to "レビューを書く", new_review_path(game_id: @game.id), id: "new_review_btn", class: "btn btn-primary new_review_2" %>
+<% end %>

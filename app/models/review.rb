@@ -14,6 +14,8 @@ class Review < ApplicationRecord
 
   #titleとreviewに値が入力されているreviewインスタンスを返す
   scope :review_with_value, -> { where.not(review: "", review: nil).order(updated_at: "desc") }
+  # reviewをupdated_atの降順に並べ替え
+  scope :sort_review, -> { order(updated_at: "desc") }
 
   # scoreのバリデーション(1~10の数字以外はエラーになる)
   def validate_score

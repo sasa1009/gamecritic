@@ -19,13 +19,14 @@ class RecruitmentsController < ApplicationController
   end
   
   def edit
+    session[:previous_page] = Rails.application.routes.recognize_path(request.referer)
   end
   
   def update
     if current_user == User.find(@recruitment.user_id)
       if @recruitment.update_attributes(recruitment_params)
         flash[:success] = "投稿が更新されました"
-        redirect_to recruitments_game_path(@recruitment.game_id)
+        redirect_to_previous_page(recruitments_game_path(@recruitment.game_id))
       else
         render "edit"
       end
@@ -36,10 +37,15 @@ class RecruitmentsController < ApplicationController
   end
   
   def destroy
+    previous_page = Rails.application.routes.recognize_path(request.referer)
     if current_user == User.find(@recruitment.user_id)
       if @recruitment.destroy
         flash[:success] = "投稿が削除されました"
-        redirect_to recruitments_game_path(@recruitment.game_id)
+        if previous_page[:controller] == "games"
+          redirect_to recruitments_game_path(@recruitment.game_id)
+        else
+          redirect_to recruitment_user_path(@recruitment.user_id)
+        end
       else
         flash[:danger] = "投稿は存在しません"
         redirect_to recruitments_game_path(@recruitment.game_id)

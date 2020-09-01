@@ -1,24 +1,32 @@
-# README
+アプリ概要
+ゲームソフトのユーザーレビューサイトです。
+ユーザーはゲームソフトのユーザーレビューの閲覧・投稿・編集、ゲームのフレンド募集の閲覧・投稿・編集、ユーザープロフィール情報の閲覧・投稿・編集ができます。
+ゲームタイトル詳細ページにはゲームの概要、そのタイトルに対して投稿されたユーザーレビュー・フレンド募集が表示されます。
+ユーザープロフィールページには、ユーザープロフィール、ユーザーが投稿したユーザーレビュー・フレンド募集が表示されます。
+サイト管理者は上記のユーザー機能に加えて、ゲームタイトルの追加・削除・編集ができます。
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+使用技術一覧
+バックエンド
+  Ruby 2.6.5
+  Rails 5.2.4
+  DB: PostgreSQL
 
-Things you may want to cover:
+フロントエンド
+  JavaScript
+  jQuery
+  SCSS
+  Bootstrap4
 
-* Ruby version
+テスト
+  RSpec
 
-* System dependencies
+開発環境
+  Docker
+  Docker Compose
 
-* Configuration
+ソースコード管理
+  Git
+  GitHub
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+ホスティング
+  Heroku

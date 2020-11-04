@@ -20,7 +20,10 @@ test:
 
 production:
   <<: *default
-  database: gamecritic_production
-  username: root
-  password: gamecriticrds1012
-  host: gamecriticdb.c9xxvrayexac.ap-northeast-1.rds.amazonaws.com
+  database: <%= Rails.application.credentials.dig(:database, :database) %>
+  username: <%= Rails.application.credentials.dig(:database, :username) %>
+  password: <%= Rails.application.credentials.dig(:database, :password) %>
+  host: <%= Rails.application.credentials.dig(:database, :host) %>
+  
+  
+  

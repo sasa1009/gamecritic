@@ -1,5 +1,5 @@
 <% if user.profile_image.attached? %>
   <%= image_tag user.profile_image.variant(combine_options:{resize: "#{size}^", crop:"#{size}+0+0", gravity: :center}).processed, class: "profile_image" %>
 <% else %>
-  <%= image_tag 'NO_IMAGE2.jpeg', class: "no_image" %>
+  <%= image_tag asset_path("NO_IMAGE2.jpeg"), class: "no_image" %>
 <% end %>

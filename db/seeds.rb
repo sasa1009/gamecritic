@@ -1,6 +1,10 @@
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
 
+def file_path(name)
+  File.open("#{Rails.root}/db/images/#{name}.jpg")
+end
+
 User.create!(name:  "Akinori Sasakura",
              email: "conventional1009@gmail.com",
              password:              "password",
@@ -27,9 +31,9 @@ atsumori = Game.new(user_id: User.first.id,
                     release_date: "2020-03-20 00:00:00",
                     summary: "無人島移住ではじまる自由気ままな楽園生活<br>現実と同じ時間が流れる世界で、自由気ままに暮らし、ときには四季折々のイベントやどうぶつたちとの交流を楽しむ「どうぶつの森」シリーズ最新作がNintendo Switchに登場。",
                     youtube_video_id: "https://youtu.be/UcB9KrrD26M" )
-atsumori.jacket.attach(io: File.open(Rails.root.join('app', 'assets', 'images', '集まれどうぶつの森.jpg')), 
-                                              filename: '集まれどうぶつの森.jpg', 
-                                              content_type: 'image/jpeg')
+atsumori.jacket.attach(io: file_path('atsumori'), 
+                           filename: 'atsumori.jpg', 
+                           content_type: 'image/jpeg')
 atsumori.save
 
 ff7 = Game.new(user_id: User.first.id,
@@ -40,9 +44,9 @@ ff7 = Game.new(user_id: User.first.id,
 
                     壮大な物語や魅力的なキャラクター、当時の最先端技術が駆使された映像で多くの人を魅了した不朽の名作が、時を経て「新たな物語」として生まれ変わります。",
                     youtube_video_id: "https://youtu.be/FbYxZMGdXUc" )
-ff7.jacket.attach(io: File.open(Rails.root.join('app', 'assets', 'images', 'FF7REMAKE.jpg')), 
-                                              filename: 'FF7REMAKE.jpg', 
-                                              content_type: 'image/jpeg')
+ff7.jacket.attach(io: file_path('FF7REMAKE'),
+                      filename: 'FF7REMAKE.jpg',
+                      content_type: 'image/jpeg')
 ff7.save
 
 persona5 = Game.new(user_id: User.first.id,
@@ -53,9 +57,9 @@ persona5 = Game.new(user_id: User.first.id,
 
                     新たなキャラクターや“未知なる３学期”が加わり「ペルソナ５」では語られなかった“深層”が明らかに。",
                     youtube_video_id: "https://youtu.be/o9QjlLdYK5I" )
-persona5.jacket.attach(io: File.open(Rails.root.join('app', 'assets', 'images', 'ペルソナ５ロイヤル.jpg')), 
-                                              filename: 'ペルソナ５ロイヤル.jpg', 
-                                              content_type: 'image/jpeg')
+persona5.jacket.attach(io: file_path('p5r'),
+                           filename: 'p5r.jpg',
+                           content_type: 'image/jpeg')
 persona5.save
 
 biohazard3 = Game.new(user_id: User.first.id,
@@ -67,9 +71,9 @@ biohazard3 = Game.new(user_id: User.first.id,
                     2作を収めた贅沢な1本、『バイオハザード RE:3』を遊び尽くせ!
                     極限からの生還を目指すサバイバルホラー『バイオハザード3 ラスト エスケープ』のフルリメイク作品と、オンラインでの新たなバイオハザードともいうべき、非対称対戦サバイバルホラー『バイオハザード レジスタンス』とをあわせたコンピレーションタイトル。",
                     youtube_video_id: "https://youtu.be/w5-GWjLOghg" )
-biohazard3.jacket.attach(io: File.open(Rails.root.join('app', 'assets', 'images', 'バイオ３.jpg')), 
-                                              filename: 'バイオ３.jpg', 
-                                              content_type: 'image/jpeg')
+biohazard3.jacket.attach(io: file_path('bio-hazard3'),
+                             filename: 'bio-hazard3.jpg',
+                             content_type: 'image/jpeg')
 biohazard3.save
 
 assasin_origin = Game.new(user_id: User.first.id,
@@ -79,9 +83,9 @@ assasin_origin = Game.new(user_id: User.first.id,
                     summary: "ストーリー<br>首都アレクサンドリアから遠く、広大な砂漠の中に孤立するように存在するシワオアシス。そこで暮らしているバエクは、古代エジプトの社会と伝統を脈々と守ってきた最後のメジャイである。
                     息子を殺されるという大いなる悲劇に見舞われたバエクは、やはりメジャイである妻のアヤと共に、事件の真相と敵を求めて旅に出ることとなる。そしてついに、敵はエジプト全土の抑圧と支配を目指す秘密結社の一員であることを突き止める。",
                     youtube_video_id: "https://youtu.be/fBTFF9GNOV0" )
-assasin_origin.jacket.attach(io: File.open(Rails.root.join('app', 'assets', 'images', 'アサシンクリードオリジンズ.jpg')), 
-                                              filename: 'アサシンクリードオリジンズ.jpg', 
-                                              content_type: 'image/jpeg')
+assasin_origin.jacket.attach(io: file_path('assassin-creed-origins'),
+                                 filename: 'assassin-creed-origins.jpg',
+                                 content_type: 'image/jpeg')
 assasin_origin.save
 
 witcher_3 = Game.new(user_id: User.first.id,
@@ -90,9 +94,9 @@ witcher_3 = Game.new(user_id: User.first.id,
                     release_date: "2016-09-01 00:00:00",
                     summary: "2015年5月の発売以降、全世界で800以上のメディアアワード&ノミネーションを獲得し、名実共に2015年最高のRPGとなった。この傑作RPGが、これまでに配信された全てのコンテンツを同梱した「ゲームオブザイヤーエディション」として再び登場! !",
                     youtube_video_id: "https://youtu.be/i_5CFNACAds" )
-witcher_3.jacket.attach(io: File.open(Rails.root.join('app', 'assets', 'images', 'ウィッチャー３.jpg')), 
-                                              filename: 'ウィッチャー３.jpg', 
-                                              content_type: 'image/jpeg')
+witcher_3.jacket.attach(io: file_path('witcher3'),
+                            filename: 'witcher3.jpg',
+                            content_type: 'image/jpeg')
 witcher_3.save
 
 fallout4 = Game.new(user_id: User.first.id,
@@ -102,9 +106,9 @@ fallout4 = Game.new(user_id: User.first.id,
                     summary: "『Fallout 4: Game of the Year Edition』には、ゲーム本編および『Far Harbor』や『Nuka-World』など6つ全ての追加コンテンツのダウンロードコードが封入されています。『Fallout 4』は、Bethesda Game Studiosが手掛けた核戦争後の世界を舞台にしたゲーム。日本で「日本ゲーム大賞2015・フューチャー部門」や「PlayStationR Awards 2016ユーザーズチョイス賞」を獲得しているほか、世界では200以上もの「最優秀賞」に輝いています。<br>
                     あなたは「Vault 111」唯一の生存者として、核戦争で荒廃した世界で生き抜き、ウェイストランドの命運を担うことになります。",
                     youtube_video_id: "https://youtu.be/BhXDeEBk53I" )
-fallout4.jacket.attach(io: File.open(Rails.root.join('app', 'assets', 'images', 'fallout4.jpg')), 
-                                              filename: 'fallout4.jpg', 
-                                              content_type: 'image/jpeg')
+fallout4.jacket.attach(io: file_path('fallout4'),
+                           filename: 'fallout4.jpg',
+                           content_type: 'image/jpeg')
 fallout4.save
 
 mario_cart = Game.new(user_id: User.first.id,
@@ -114,9 +118,9 @@ mario_cart = Game.new(user_id: User.first.id,
                     summary: "あらゆる場所がサーキット。レース、バトル、すべてがデラックス。今までにないキャラクター、コース、マシンが加わり、『マリオカート8』がデラックスに。<br>
                     Wii U『マリオカート8』の追加コンテンツを全て収録し、本作独自の新しいキャラクターやコース、マシンなどの新要素がプラスされ、シリーズ最大ボリュームのマリオカートとして新たに登場。",
                     youtube_video_id: "https://youtu.be/HljJvwifETg" )
-mario_cart.jacket.attach(io: File.open(Rails.root.join('app', 'assets', 'images', 'マリオカート８.jpg')), 
-                                              filename: 'マリオカート８.jpg', 
-                                              content_type: 'image/jpeg')
+mario_cart.jacket.attach(io: file_path('mariokart8'), 
+                             filename: 'mariokart8.jpg', 
+                             content_type: 'image/jpeg')
 mario_cart.save
 
 kingdom_hearts = Game.new(user_id: User.first.id,
@@ -129,9 +133,9 @@ kingdom_hearts = Game.new(user_id: User.first.id,
                     これまでのキングダムハーツをめぐる戦いが、 キーブレード戦争を引き起こそうと目論むマスター・ゼアノートの意のままに進んでいたことを知ったソラ達は、闇に対抗する、7人の光の守護者を揃えようとしていた。<br>
                     王様とリクは歴戦のキーブレード使いの居場所を探し始め、ソラ、ドナルド、グーフィーの3人は「目覚めの力」を取り戻すため、 再び様々なディズニーのワールドを駆け巡って行くのだった。",
                     youtube_video_id: "https://youtu.be/4Bj3RAUOd-A" )
-kingdom_hearts.jacket.attach(io: File.open(Rails.root.join('app', 'assets', 'images', 'キングダムハーツ.jpg')), 
-                                              filename: 'キングダムハーツ.jpg', 
-                                              content_type: 'image/jpeg')
+kingdom_hearts.jacket.attach(io: file_path('kingdom-hearts'), 
+                                 filename: 'kingdom-hearts.jpg', 
+                                 content_type: 'image/jpeg')
 kingdom_hearts.save
 
 sekiro = Game.new(user_id: User.first.id,
@@ -141,9 +145,9 @@ sekiro = Game.new(user_id: User.first.id,
                     summary: "史上最も血なまぐさい時代・戦国。連れ攫われた皇子を奪還し、自らの左腕を斬り落とした侍に復讐を果たすため、孤独な忍びの戦いが始まる。 
                     『DARK SOULS』シリーズ、『Bloodborne』などで知られるフロム・ソフトウェアの最新作である本作は、戦国末期の日本を舞台とした、RPG要素を備えたアクションアドベンチャーゲームです。 ",
                     youtube_video_id: "https://youtu.be/rXMX4YJ7Lks" )
-sekiro.jacket.attach(io: File.open(Rails.root.join('app', 'assets', 'images', 'SEKIRO.jpg')), 
-                                              filename: 'SEKIRO.jpg', 
-                                              content_type: 'image/jpeg')
+sekiro.jacket.attach(io: file_path('SEKIRO'), 
+                         filename: 'SEKIRO.jpg', 
+                         content_type: 'image/jpeg')
 sekiro.save
 
 # game = Game.new(user_id: User.first.id,

@@ -13,7 +13,20 @@ threads threads_count, threads_count
 #port        ENV.fetch("PORT") { 3000 }
 
 # socketの設定
-bind "unix://#{Rails.root}/tmp/sockets/puma.sock"
+#bind "unix://#{Rails.root}/tmp/sockets/puma.sock"
+
+# pumaをデーモンとしてバックグラウンドで起動する設定↓↓
+rails_root = Dir.pwd
+bind "unix://" + File.join(rails_root, 'tmp', 'sockets', 'puma.sock')
+pidfile File.join(rails_root, 'tmp', 'pids', 'puma.pid')
+state_path File.join(rails_root, 'tmp', 'pids', 'puma.state')
+stdout_redirect(
+  File.join(rails_root, 'log', 'puma.log'),
+  File.join(rails_root, 'log', 'puma-error.log'),
+  true
+)
+daemonize
+# ここまで↑↑
 
 # Specifies the `environment` that Puma will run in.
 #

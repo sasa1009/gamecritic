@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :users, except: [:new, :create] do
     member do
       get 'recruitment'
+      get 'delete_account'
     end
   end
   resources :account_activations, only: [:edit]

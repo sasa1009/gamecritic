@@ -1,10 +1,9 @@
 class UsersController < ApplicationController
-  before_action :logged_in_user, only: [:index, :edit, :update, :destroy]
+  before_action :logged_in_user, only: [:index, :edit, :update, :destroy, :delete_account]
   before_action :correct_user,   only: [:edit, :update]
-  before_action :admin_user,     only: :destroy
 
   def index
-    @users = User.activated_user.page(params[:page])
+    @users = User.activated_user.order_desc.page(params[:page])
   end
 
   def new
@@ -16,7 +15,7 @@ class UsersController < ApplicationController
     if @user.save
       @user.send_activation_email
       flash[:info] = "メールアドレスの確認のためにメールを送信しました。
-                      メール内のリンクをクリックしてアカウントの登録を完了して下さい"
+                      メール内のリンクをクリックしてアカウントの登録を完了して下さい。"
       redirect_to root_path
     else
       render 'new'
@@ -54,13 +53,36 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    if @user = User.find_by(id: params[:id])
+    @user = User.find_by(id: params[:id])
+    c_user = current_user
+    if @user == nil
+      flash[:danger] = "ユーザを削除できません"
+      redirect_to users_url
+    elsif @user != c_user && !@user.admin? && c_user.admin?
       @user.destroy
       flash[:success] = "ユーザが削除されました"
       redirect_to users_url
+    elsif @user == c_user && !@user.admin? && params[:user][:delete_account] == "0"
+      flash.now[:danger] = "アカウントを削除するには、チェックボックスにチェックをしてください"
+      render 'delete_account'
+    elsif @user == c_user && !@user.admin? && params[:user][:delete_account] == "1"
+      @user.destroy
+      log_out
+      flash[:success] = "アカウントが削除されました。gamecriticをご利用頂きありがとうございました。"
+      redirect_to root_path
     else
-      flash[:danger] = "ユーザは存在しません"
-      redirect_to users_url
+      flash[:danger] = "ユーザを削除できません"
+      redirect_to root_path
+    end
+  end
+
+  def delete_account
+    @user = User.find(params[:id])
+    if current_user?(@user)
+      render 'delete_account'
+    else
+      flash[:danger] = "このページにはアクセスできません"
+      redirect_to root_path
     end
   end
 

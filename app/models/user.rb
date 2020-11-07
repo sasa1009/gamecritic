@@ -18,8 +18,10 @@ class User < ApplicationRecord
   validates :self_introduction, length: { maximum: 1000 }
   validate :validate_profile_image
 
-  #activatedがtrueのユーザー一覧を返す
+  # activatedがtrueのユーザー一覧を返す
   scope :activated_user, -> { where(activated: true) }
+  # updated_atが最近の物から順に並べ替える
+  scope :order_desc, -> { order(updated_at: "desc") }
 
   # 渡された文字列のハッシュ値を返す
   def User.digest(string)

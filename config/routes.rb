@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   post '/signup', to: 'users#create'
   get    '/login',   to: 'sessions#new'
   post   '/login',   to: 'sessions#create'
+  get    '/guest_login', to: 'sessions#guest_login'
   delete '/logout',  to: 'sessions#destroy'
   resources :users, except: [:new, :create] do
     member do

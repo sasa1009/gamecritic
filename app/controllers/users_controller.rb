@@ -52,10 +52,21 @@ class UsersController < ApplicationController
     end
   end
 
+  # ユーザー退会ページへのアクセス
+  def delete_account
+    @user = User.find(params[:id])
+    if current_user?(@user)
+      render 'delete_account'
+    else
+      flash[:danger] = "このページにはアクセスできません"
+      redirect_to root_path
+    end
+  end
+
   def destroy
     @user = User.find_by(id: params[:id])
     c_user = current_user
-    if @user == nil
+    if @user.nil?
       flash[:danger] = "ユーザを削除できません"
       redirect_to users_url
     elsif @user != c_user && !@user.admin? && c_user.admin?
@@ -72,16 +83,6 @@ class UsersController < ApplicationController
       redirect_to root_path
     else
       flash[:danger] = "ユーザを削除できません"
-      redirect_to root_path
-    end
-  end
-
-  def delete_account
-    @user = User.find(params[:id])
-    if current_user?(@user)
-      render 'delete_account'
-    else
-      flash[:danger] = "このページにはアクセスできません"
       redirect_to root_path
     end
   end

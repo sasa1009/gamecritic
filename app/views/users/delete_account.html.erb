@@ -1,0 +1,10 @@
+<%= form_for @user, url: {action: "destroy"}, method: "delete", html: {class: "delete_form"} do |f| %>
+  <p class="delete_description">
+    アカウントを削除するとこれまでに投稿していただいた、レビュー及びフレンド募集は全て削除されます。<br>
+    上記に同意してアカウントを削除する場合は、以下のチェックボックスにチェックをして、削除をクリックして下さい。
+  </p>
+  <div class="delete_check">
+    <span>同意してアカウントを削除する</span><%= f.check_box(:delete_account, {checked: false}) %>
+  </div>
+  <%= f.submit "削除", class: "btn btn-danger" %>
+<% end %>

@@ -150,50 +150,88 @@ sekiro.jacket.attach(io: file_path('SEKIRO'),
                          content_type: 'image/jpeg')
 sekiro.save
 
-# game = Game.new(user_id: User.first.id,
+lastofus2 = Game.new(user_id: User.first.id,
+                    title: "The Last of Us Part II",
+                    developer: "ソニー・インタラクティブエンタテインメント",
+                    release_date: "2020-06-19 00:00:00",
+                    summary: "謎の感染爆発によって変わり果てたアメリカを横断した危険な旅路から5年、エリーとジョエルはワイオミング州ジャクソンで暮らしていた。生き残った者たち(生存者たち)によるコミュニティーは順調に発展し、二人は安らぎと落ち着きを取り戻したかのように見えた。もちろん、さまざまな危険は存在する。感染者とそれ以外――惨めな境遇にいる他の生存者たちだ。そして、あるすさまじい出来事が平和を崩壊させたとき、エリーの無慈悲な旅が再び始まる。",
+                    youtube_video_id: "https://youtu.be/OkT-oRad_fs" )
+lastofus2.jacket.attach(io: file_path('lastofus2'), 
+                         filename: 'lastofus2.jpg', 
+                         content_type: 'image/jpeg')
+lastofus2.save
+
+ghostoftsushima = Game.new(user_id: User.first.id,
+                    title: "Ghost of Tsushima",
+                    developer: "ソニー・インタラクティブエンタテインメント",
+                    release_date: "2020-07-17 00:00:00",
+                    summary: "Ghost of Tsushima ( ゴーストオブツシマ )は、武士の道から外れた境井 仁(さかい じん)が、冥府から蘇った「冥人(くろうど)」となり、対馬を敵の手から解き放つ。 期待のオープンワールド時代劇アクションアドベンチャー
+                    民のために戦え 名誉を捨てて――対馬を奪い返すためには、身分や立場を問わず、さまざまな島民の力を借りなくてはならない。 たとえ武士の道から外れようと、元軍を倒すために新たな兵術を作り出し、故郷を守り抜け。",
+                    youtube_video_id: "https://youtu.be/QO6fChKB20Y" )
+ghostoftsushima.jacket.attach(io: file_path('ghostoftsushima'), 
+                         filename: 'ghostoftsushima.jpg', 
+                         content_type: 'image/jpeg')
+ghostoftsushima.save
+
+watchdogslegion = Game.new(user_id: User.first.id,
+                    title: "ウォッチドッグス レギオン",
+                    developer: "UBIsoft",
+                    release_date: "2020-10-29 00:00:00",
+                    summary: "バーチャル上で出会う人々を自由に仲間に加えてレジスタンスを組織し、ハッキング、潜入、戦闘を繰り広げて崩壊の危機に直面する近未来のロンドンを取り戻そう。今こそ、レジスタンスのもとに集え。
+                    街で出会う誰でも仲間に加え、その人物としてプレイできるほか、それぞれにバックストーリー、個性、スキルが設定されている。
+                    武装ドローンをハックし、スパイダーボットを展開させ、ARクロークで身を隠しながら敵を排除しよう。
+                    広大な都市を再現したオープンワールドを探索し、ロンドンに点在するランドマークの数々や楽しいサイドアクティビティを楽しもう。
+                    新たなメンバーをオンラインに誘い、フレンドと協力してミッションをこなし、高難度のエンドゲームコンテンツに挑もう。",
+                    youtube_video_id: "https://youtu.be/u2_SfHrMFzY" )
+watchdogslegion.jacket.attach(io: file_path('watchdogslegion'), 
+                         filename: 'watchdogslegion.jpg', 
+                         content_type: 'image/jpeg')
+watchdogslegion.save
+
+apex = Game.new(user_id: User.first.id,
+                    title: "エーペックスレジェンズ",
+                    developer: "Electronic Arts",
+                    release_date: "2019-02-05 00:00:00",
+                    summary: "熾烈な侵略戦が展開する「エーペックスレジェンズ」は、強力なアビリティを操る伝説の戦士が結集してフロンティアの辺境で富と名声を懸けて戦う、基本プレイ無料*のバトルロイヤルシューティング。 次々と登場する個性豊かなレジェンドを操り、戦術性が高く奥深い部隊プレイを究めよう。バトルロイヤルゲームが野心的な進化を遂げるのは、何が起きても不思議ではない荒涼とした世界だ。 君はここで、新世代のバトルロイヤルを体感する。",
+                    youtube_video_id: "https://youtu.be/_ZpLbriJXvM" )
+apex.jacket.attach(io: file_path('apexlegends'), 
+                         filename: 'apexlegends.jpg', 
+                         content_type: 'image/jpeg')
+apex.save
+
+#  = Game.new(user_id: User.first.id,
 #                     title: "",
 #                     developer: "",
-#                     release_date: "2020-03-20 00:00:00",
+#                     release_date: "2019-03-22 00:00:00",
 #                     summary: "",
 #                     youtube_video_id: "" )
-# game.jacket.attach(io: File.open(Rails.root.join('app', 'assets', 'images', 'SEKIRO.jpg')), 
-#                                               filename: 'SEKIRO.jpg', 
-#                                               content_type: 'image/jpeg')
-# game.save
+# .jacket.attach(io: file_path(''), 
+#                          filename: '.jpg', 
+#                          content_type: 'image/jpeg')
+# .save
 
-# game = Game.new(user_id: User.first.id,
-#                     title: "",
-#                     developer: "",
-#                     release_date: "2020-03-20 00:00:00",
-#                     summary: "",
-#                     youtube_video_id: "" )
-# game.jacket.attach(io: File.open(Rails.root.join('app', 'assets', 'images', 'SEKIRO.jpg')), 
-#                                               filename: 'SEKIRO.jpg', 
-#                                               content_type: 'image/jpeg')
-# game.save
-
-for i in 1..10 do
+for i in 1..14 do
   game = Game.find(i)
   case i
-  when 1..3 then
+  when 1..4 then
+    for x in 1..100 do
+      user = User.find(x)
+      game.reviews.create(user_id: user.id,
+                          score: rand(5..7),
+                          review: Faker::Movies::HarryPotter.quote )
+    end
+  when 5..9 then
+    for x in 1..100 do
+      user = User.find(x)
+      game.reviews.create(user_id: user.id,
+                          score: rand(2..5),
+                          review: Faker::Movies::HarryPotter.quote )
+    end
+  when 10..14 then
     for x in 1..100 do
       user = User.find(x)
       game.reviews.create(user_id: user.id,
                           score: rand(6..10),
-                          review: Faker::Movies::HarryPotter.quote )
-    end
-  when 4..8 then
-    for x in 1..100 do
-      user = User.find(x)
-      game.reviews.create(user_id: user.id,
-                          score: rand(4..7),
-                          review: Faker::Movies::HarryPotter.quote )
-    end
-  when 9..10 then
-    for x in 1..100 do
-      user = User.find(x)
-      game.reviews.create(user_id: user.id,
-                          score: rand(1..4),
                           review: Faker::Movies::HarryPotter.quote )
     end
   end

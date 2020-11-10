@@ -7,5 +7,10 @@
   </div>
   <div class="form">
     <%= render "form" %>
+    <% if !current_user.admin? %>
+      <div class="delete_account">
+        <%= link_to "アカウントの削除はこちらから", delete_account_user_path(@user) %>
+      </div>
+    <% end %>
   </div>
 </div>

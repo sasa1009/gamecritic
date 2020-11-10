@@ -173,25 +173,26 @@ RSpec.describe "Users", type: :request do
     end
   end
 
-  describe "delete" do
-    shared_examples 'is redirected to login page' do
-      it {
+  describe "delete by admin" do
+    context "without login" do
+      it "can't delete account" do
         expect {
           delete user_path(archer)
         }.to_not change { User.count }
         expect(response).to redirect_to login_path
-      }
-    end
-
-    context "without login" do
-      it_behaves_like 'is redirected to login page'
+      end
     end
 
     context "with non admin user" do
       before do
         log_in_as(user)
       end
-      it_behaves_like 'is redirected to login page'
+      it "can't delete account" do
+        expect {
+          delete user_path(archer)
+        }.to_not change { User.count }
+        expect(response).to redirect_to root_path
+      end
     end
 
     context "with admin user" do
@@ -205,6 +206,74 @@ RSpec.describe "Users", type: :request do
           delete user_path(archer)
         }.to_not change { User.count }
         expect(response).to redirect_to users_path
+      end
+    end
+  end
+
+  # ユーザー退会機能のテスト
+  describe "delete by user themself" do
+    context "without login" do
+      # ログインしていない場合退会ページにアクセスできない
+      it "can't access to the account delete page" do
+        get delete_account_user_path(user)
+        expect(response).to redirect_to login_path
+      end
+    end
+
+    context "with login" do
+      before do
+        log_in_as(user)
+      end
+      
+      # 現在ログインしているユーザーが他のユーザーの退会ページにアクセスするとゲーム一覧ページにリダイレクトされる
+      it "can't access to the other user's account delete page" do
+        get delete_account_user_path(archer)
+        expect(response).to redirect_to root_path
+      end
+
+      # 現在ログインしているユーザーが本人の退会ページにアクセスすると退会ページが表示される
+      it "can access to the themselves account delete page" do
+        get delete_account_user_path(user)
+        expect(response).to have_http_status "200"
+      end
+    end
+
+    context "by admin" do
+      before do
+        log_in_as(admin)
+      end
+      # adminユーザーが自身のアカウントを削除できない
+      it "can't delete admin user's account" do
+        expect {
+          delete user_path(admin), params: { user: { delete_account: "1"}}
+        }.to_not change(User, :count)
+      end
+    end
+
+    context "by non andmin" do
+      before do
+        log_in_as(user)
+      end
+
+      # 自分以外のユーザーのアカウントは削除できない
+      it "can't delete othe user's account" do
+        expect {
+          delete user_path(archer), params: { user: { delete_account: "1"}}
+        }.to_not change(User, :count)
+      end
+
+      # パラメーターの:delete_accountが"0"の場合アカウントが削除されない
+      it "can't delete account when delete_account is 0" do
+        expect {
+          delete user_path(user), params: { user: { delete_account: "0"}}
+        }.to_not change(User, :count)
+      end
+
+      # パラメーターの:delete_accountが"1"の場合アカウントが削除される
+      it "can delete account when delete_account is 1" do
+        expect {
+          delete user_path(user), params: { user: { delete_account: "1"}}
+        }.to change(User, :count).by(-1)
       end
     end
   end

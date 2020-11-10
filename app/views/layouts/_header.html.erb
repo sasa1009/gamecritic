@@ -2,7 +2,7 @@
   <nav class="navbar-dark bg-dark">
     <%= link_to "gamecritic", root_path, id: "logo" ,class: "navbar-brand"%>
     <ul class="list-inline">
-      <li class="list-inline-item"><%= link_to "About", '#', class: "text-light" %></li>
+      <!-- <li class="list-inline-item"><%= link_to "About", '#', class: "text-light" %></li> -->
       <% if logged_in? %>
         <li class="list-inline-item"><%= link_to "Users", users_path, class: "text-light" %></li>
         <li class="dropdown list-inline-item">

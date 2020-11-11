@@ -21,7 +21,7 @@ class SessionsController < ApplicationController
   end
 
   def guest_login
-    user = User.second
+    user = User.find_by(email: "guest-user@example.com")
     log_in user
     redirect_to user_path(user)
   end

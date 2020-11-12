@@ -7,7 +7,7 @@ atsumori = Game.new(user_id: User.first.id,
 atsumori.jacket.attach(io: file_path('atsumori.jpg'), 
                         filename: 'atsumori.jpg', 
                         content_type: 'image/jpeg')
-atsumori.save
+atsumori.save!
 
 ff7 = Game.new(user_id: User.first.id,
                 title: "ファイナルファンタジーⅦ リメイク",
@@ -20,7 +20,7 @@ ff7 = Game.new(user_id: User.first.id,
 ff7.jacket.attach(io: file_path('FF7REMAKE.jpg'),
                     filename: 'FF7REMAKE.jpg',
                     content_type: 'image/jpeg')
-ff7.save
+ff7.save!
 
 persona5 = Game.new(user_id: User.first.id,
                     title: "ペルソナ5 ザ・ロイヤル",
@@ -33,7 +33,7 @@ persona5 = Game.new(user_id: User.first.id,
 persona5.jacket.attach(io: file_path('p5r.jpg'),
                         filename: 'p5r.jpg',
                         content_type: 'image/jpeg')
-persona5.save
+persona5.save!
 
 biohazard3 = Game.new(user_id: User.first.id,
                       title: "BIOHAZARD RE:3 Z Version",
@@ -47,7 +47,7 @@ biohazard3 = Game.new(user_id: User.first.id,
 biohazard3.jacket.attach(io: file_path('bio-hazard3.jpg'),
                         filename: 'bio-hazard3.jpg',
                         content_type: 'image/jpeg')
-biohazard3.save
+biohazard3.save!
 
 assasin_origin = Game.new(user_id: User.first.id,
                           title: "アサシン クリード オリジンズ デラックスエディション",
@@ -59,7 +59,7 @@ assasin_origin = Game.new(user_id: User.first.id,
 assasin_origin.jacket.attach(io: file_path('assassin-creed-origins.jpg'),
                             filename: 'assassin-creed-origins.jpg',
                             content_type: 'image/jpeg')
-assasin_origin.save
+assasin_origin.save!
 
 witcher_3 = Game.new(user_id: User.first.id,
                       title: "ウィッチャー3 ワイルドハント ゲームオブザイヤーエディション",
@@ -70,7 +70,7 @@ witcher_3 = Game.new(user_id: User.first.id,
 witcher_3.jacket.attach(io: file_path('witcher3.jpg'),
                         filename: 'witcher3.jpg',
                         content_type: 'image/jpeg')
-witcher_3.save
+witcher_3.save!
 
 fallout4 = Game.new(user_id: User.first.id,
                     title: "Fallout 4 Game of the Year Edition",
@@ -82,7 +82,7 @@ fallout4 = Game.new(user_id: User.first.id,
 fallout4.jacket.attach(io: file_path('fallout4.jpg'),
                         filename: 'fallout4.jpg',
                         content_type: 'image/jpeg')
-fallout4.save
+fallout4.save!
 
 mario_cart = Game.new(user_id: User.first.id,
                       title: "マリオカート8 デラックス",
@@ -94,7 +94,7 @@ mario_cart = Game.new(user_id: User.first.id,
 mario_cart.jacket.attach(io: file_path('mariokart8.jpg'), 
                         filename: 'mariokart8.jpg', 
                         content_type: 'image/jpeg')
-mario_cart.save
+mario_cart.save!
 
 kingdom_hearts = Game.new(user_id: User.first.id,
                           title: "キングダム ハーツIII",
@@ -109,7 +109,7 @@ kingdom_hearts = Game.new(user_id: User.first.id,
 kingdom_hearts.jacket.attach(io: file_path('kingdom-hearts.jpg'), 
                               filename: 'kingdom-hearts.jpg', 
                               content_type: 'image/jpeg')
-kingdom_hearts.save
+kingdom_hearts.save!
 
 sekiro = Game.new(user_id: User.first.id,
                   title: "SEKIRO: SHADOWS DIE TWICE",
@@ -121,7 +121,7 @@ sekiro = Game.new(user_id: User.first.id,
 sekiro.jacket.attach(io: file_path('SEKIRO.jpg'), 
                     filename: 'SEKIRO.jpg', 
                     content_type: 'image/jpeg')
-sekiro.save
+sekiro.save!
 
 lastofus2 = Game.new(user_id: User.first.id,
                     title: "The Last of Us Part II",
@@ -132,7 +132,7 @@ lastofus2 = Game.new(user_id: User.first.id,
 lastofus2.jacket.attach(io: file_path('lastofus2.jpg'), 
                         filename: 'lastofus2.jpg', 
                         content_type: 'image/jpeg')
-lastofus2.save
+lastofus2.save!
 
 ghostoftsushima = Game.new(user_id: User.first.id,
                             title: "Ghost of Tsushima",
@@ -144,7 +144,7 @@ ghostoftsushima = Game.new(user_id: User.first.id,
 ghostoftsushima.jacket.attach(io: file_path('ghostoftsushima.jpg'), 
                               filename: 'ghostoftsushima.jpg', 
                               content_type: 'image/jpeg')
-ghostoftsushima.save
+ghostoftsushima.save!
 
 watchdogslegion = Game.new(user_id: User.first.id,
                             title: "ウォッチドッグス レギオン",
@@ -159,7 +159,7 @@ watchdogslegion = Game.new(user_id: User.first.id,
 watchdogslegion.jacket.attach(io: file_path('watchdogslegion.jpg'), 
                               filename: 'watchdogslegion.jpg', 
                               content_type: 'image/jpeg')
-watchdogslegion.save
+watchdogslegion.save!
 
 apex = Game.new(user_id: User.first.id,
                 title: "エーペックスレジェンズ",
@@ -170,7 +170,7 @@ apex = Game.new(user_id: User.first.id,
 apex.jacket.attach(io: file_path('apexlegends.jpg'), 
                     filename: 'apexlegends.jpg', 
                     content_type: 'image/jpeg')
-apex.save
+apex.save!
 
 #  = Game.new(user_id: User.first.id,
 #                     title: "",
@@ -181,4 +181,4 @@ apex.save
 # .jacket.attach(io: file_path(''), 
 #                          filename: '.jpg', 
 #                          content_type: 'image/jpeg')
-# .save
+# .save!

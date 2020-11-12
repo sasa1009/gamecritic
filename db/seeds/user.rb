@@ -18,7 +18,7 @@ guest = User.new(name:  "ゲストユーザー",
 guest.profile_image.attach(io: file_path('tanukichi.jpeg'), 
                             filename: 'tanukichi.jpeg', 
                             content_type: 'image/jpeg')
-guest.save
+guest.save!
 
 99.times do |n|
 name  = Faker::Name.name

@@ -42,4 +42,4 @@ review.images.attach(io: file_path('atsumori1.jpg'),
 review.images.attach(io: file_path('atsumori2.jpg'), 
                       filename: 'atsumori2.jpg', 
                       content_type: 'image/jpeg')
-review.save
+review.save!

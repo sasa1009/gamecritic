@@ -10,7 +10,7 @@ guest = User.new(name:  "ゲストユーザー",
 guest.profile_image.attach(io: file_path('tanukichi.jpeg'), 
                filename: 'tanukichi.jpeg', 
                content_type: 'image/jpeg')
-guest.save
+guest.save!
 
 guest = User.find_by(email: "guest-user@example.com")
 game = Game.find_by(title: "あつまれ　どうぶつの森")
@@ -29,4 +29,4 @@ review.images.attach(io: file_path('atsumori1.jpeg'),
 review.images.attach(io: file_path('atsumori2.jpeg'), 
                       filename: 'atsumori2.jpeg', 
                       content_type: 'image/jpeg')
-review.save
+review.save!

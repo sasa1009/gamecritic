@@ -1,17 +1,17 @@
 ActiveRecord::Base.transaction do
-#   guest = User.new(name:  "ゲストユーザー",
-#                   email: "guest-user@example.com",
-#                   password:              "password",
-#                   password_confirmation: "password",
-#                   admin: false,
-#                   activated: true,
-#                   activated_at: Time.zone.now,
-#                   self_introduction: "最近はあつまれ動物の森で遊んでます！
-#                   フレンド募集中です。一緒に遊びましょう！")
-#   guest.profile_image.attach(io: file_path('tanukichi.jpeg'), 
-#               filename: 'tanukichi.jpeg', 
-#               content_type: 'image/jpeg')
-#   guest.save!
+  guest = User.new(name:  "ゲストユーザー",
+                  email: "guest-user@example.com",
+                  password:              "password",
+                  password_confirmation: "password",
+                  admin: false,
+                  activated: true,
+                  activated_at: Time.zone.now,
+                  self_introduction: "最近はあつまれ動物の森で遊んでます！
+                  フレンド募集中です。一緒に遊びましょう！")
+  guest.profile_image.attach(io: file_path('tanukichi.jpeg'), 
+              filename: 'tanukichi.jpeg', 
+              content_type: 'image/jpeg')
+  guest.save!
 
   guest = User.find_by(email: "guest-user@example.com")
   game = Game.find_by(title: "あつまれ　どうぶつの森")

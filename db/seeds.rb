@@ -9,5 +9,3 @@ end
 # require './db/seeds/game.rb'
 # require './db/seeds/review.rb'
 require './db/seeds/guest.rb'
-
-# Dir[File.join(Rails.root, 'db', 'seeds', '*.rb')].sort.each { |seed| load seed }

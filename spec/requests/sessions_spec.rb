@@ -47,6 +47,21 @@ RSpec.describe "Sessions", type: :request do
     end
   end
 
+  # ゲストログイン機能
+  describe "guest login" do
+    before do
+      FactoryBot.create_list(:user, 2)
+    end
+
+    it "can login as a guest user" do
+      # guest_login_pathにアクセスするとid:2のユーザーとしてログインしてユーザープロフィールページにリダイレクトされる
+      user = User.second
+      get guest_login_path
+      expect(response).to redirect_to "/users/#{user.id}"
+      expect(is_logged_in?).to be_truthy
+    end
+  end
+
   describe "logout" do
     let(:user) { FactoryBot.create(:user) }
 

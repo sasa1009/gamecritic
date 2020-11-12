@@ -35,4 +35,21 @@ RSpec.describe 'UsersLogin', type: :system, js: true do
     expect(page).to have_link("Login", href: login_path)
   end
 
+  # ゲストユーザーとしてログイン
+  context "guest login" do
+    before do
+      FactoryBot.create_list(:user, 2)
+    end
+
+    it "can log in as a guest user" do
+      user = User.second
+      visit login_path
+      # ログインページ内にゲストログインボタンがある
+      expect(page).to have_selector(".btn-warning")
+      # ゲストログインボタンをクリックするとゲストユーザーとしてログインして、ユーザープロフィルページにリダイレクトされる
+      click_link("ゲストログイン")
+      expect(page).to have_current_path "/users/#{user.id}"
+    end
+  end
+
 end

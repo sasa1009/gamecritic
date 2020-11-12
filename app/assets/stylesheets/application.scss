@@ -201,6 +201,16 @@ header {
     input {
       font-size: 1.7rem;
     }
+    .login-button {
+      a {
+        width: 160px;
+        margin-left: 15px;
+        color: white;
+        font-size: 1.7rem;
+        // vertical-align: middle;
+        padding-top: 7px;
+      }
+    }
     .btn {
       height: 40px;
       width: 140px;

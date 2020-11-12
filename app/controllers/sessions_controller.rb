@@ -20,6 +20,12 @@ class SessionsController < ApplicationController
     end
   end
 
+  def guest_login
+    user = User.find_by(email: "guest-user@example.com")
+    log_in user
+    redirect_to user_path(user)
+  end
+
   def destroy
     log_out if logged_in?
     redirect_to login_path
